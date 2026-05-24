@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>お問い合わせ — Dreave</title>
+<link rel="stylesheet" href="style.css">
+<meta property="og:title" content="お問い合わせ — Dreave">
+<meta property="og:description" content="Dreave に関するお問い合わせ。">
+<meta property="og:image" content="og-image.png">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">
+    <span class="nav-logo-icon">☽</span>
+    Dreave
+    <span class="nav-logo-tagline">- Lucid Dream Inducer</span>
+  </a>
+</nav>
+
+<header class="page-header">
+  <canvas id="header-stars" class="header-stars"></canvas>
+  <div class="container fade-up">
+    <span class="section-label">Contact</span>
+    <h1>お問い合わせ</h1>
+    <p class="header-sub">バグ報告、機能のご要望など、お気軽にご連絡ください。</p>
+  </div>
+</header>
+
+<section>
+  <div class="container" style="max-width:600px; text-align:center">
+    <div class="content-block fade-up">
+      <p>現在、お問い合わせはメールにて受け付けております。</p>
+      <a href="mailto:kimuraenator@gmail.com" class="btn-primary" style="margin-top:20px">メールを送る</a>
+      <p style="margin-top:32px; font-size:14px; color:var(--muted)">通常、3〜5 営業日以内に返信いたします。</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <a href="index.html" class="footer-logo">☽ Dreave</a>
+    </div>
+    <div class="footer-links">
+      <a href="index.html">ホーム</a>
+      <a href="privacy.html">プライバシーポリシー</a>
+      <a href="terms.html">利用規約</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+function makeStars(canvasId, count){
+  const c=document.getElementById(canvasId);
+  if(!c)return;
+  const ctx=c.getContext('2d');
+  function resize(){c.width=c.offsetWidth;c.height=c.offsetHeight}
+  resize();
+  window.addEventListener('resize',resize);
+  const stars=Array.from({length:count},()=>({
+    x:Math.random(),y:Math.random(),
+    r:Math.random()*1.5+.5,
+    t:Math.random()*Math.PI*2,
+    speed:Math.random()*.003+.001
+  }));
+  function draw(){
+    ctx.clearRect(0,0,c.width,c.height);
+    stars.forEach(s=>{
+      s.t+=s.speed;
+      const a=.2+.7*(.5+.5*Math.sin(s.t));
+      ctx.beginPath();
+      ctx.arc(s.x*c.width,s.y*c.height,s.r,0,Math.PI*2);
+      ctx.fillStyle=`rgba(255,255,255,${a})`;
+      ctx.fill();
+    });
+    requestAnimationFrame(draw);
+  }
+  draw();
+}
+makeStars('header-stars',60);
+
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.style.opacity=1;e.target.style.transform='none'}});
+},{threshold:.15});
+document.querySelectorAll('.content-block').forEach(el=>{
+  el.style.opacity=0;el.style.transform='translateY(28px)';
+  el.style.transition='opacity .5s ease-out,transform .5s ease-out';
+  obs.observe(el);
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Yoshihiko - Independent Developer. Creating premium digital experiences.">
+    <title>Yoshihiko's Website</title>
+    <!-- Google Fontsの導入 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --bg-start: #03020b;
+            --bg-end: #07061a;
+            --accent: #3b82f6;
+            --accent-glow: rgba(59, 130, 246, 0.3);
+            --accent-purple: #8b5cf6;
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+            --border: rgba(255, 255, 255, 0.08);
+            --card-bg: rgba(13, 11, 38, 0.45);
+            --card-border: rgba(59, 130, 246, 0.12);
+            --card-border-hover: rgba(59, 130, 246, 0.4);
+        }
+
+        html, body {
+            height: 100%;
+            background-color: var(--bg-start);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, var(--bg-start) 0%, var(--bg-end) 100%);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* 背景の瞬く星フィールド */
+        canvas#stars {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* マウス追従グラデーションオーラ */
+        .mouse-glow {
+            position: fixed;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.06) 0%, rgba(139, 92, 246, 0.02) 50%, transparent 100%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 0;
+            transform: translate(-50%, -50%);
+            opacity: 0;
+            transition: opacity 1s ease;
+            mix-blend-mode: screen;
+        }
+
+        .page {
+            position: relative;
+            z-index: 1;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 80px 24px;
+            gap: 48px;
+            opacity: 0;
+            animation: fadeInPage 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        @keyframes fadeInPage {
+            to { opacity: 1; }
+        }
+
+        /* ヘッダーブロック */
+        .header {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+        }
+
+        #solar {
+            display: block;
+            margin-bottom: 8px;
+            filter: drop-shadow(0 0 12px rgba(59, 130, 246, 0.2));
+        }
+
+        .logo {
+            font-family: 'Outfit', sans-serif;
+            font-size: 40px;
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            color: var(--text-primary);
+            background: linear-gradient(135deg, #ffffff 40%, #a5b4fc 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .logo-dot {
+            color: var(--accent);
+            -webkit-text-fill-color: var(--accent);
+        }
+
+        .tagline {
+            font-family: 'Inter', sans-serif;
+            font-size: 11px;
+            font-weight: 500;
+            color: var(--text-secondary);
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 4px 14px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        /* 区切り線 */
+        .divider {
+            width: 1px;
+            height: 48px;
+            background: linear-gradient(to bottom, transparent, var(--border), transparent);
+        }
+
+        /* プロジェクトリスト */
+        .projects {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            width: 100%;
+            max-width: 440px;
+        }
+
+        .section-label {
+            font-family: 'Outfit', sans-serif;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.2em;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            margin-bottom: 4px;
+            padding-left: 4px;
+        }
+
+        .card {
+            position: relative;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 24px;
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            overflow: hidden;
+            transform-style: preserve-3d;
+            transform: perspective(1000px);
+        }
+
+        /* ガラスの反射光ハイライト */
+        .card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, transparent 50%);
+            opacity: 1;
+            pointer-events: none;
+        }
+
+        .card:hover {
+            border-color: var(--card-border-hover);
+            box-shadow: 0 12px 40px rgba(59, 130, 246, 0.15);
+        }
+
+        .card-left {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            position: relative;
+            transform: translateZ(20px); /* 3D飛び出しエフェクト */
+        }
+        .card-name {
+            font-family: 'Outfit', sans-serif;
+            font-size: 17px;
+            font-weight: 600;
+            color: var(--text-primary);
+            letter-spacing: -0.01em;
+            margin-top: 4px;
+        }
+        .card-desc {
+            font-size: 13px;
+            color: var(--text-secondary);
+            line-height: 1.4;
+        }
+        .card-arrow {
+            font-size: 20px;
+            color: var(--accent);
+            position: relative;
+            flex-shrink: 0;
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            transform: translateZ(30px); /* さらに前に配置 */
+        }
+        .card:hover .card-arrow {
+            transform: translateZ(30px) translateX(4px);
+            color: #60a5fa;
+        }
+
+        .card-badge {
+            font-family: 'Outfit', sans-serif;
+            font-size: 9px;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            padding: 3px 10px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            color: var(--text-secondary);
+            background: rgba(255, 255, 255, 0.03);
+            width: fit-content;
+            text-transform: uppercase;
+        }
+        .card-badge.live {
+            border-color: rgba(59, 130, 246, 0.3);
+            color: #60a5fa;
+            background: rgba(59, 130, 246, 0.06);
+            box-shadow: 0 0 10px rgba(59, 130, 246, 0.1);
+        }
+
+        /* フッター */
+        .footer {
+            font-family: 'Outfit', sans-serif;
+            font-size: 11px;
+            color: var(--text-muted);
+            letter-spacing: 0.1em;
+            margin-top: 16px;
+        }
+
+        /* サイバーパンク風 座標・ステータス表示 */
+        .cyber-panel {
+            position: fixed;
+            bottom: 24px;
+            right: 28px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 4px;
+            font-family: 'Inter', monospace;
+            font-size: 9px;
+            letter-spacing: 0.12em;
+            color: var(--text-muted);
+            z-index: 2;
+            pointer-events: none;
+            background: rgba(3, 2, 11, 0.4);
+            padding: 8px 12px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(4px);
+        }
+        .cyber-status {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: #10b981; /* 緑色で稼働中を示す */
+            font-weight: 500;
+        }
+        .status-dot {
+            width: 4px;
+            height: 4px;
+            background: #10b981;
+            border-radius: 50%;
+            box-shadow: 0 0 8px #10b981;
+            animation: pulseStatus 2s infinite;
+        }
+        @keyframes pulseStatus {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+        .coords {
+            font-variant-numeric: tabular-nums;
+        }
+    </style>
+</head>
+<body>
+
+<!-- 星フィールド Canvas背景 -->
+<canvas id="stars"></canvas>
+
+<!-- マウス追従グラデーションオーラ -->
+<div class="mouse-glow" id="mouse-glow"></div>
+
+<div class="page">
+    <div class="header">
+        <!-- 太陽系モデル Canvas -->
+        <canvas id="solar" width="160" height="160"></canvas>
+        <h1 class="logo" id="main-logo">Yoshihiko<span class="logo-dot">'s</span> Website</h1>
+        <div class="tagline">Independent Developer</div>
+    </div>
+
+    <div class="divider"></div>
+
+    <main class="projects">
+        <h2 class="section-label">Projects</h2>
+
+        <a href="eyerecovery/" class="card" id="card-eye">
+            <div class="card-left">
+                <span class="card-badge live">App — iOS</span>
+                <div class="card-name">視力回復3Dトレーニング</div>
+                <div class="card-desc">ランダムドットステレオグラムで視力ケア</div>
+            </div>
+            <div class="card-arrow">→</div>
+        </a>
+
+        <a href="lucid-engine/" class="card" id="card-dreave">
+            <div class="card-left">
+                <span class="card-badge live">App — iOS</span>
+                <div class="card-name">Dreave</div>
+                <div class="card-desc">明晰夢を、科学する。</div>
+            </div>
+            <div class="card-arrow">→</div>
+        </a>
+    </main>
+
+    <footer class="footer">&copy; 2026 Yoshihiko.inc</footer>
+</div>
+
+<!-- 右下サイバーパネル -->
+<div class="cyber-panel">
+    <div class="cyber-status">
+        <span class="status-dot"></span>
+        <span>SYSTEM OPERATIONAL</span>
+    </div>
+    <div class="coords" id="coords">35.6895° N&nbsp;&nbsp;139.6917° E</div>
+</div>
+
+<script>
+// 太陽系モデル
+(function() {
+    const c = document.getElementById('solar');
+    const cx = c.getContext('2d');
+    const CX = 80, CY = 80;
+
+    // ダークテーマ用に惑星カラーを鮮やかに調整
+    const planets = [
+        { r: 24, size: 2.0, speed: 0.009,  color: '#e2e8f0',     phase: 0 }, // 水星風
+        { r: 38, size: 3.2, speed: 0.0055, color: '#3b82f6',     phase: 1.2 }, // 地球風 (美しい青)
+        { r: 52, size: 2.6, speed: 0.0035, color: '#a78bfa',     phase: 2.5 }, // 金星風 (紫)
+        { r: 68, size: 4.5, speed: 0.002,  color: '#f472b6',     phase: 0.8 }, // 火星風 (ピンク)
+    ];
+
+    function drawSolar(t) {
+        cx.clearRect(0, 0, 160, 160);
+
+        // 軌道リング (極めて繊細に)
+        for (const p of planets) {
+            cx.beginPath();
+            cx.arc(CX, CY, p.r, 0, Math.PI * 2);
+            cx.strokeStyle = 'rgba(255,255,255,0.04)';
+            cx.lineWidth = 0.6;
+            cx.stroke();
+        }
+
+        // 太陽のネオングロー効果
+        cx.save();
+        cx.shadowBlur = 12;
+        cx.shadowColor = 'rgba(59, 130, 246, 0.6)';
+        cx.beginPath();
+        cx.arc(CX, CY, 6, 0, Math.PI * 2);
+        cx.fillStyle = '#ffffff';
+        cx.fill();
+        cx.restore();
+
+        // 太陽の大きなグラデーションオーラ
+        const grd = cx.createRadialGradient(CX, CY, 2, CX, CY, 16);
+        grd.addColorStop(0, 'rgba(59, 130, 246, 0.2)');
+        grd.addColorStop(1, 'rgba(59, 130, 246, 0)');
+        cx.beginPath();
+        cx.arc(CX, CY, 16, 0, Math.PI * 2);
+        cx.fillStyle = grd;
+        cx.fill();
+
+        // 惑星の描画
+        for (const p of planets) {
+            const angle = t * p.speed + p.phase;
+            const px = CX + Math.cos(angle) * p.r;
+            const py = CY + Math.sin(angle) * p.r;
+
+            cx.save();
+            // 惑星にも微妙な発光感を与える
+            cx.shadowBlur = 6;
+            cx.shadowColor = p.color;
+            cx.beginPath();
+            cx.arc(px, py, p.size, 0, Math.PI * 2);
+            cx.fillStyle = p.color;
+            cx.fill();
+            cx.restore();
+        }
+
+        requestAnimationFrame(drawSolar);
+    }
+
+    requestAnimationFrame(drawSolar);
+})();
+
+// 星フィールド (瞬く星空)
+const canvas = document.getElementById('stars');
+const ctx = canvas.getContext('2d');
+
+let W, H, stars = [];
+
+function resize() {
+    W = canvas.width  = window.innerWidth;
+    H = canvas.height = window.innerHeight;
+}
+
+function initStars(n = 150) {
+    stars = [];
+    for (let i = 0; i < n; i++) {
+        // 青みがかった星と紫がかった星をブレンド
+        const colorType = Math.random() > 0.4 ? 'rgba(59, 130, 246,' : 'rgba(139, 92, 246,';
+        stars.push({
+            x: Math.random() * W,
+            y: Math.random() * H,
+            r: Math.random() * 1.3 + 0.3,
+            colorPrefix: colorType,
+            speed: Math.random() * 0.002 + 0.0008,
+            phase: Math.random() * Math.PI * 2
+        });
+    }
+}
+
+function draw(t) {
+    ctx.clearRect(0, 0, W, H);
+    for (const s of stars) {
+        // 優しいまたたきエフェクト
+        const alpha = (Math.sin(t * s.speed + s.phase) * 0.5 + 0.5) * 0.45 + 0.05;
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+        ctx.fillStyle = `${s.colorPrefix} ${alpha})`;
+        ctx.fill();
+    }
+    requestAnimationFrame(draw);
+}
+
+resize();
+initStars();
+window.addEventListener('resize', () => { resize(); initStars(); });
+requestAnimationFrame(draw);
+
+// マウス追従グラデーションオーラ (PCなどのポインティングデバイスのみ機能)
+(function() {
+    const glow = document.getElementById('mouse-glow');
+    let mouseX = window.innerWidth / 2;
+    let mouseY = window.innerHeight / 2;
+    let glowX = mouseX;
+    let glowY = mouseY;
+    let active = false;
+
+    window.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        if (!active) {
+            glow.style.opacity = '1';
+            active = true;
+        }
+    });
+
+    function updateGlow() {
+        // 滑らかなイージングで追従 (LERP: 線形補間)
+        glowX += (mouseX - glowX) * 0.07;
+        glowY += (mouseY - glowY) * 0.07;
+        glow.style.left = `${glowX}px`;
+        glow.style.top = `${glowY}px`;
+        requestAnimationFrame(updateGlow);
+    }
+    updateGlow();
+})();
+
+// プロジェクトカード 3Dホバーチルト効果
+(function() {
+    const cards = document.querySelectorAll('.card');
+
+    cards.forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left; // マウスのカード内X座標
+            const y = e.clientY - rect.top;  // マウスのカード内Y座標
+
+            const xc = rect.width / 2;
+            const yc = rect.height / 2;
+
+            // 傾き角度を計算 (最大約6度)
+            const angleX = (yc - y) / 15;
+            const angleY = (x - xc) / 20;
+
+            card.style.transform = `perspective(1000px) rotateX(${angleX}deg) rotateY(${angleY}deg) scale(1.02)`;
+        });
+
+        card.addEventListener('mouseleave', () => {
+            // 元の角度にスムーズにリセット
+            card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
+        });
+    });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>明晰夢と 40Hz 刺激の科学 — Dreave</title>
+<meta name="description" content="REM 周期モデル・ガンマ波・40Hz 音響刺激の研究背景を解説。Dreave がどのような根拠でアプローチするかを詳しく紹介します。">
+<link rel="stylesheet" href="style.css">
+<meta property="og:title" content="科学的根拠 — Dreave">
+<meta property="og:description" content="明晰夢の科学的アプローチ。">
+<meta property="og:image" content="og-image.png">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">
+    <span class="nav-logo-icon">☽</span>
+    Dreave
+    <span class="nav-logo-tagline">- Lucid Dream Inducer</span>
+  </a>
+  <a href="pricing.html" class="nav-cta">無料で始める</a>
+</nav>
+
+<!-- HEADER -->
+<header class="page-header">
+  <canvas id="header-stars" class="header-stars"></canvas>
+  <div class="container fade-up">
+    <span class="section-label">Science</span>
+    <h1>科学的根拠</h1>
+    <p class="header-sub">なぜ Dreave は「4.5 時間後」と「40Hz」にこだわるのか。</p>
+  </div>
+</header>
+
+<!-- SCIENCE CONTENT -->
+<section>
+  <div class="container">
+    
+    <div class="content-block fade-up">
+      <h3>REM 睡眠とは：夢を見るのは、眠りの終盤</h3>
+      <p>睡眠には「レム（REM）睡眠」と「ノンレム（Non-REM）睡眠」の 2 種類があります。夢のほとんどは、眼球が素早く動き、脳が活発に動いているレム睡眠中に見られます。この周期は約 90 分ごとに繰り返されますが、レム睡眠の時間は朝方に近づくにつれて長く、鮮明になっていきます。</p>
+    </div>
+
+    <div class="content-block fade-up">
+      <h3>なぜ第 3 周期か：4.5 時間後が「黄金の窓」である理由</h3>
+      <p>入眠から 1〜2 周期目のレム睡眠は非常に短く、すぐに深い眠り（徐波睡眠）に戻ってしまいます。しかし、第 3 周期（約 4.5 時間後）を境に、脳は徐波睡眠よりもレム睡眠を優先し始めます。この「黄金の窓」を狙うことで、睡眠を過度に妨げることなく、最も効率的に明晰夢を誘発するチャンスを得ることができます。</p>
+      <div class="rem-chart" style="margin:32px 0; max-width:600px">
+        <div class="rem-chart-title">睡眠周期と刺激タイミング</div>
+        <div class="rem-bars">
+          <div class="rem-bar" style="height:30%"></div>
+          <div class="rem-bar" style="height:70%"></div>
+          <div class="rem-bar" style="height:90%"></div>
+          <div class="rem-bar rem" style="height:40%"></div>
+          <div class="rem-bar" style="height:80%"></div>
+          <div class="rem-bar" style="height:95%"></div>
+          <div class="rem-bar rem" style="height:30%"></div>
+          <div class="rem-bar" style="height:60%"></div>
+          <div class="rem-bar" style="height:85%"></div>
+          <div class="rem-bar highlight" style="height:25%"></div>
+          <div class="rem-bar" style="height:50%"></div>
+          <div class="rem-bar" style="height:75%"></div>
+          <div class="rem-bar rem" style="height:20%"></div>
+        </div>
+        <div style="display:flex;justify-content:space-between">
+          <div class="rem-label">0h</div>
+          <div class="rem-label">3h</div>
+          <div style="text-align:center"><div class="marker">☽ 4.5h 刺激</div></div>
+          <div class="rem-label">8h</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="content-block fade-up">
+      <h3>40Hz 刺激について：ガンマ波と、覚醒の接点</h3>
+      <p>ドイツのフランクフルト大学で行われた有名な研究（<a href="https://pubmed.ncbi.nlm.nih.gov/24816141/" target="_blank" rel="noopener noreferrer" style="color:var(--cyan); text-decoration:underline">Voss et al., 2014</a>）では、レム睡眠中の脳に 40Hz（ガンマ波帯域）の電気刺激を与えると、明晰夢の発生率が有意に上昇することが示されました。Dreave は、この電気刺激の代わりに「40Hz の音響パルス」を用いることで、より安全に、誰でも試せるアプローチを実現しています。</p>
+      <p>40Hz 刺激は脳内のネットワークを一時的に「同期」させ、夢の中にいながらにして「目覚めている時のような自己意識」を呼び覚ますトリガーとなります。</p>
+    </div>
+
+    <div class="content-block fade-up">
+      <h3>アプリのアプローチ：Dreave が選んだ設計</h3>
+      <p>単に音を鳴らすだけでは、脳はすぐに慣れてしまうか、あるいは完全に目が覚めてしまいます。Dreave は以下の工夫を凝らしています。</p>
+      <ul>
+        <li><strong>リアルタイム合成:</strong> 外部音声ファイルを使わず、その場で 40Hz サイン波を生成。</li>
+        <li><strong>漸進的導入:</strong> ピンクノイズから始まり、数分かけて 40Hz パルスをフェードイン。</li>
+        <li><strong>個人化調整:</strong> 過去の「夢日記」の記録時間から、あなたのレム周期をより正確に再推定。</li>
+      </ul>
+    </div>
+
+    <div class="content-block fade-up" style="background:rgba(255,255,255,.04); padding:24px; border-radius:16px; border:1px solid rgba(255,255,255,.1)">
+      <h3>正直な注記</h3>
+      <p style="font-size:14px">※ 明晰夢の効果には個人差があります。睡眠環境、体調、心理状態に大きく左右されます。また、本アプリは教育・娯楽を目的としたものであり、医療機器ではありません。睡眠障害の治療や診断には使用できません。</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <a href="index.html" class="footer-logo">☽ Dreave</a>
+      <div class="footer-tagline">明晰夢を、科学する。</div>
+    </div>
+    <div class="footer-links">
+      <a href="features.html">機能詳細</a>
+      <a href="science.html">科学的根拠</a>
+      <a href="pricing.html">料金プラン</a>
+      <a href="journal-tips.html">夢日記 Tips</a>
+      <a href="privacy.html">プライバシーポリシー</a>
+      <a href="terms.html">利用規約</a>
+      <a href="contact.html">お問い合わせ</a>
+    </div>
+  </div>
+  <div class="footer-copy">© 2026 Dreave. All rights reserved.</div>
+</footer>
+
+<script>
+function makeStars(canvasId, count){
+  const c=document.getElementById(canvasId);
+  if(!c)return;
+  const ctx=c.getContext('2d');
+  function resize(){c.width=c.offsetWidth;c.height=c.offsetHeight}
+  resize();
+  window.addEventListener('resize',resize);
+  const stars=Array.from({length:count},()=>({
+    x:Math.random(),y:Math.random(),
+    r:Math.random()*1.5+.5,
+    t:Math.random()*Math.PI*2,
+    speed:Math.random()*.003+.001
+  }));
+  function draw(){
+    ctx.clearRect(0,0,c.width,c.height);
+    stars.forEach(s=>{
+      s.t+=s.speed;
+      const a=.2+.7*(.5+.5*Math.sin(s.t));
+      ctx.beginPath();
+      ctx.arc(s.x*c.width,s.y*c.height,s.r,0,Math.PI*2);
+      ctx.fillStyle=`rgba(255,255,255,${a})`;
+      ctx.fill();
+    });
+    requestAnimationFrame(draw);
+  }
+  draw();
+}
+makeStars('header-stars',60);
+
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.style.opacity=1;e.target.style.transform='none'}});
+},{threshold:.15});
+document.querySelectorAll('.content-block').forEach(el=>{
+  el.style.opacity=0;el.style.transform='translateY(28px)';
+  el.style.transition='opacity .5s ease-out,transform .5s ease-out';
+  obs.observe(el);
+});
+</script>
+</body>
+</html>

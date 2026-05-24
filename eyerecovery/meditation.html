@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meditation Frequency Generator</title>
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --text-color: #e2e8f0;
+            --accent-color: #38bdf8;
+            --glow-color: rgba(56, 189, 248, 0.5);
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* スタイリッシュな背景装飾 */
+        .background-glow {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, #1e293b 0%, var(--bg-color) 70%);
+            z-index: -1;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 2rem;
+            z-index: 10;
+        }
+
+        h1 {
+            font-weight: 300;
+            letter-spacing: 0.2em;
+            font-size: 1.5rem;
+            margin: 0;
+            text-transform: uppercase;
+        }
+
+        .freq-badge {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 5px 12px;
+            border: 1px solid var(--accent-color);
+            border-radius: 20px;
+            color: var(--accent-color);
+            font-size: 0.8rem;
+            box-shadow: 0 0 10px var(--glow-color);
+        }
+
+        /* ビジュアライザーキャンバス */
+        #visualizer {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.02);
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+            margin-bottom: 3rem;
+        }
+
+        /* ジェネレートボタン */
+        .controls {
+            z-index: 10;
+        }
+
+        button#play-btn {
+            background: transparent;
+            border: 1px solid var(--text-color);
+            color: var(--text-color);
+            padding: 15px 40px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            border-radius: 50px;
+            letter-spacing: 0.1em;
+            position: relative;
+            overflow: hidden;
+        }
+
+        button#play-btn:hover {
+            background: var(--accent-color);
+            border-color: var(--accent-color);
+            color: var(--bg-color);
+            box-shadow: 0 0 20px var(--glow-color);
+        }
+
+        button#play-btn.active {
+            border-color: #f43f5e;
+            color: #f43f5e;
+        }
+
+        button#play-btn.active:hover {
+            background: #f43f5e;
+            color: white;
+            box-shadow: 0 0 20px rgba(244, 63, 94, 0.5);
+        }
+
+        .status {
+            margin-top: 20px;
+            font-size: 0.8rem;
+            opacity: 0.6;
+            height: 1.2em;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="background-glow"></div>
+
+    <header>
+        <h1>Meditation Flow</h1>
+        <div class="freq-badge">Current: 432Hz - Universe</div>
+    </header>
+
+    <canvas id="visualizer" width="600" height="600"></canvas>
+
+    <div class="controls">
+        <button id="play-btn">GENERATE SOUND</button>
+    </div>
+    <div class="status" id="status-text">Click to start synthesis</div>
+
+    <script>
+        // Web Audio API Context
+        let audioCtx;
+        let oscillators = [];
+        let gainNode;
+        let analyser;
+        let isPlaying = false;
+        let animationId;
+
+        const canvas = document.getElementById('visualizer');
+        const canvasCtx = canvas.getContext('2d');
+        const playBtn = document.getElementById('play-btn');
+        const statusText = document.getElementById('status-text');
+
+        // 432Hzをベースにしたメディテーションサウンド構成
+        // 複数のオシレーターを重ねて、単調な電子音ではなく「うねり」のある音を作ります
+        const frequencies = [
+            { freq: 432, type: 'sine', detune: 0, gain: 0.6 },    // 基本周波数
+            { freq: 432, type: 'sine', detune: 4, gain: 0.3 },    // わずかなズレ（うねり生成）
+            { freq: 216, type: 'triangle', detune: 0, gain: 0.1 } // 1オクターブ下（深み）
+        ];
+
+        function initAudio() {
+            const AudioContext = window.AudioContext || window.webkitAudioContext;
+            audioCtx = new AudioContext();
+
+            // マスターボリューム
+            gainNode = audioCtx.createGain();
+            gainNode.gain.value = 0; // フェードイン用に0からスタート
+
+            // ビジュアライザー用のアナライザー
+            analyser = audioCtx.createAnalyser();
+            analyser.fftSize = 2048;
+
+            gainNode.connect(analyser);
+            analyser.connect(audioCtx.destination);
+        }
+
+        function startSound() {
+            if (!audioCtx) initAudio();
+            audioCtx.resume();
+
+            oscillators = frequencies.map(conf => {
+                const osc = audioCtx.createOscillator();
+                const oscGain = audioCtx.createGain();
+
+                osc.type = conf.type;
+                osc.frequency.setValueAtTime(conf.freq, audioCtx.currentTime);
+                osc.detune.setValueAtTime(conf.detune, audioCtx.currentTime); // デチューンで揺らぎを作る
+
+                oscGain.gain.value = conf.gain;
+
+                osc.connect(oscGain);
+                oscGain.connect(gainNode);
+
+                osc.start();
+                return { osc, oscGain };
+            });
+
+            // フェードイン (3秒かけて音量を上げる)
+            gainNode.gain.setTargetAtTime(0.5, audioCtx.currentTime, 0.5);
+
+            isPlaying = true;
+            playBtn.textContent = "STOP GENERATION";
+            playBtn.classList.add('active');
+            statusText.textContent = "Generating 432Hz Binaural Textures...";
+
+            visualize();
+        }
+
+        function stopSound() {
+            // フェードアウト
+            gainNode.gain.setTargetAtTime(0, audioCtx.currentTime, 0.5);
+
+            setTimeout(() => {
+                oscillators.forEach(o => {
+                    o.osc.stop();
+                    o.osc.disconnect();
+                });
+                oscillators = [];
+                isPlaying = false;
+                playBtn.textContent = "GENERATE SOUND";
+                playBtn.classList.remove('active');
+                statusText.textContent = "System Ready";
+                cancelAnimationFrame(animationId);
+                clearCanvas(); // 停止時に描画をクリア
+            }, 1000);
+        }
+
+        playBtn.addEventListener('click', () => {
+            if (isPlaying) {
+                stopSound();
+            } else {
+                startSound();
+            }
+        });
+
+        // ビジュアライザー描画ロジック（円形の波形）
+        function visualize() {
+            const bufferLength = analyser.frequencyBinCount;
+            const dataArray = new Uint8Array(bufferLength);
+
+            const centerX = canvas.width / 2;
+            const centerY = canvas.height / 2;
+            const radius = 100; // 基本の円の半径
+
+            function draw() {
+                animationId = requestAnimationFrame(draw);
+
+                analyser.getByteTimeDomainData(dataArray);
+
+                // 残像効果のために少し透明な黒で塗りつぶす
+                canvasCtx.fillStyle = 'rgba(15, 23, 42, 0.2)';
+                canvasCtx.fillRect(0, 0, canvas.width, canvas.height);
+
+                canvasCtx.lineWidth = 2;
+                canvasCtx.strokeStyle = '#38bdf8'; // Cyan color
+                canvasCtx.beginPath();
+
+                for (let i = 0; i < bufferLength; i++) {
+                    const v = dataArray[i] / 128.0; // 1.0を中心に振幅
+                    const angle = (i / bufferLength) * Math.PI * 2;
+
+                    // 波形を円形にマッピング
+                    // vが1より大きいと外側、小さいと内側に揺れる
+                    const r = radius + (v * 100) - 100;
+
+                    const x = centerX + Math.cos(angle) * r;
+                    const y = centerY + Math.sin(angle) * r;
+
+                    if (i === 0) {
+                        canvasCtx.moveTo(x, y);
+                    } else {
+                        canvasCtx.lineTo(x, y);
+                    }
+                }
+
+                canvasCtx.closePath();
+                canvasCtx.stroke();
+
+                // 内側のグロー効果
+                canvasCtx.beginPath();
+                canvasCtx.arc(centerX, centerY, radius * 0.5, 0, Math.PI * 2);
+                canvasCtx.fillStyle = `rgba(56, 189, 248, ${Math.random() * 0.1})`;
+                canvasCtx.fill();
+            }
+
+            draw();
+        }
+
+        function clearCanvas() {
+            canvasCtx.clearRect(0, 0, canvas.width, canvas.height);
+        }
+
+    </script>
+</body>
+
+</html>

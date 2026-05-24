@@ -1,0 +1,1832 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dreave トレーナー機能 仕様書</title>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <style>
+    /* Reset & Base Styles */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      scroll-behavior: smooth;
+    }
+    
+    :root {
+      --color-cyan: #59C7FA;
+      --color-indigo: #5957D6;
+      --color-aurora: #8CF2BA;
+      --color-gold: #F2BF4D;
+      --color-bg-top: #14142E;
+      --color-bg-bot: #261F4D;
+      --color-dark: #0D0D2B;
+      --color-muted: #B0B8D8;
+      --color-white: #ffffff;
+      --color-card-bg: rgba(20, 20, 46, 0.6);
+      --color-card-border: rgba(89, 199, 250, 0.15);
+      --font-primary: 'Outfit', 'Noto Sans JP', sans-serif;
+      --transition-speed: 0.3s;
+    }
+    
+    body {
+      font-family: var(--font-primary);
+      background: linear-gradient(135deg, var(--color-bg-top) 0%, var(--color-bg-bot) 100%);
+      background-attachment: fixed;
+      color: var(--color-white);
+      line-height: 1.6;
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+    
+    /* Layout */
+    .app-container {
+      display: flex;
+      min-height: 100vh;
+      position: relative;
+    }
+    
+    /* Sidebar styling */
+    aside.sidebar {
+      width: 320px;
+      background: rgba(13, 13, 43, 0.85);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-right: 1px solid var(--color-card-border);
+      height: 100vh;
+      position: sticky;
+      top: 0;
+      display: flex;
+      flex-direction: column;
+      padding: 2rem 1.5rem;
+      z-index: 100;
+      flex-shrink: 0;
+    }
+    
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: var(--color-white);
+      margin-bottom: 2rem;
+      text-decoration: none;
+    }
+    
+    .brand-logo i.moon {
+      color: var(--color-cyan);
+      text-shadow: 0 0 15px rgba(89, 199, 250, 0.6);
+      animation: float 4s ease-in-out infinite;
+    }
+    
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
+    }
+    
+    .brand-logo span {
+      background: linear-gradient(90deg, var(--color-white) 30%, var(--color-cyan) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    
+    .search-box {
+      position: relative;
+      margin-bottom: 1.5rem;
+    }
+    
+    .search-box i {
+      position: absolute;
+      left: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--color-muted);
+    }
+    
+    .search-box input {
+      width: 100%;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(89, 199, 250, 0.1);
+      padding: 0.75rem 1rem 0.75rem 2.5rem;
+      border-radius: 30px;
+      color: var(--color-white);
+      font-family: var(--font-primary);
+      font-size: 0.9rem;
+      transition: all var(--transition-speed);
+    }
+    
+    .search-box input:focus {
+      outline: none;
+      border-color: var(--color-cyan);
+      background: rgba(255, 255, 255, 0.1);
+      box-shadow: 0 0 10px rgba(89, 199, 250, 0.2);
+    }
+    
+    .toc-title {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--color-cyan);
+      margin-bottom: 0.75rem;
+      font-weight: 700;
+    }
+    
+    .nav-menu {
+      list-style: none;
+      overflow-y: auto;
+      flex-grow: 1;
+      padding-right: 0.5rem;
+    }
+    
+    .nav-menu::-webkit-scrollbar {
+      width: 4px;
+    }
+    
+    .nav-menu::-webkit-scrollbar-thumb {
+      background: rgba(89, 199, 250, 0.2);
+      border-radius: 4px;
+    }
+    
+    .nav-item {
+      margin-bottom: 0.25rem;
+    }
+    
+    .nav-link {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.65rem 1rem;
+      color: var(--color-muted);
+      text-decoration: none;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: all var(--transition-speed);
+      border-left: 2px solid transparent;
+    }
+    
+    .nav-link:hover {
+      color: var(--color-white);
+      background: rgba(255, 255, 255, 0.03);
+    }
+    
+    .nav-link.active {
+      color: var(--color-cyan);
+      background: rgba(89, 199, 250, 0.08);
+      border-left-color: var(--color-cyan);
+    }
+    
+    .sidebar-footer {
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      font-size: 0.75rem;
+      color: var(--color-muted);
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+    
+    /* Main Content Area */
+    main.content {
+      flex-grow: 1;
+      padding: 3rem 4rem;
+      max-width: 1200px;
+      overflow-y: auto;
+    }
+    
+    header.doc-header {
+      margin-bottom: 3rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      padding-bottom: 2rem;
+    }
+    
+    .doc-meta {
+      display: flex;
+      gap: 1.5rem;
+      font-size: 0.85rem;
+      color: var(--color-muted);
+      margin-top: 0.75rem;
+    }
+    
+    .doc-meta span {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    
+    .doc-meta span i {
+      color: var(--color-cyan);
+    }
+    
+    /* Typography */
+    h1 {
+      font-size: 3rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      background: linear-gradient(135deg, #ffffff 50%, var(--color-cyan) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    
+    h2 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-top: 3.5rem;
+      margin-bottom: 1.5rem;
+      color: var(--color-white);
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      border-left: 4px solid var(--color-indigo);
+      padding-left: 1rem;
+    }
+    
+    h3 {
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+      color: var(--color-cyan);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    p {
+      margin-bottom: 1.25rem;
+      color: #D1D6EB;
+      font-size: 1rem;
+      line-height: 1.7;
+    }
+    
+    strong {
+      color: var(--color-white);
+    }
+    
+    hr {
+      border: 0;
+      height: 1px;
+      background: linear-gradient(90deg, rgba(89, 199, 250, 0) 0%, rgba(89, 199, 250, 0.2) 50%, rgba(89, 199, 250, 0) 100%);
+      margin: 3rem 0;
+    }
+    
+    /* Highlight/Notice Cards */
+    .highlight-card {
+      background: linear-gradient(135deg, rgba(89, 87, 214, 0.1) 0%, rgba(89, 199, 250, 0.05) 100%);
+      border: 1px solid var(--color-card-border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .highlight-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 100%;
+      background: linear-gradient(to bottom, var(--color-indigo), var(--color-cyan));
+    }
+    
+    .highlight-card p {
+      margin-bottom: 0;
+      font-weight: 500;
+    }
+    
+    /* Tables */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0 2.5rem 0;
+      font-size: 0.95rem;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    
+    th {
+      background-color: rgba(89, 87, 214, 0.2);
+      color: var(--color-white);
+      text-align: left;
+      font-weight: 600;
+      padding: 1rem 1.25rem;
+      border-bottom: 2px solid rgba(89, 199, 250, 0.2);
+    }
+    
+    td {
+      padding: 1rem 1.25rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      color: #D1D6EB;
+      background: rgba(13, 13, 43, 0.2);
+    }
+    
+    tr:last-child td {
+      border-bottom: none;
+    }
+    
+    tr:hover td {
+      background: rgba(255, 255, 255, 0.02);
+    }
+    
+    /* Code Blocks */
+    .code-container {
+      position: relative;
+      margin: 1.5rem 0 2rem 0;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--color-card-border);
+      background: #080816;
+    }
+    
+    .code-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.03);
+      padding: 0.5rem 1rem;
+      font-size: 0.8rem;
+      color: var(--color-muted);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    
+    .code-header span.lang {
+      font-family: monospace;
+      font-weight: bold;
+      color: var(--color-cyan);
+    }
+    
+    .copy-btn {
+      background: none;
+      border: none;
+      color: var(--color-muted);
+      cursor: pointer;
+      font-size: 0.85rem;
+      transition: color var(--transition-speed);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    
+    .copy-btn:hover {
+      color: var(--color-white);
+    }
+    
+    pre {
+      margin: 0;
+      padding: 1.25rem;
+      overflow-x: auto;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 0.9rem;
+    }
+    
+    code {
+      font-family: 'Courier New', Courier, monospace;
+      color: #E2E8F0;
+    }
+    
+    /* Swift Syntax Highlighting Colors (Custom) */
+    .swift-keyword { color: #FF79C6; }
+    .swift-type { color: #8BE9FD; }
+    .swift-property { color: #50FA7B; }
+    .swift-string { color: #F1FA8C; }
+    .swift-comment { color: #6272A4; }
+    .swift-number { color: #BD93F9; }
+    
+    /* Interactive Dashboard Demo Grid */
+    .interactive-demo {
+      background: rgba(20, 20, 46, 0.4);
+      border: 1px solid var(--color-card-border);
+      border-radius: 16px;
+      padding: 2rem;
+      margin: 2rem 0;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+    
+    .demo-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      padding-bottom: 1rem;
+    }
+    
+    .demo-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--color-white);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .demo-title i {
+      color: var(--color-cyan);
+    }
+    
+    .demo-badge {
+      background: rgba(89, 199, 250, 0.15);
+      color: var(--color-cyan);
+      font-size: 0.75rem;
+      padding: 0.25rem 0.75rem;
+      border-radius: 20px;
+      font-weight: 600;
+    }
+    
+    /* Phase 1.1 Coaching Dashboard Simulator */
+    .coaching-simulator {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+    
+    .sim-controls {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    
+    .sim-btn {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(89, 199, 250, 0.1);
+      border-radius: 10px;
+      padding: 0.85rem 1rem;
+      color: var(--color-muted);
+      cursor: pointer;
+      text-align: left;
+      font-family: var(--font-primary);
+      font-size: 0.9rem;
+      transition: all var(--transition-speed);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .sim-btn:hover {
+      background: rgba(255, 255, 255, 0.07);
+      border-color: var(--color-cyan);
+      color: var(--color-white);
+      transform: translateX(4px);
+    }
+    
+    .sim-btn.active {
+      background: linear-gradient(90deg, rgba(89, 87, 214, 0.3) 0%, rgba(89, 199, 250, 0.1) 100%);
+      border-color: var(--color-cyan);
+      color: var(--color-white);
+      box-shadow: 0 0 15px rgba(89, 199, 250, 0.1);
+    }
+    
+    .sim-btn .trigger-tag {
+      font-size: 0.75rem;
+      font-weight: bold;
+      color: var(--color-cyan);
+      background: rgba(89, 199, 250, 0.1);
+      padding: 0.15rem 0.5rem;
+      border-radius: 4px;
+    }
+    
+    /* Mock Phone UI */
+    .mock-phone {
+      background: #0a0a18;
+      border: 8px solid #1c1c3a;
+      border-radius: 36px;
+      height: 420px;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+    }
+    
+    .phone-header {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.75rem;
+      color: var(--color-muted);
+      margin-bottom: 1.5rem;
+    }
+    
+    .dashboard-preview {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      flex-grow: 1;
+      overflow-y: auto;
+    }
+    
+    .coaching-card {
+      background: linear-gradient(135deg, rgba(89, 87, 214, 0.25) 0%, rgba(20, 20, 46, 0.9) 100%);
+      border: 1px solid rgba(89, 199, 250, 0.3);
+      border-radius: 16px;
+      padding: 1.25rem;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+      transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+      position: relative;
+      overflow: hidden;
+      animation: cardPulse 4s ease-in-out infinite;
+    }
+    
+    @keyframes cardPulse {
+      0%, 100% { border-color: rgba(89, 199, 250, 0.3); }
+      50% { border-color: rgba(89, 199, 250, 0.6); box-shadow: 0 10px 30px rgba(89, 199, 250, 0.15); }
+    }
+    
+    .coaching-card .card-badge {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--color-cyan);
+      background: rgba(89, 199, 250, 0.15);
+      padding: 0.2rem 0.6rem;
+      border-radius: 20px;
+      margin-bottom: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    
+    .coaching-card .card-body {
+      font-size: 0.9rem;
+      line-height: 1.5;
+      color: var(--color-white);
+      margin-bottom: 1rem;
+      font-weight: 500;
+    }
+    
+    .coaching-card .card-action-btn {
+      width: 100%;
+      background: linear-gradient(90deg, var(--color-indigo) 0%, #7B79E5 100%);
+      border: none;
+      border-radius: 10px;
+      color: var(--color-white);
+      font-weight: 600;
+      font-size: 0.85rem;
+      padding: 0.65rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      transition: all var(--transition-speed);
+      box-shadow: 0 4px 10px rgba(89, 87, 214, 0.3);
+    }
+    
+    .coaching-card .card-action-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 15px rgba(89, 87, 214, 0.5);
+    }
+    
+    .fake-graph-placeholder {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px dashed rgba(255, 255, 255, 0.05);
+      border-radius: 12px;
+      height: 120px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--color-muted);
+      font-size: 0.8rem;
+    }
+    
+    /* Milestone Grid Container */
+    .milestone-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 1.25rem;
+      margin-top: 1.5rem;
+    }
+    
+    .milestone-card {
+      background: rgba(13, 13, 43, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 14px;
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      transition: all var(--transition-speed);
+      position: relative;
+    }
+    
+    .milestone-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(89, 199, 250, 0.2);
+      background: rgba(13, 13, 43, 0.6);
+    }
+    
+    .milestone-card.milestone-high {
+      border-color: rgba(89, 87, 214, 0.2);
+    }
+    
+    .milestone-card.milestone-highest {
+      border-color: rgba(242, 191, 77, 0.3);
+      background: linear-gradient(135deg, rgba(13, 13, 43, 0.6) 0%, rgba(242, 191, 77, 0.05) 100%);
+    }
+    
+    .milestone-icon {
+      font-size: 1.5rem;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.05);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .milestone-high .milestone-icon {
+      color: var(--color-indigo);
+      background: rgba(89, 87, 214, 0.15);
+    }
+    
+    .milestone-highest .milestone-icon {
+      color: var(--color-gold);
+      background: rgba(242, 191, 77, 0.15);
+      animation: pulseGold 2s infinite;
+    }
+    
+    @keyframes pulseGold {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(242, 191, 77, 0.4); }
+      50% { box-shadow: 0 0 10px 4px rgba(242, 191, 77, 0.2); }
+    }
+    
+    .milestone-card h4 {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--color-white);
+    }
+    
+    .milestone-card p {
+      font-size: 0.8rem;
+      color: var(--color-muted);
+      margin-bottom: 0;
+      line-height: 1.4;
+    }
+    
+    .milestone-card .milestone-tag {
+      align-self: flex-start;
+      font-size: 0.65rem;
+      font-weight: 700;
+      padding: 0.15rem 0.5rem;
+      border-radius: 4px;
+    }
+    
+    .tag-high {
+      background: rgba(89, 87, 214, 0.2);
+      color: #9C9AFF;
+    }
+    
+    .tag-highest {
+      background: rgba(242, 191, 77, 0.2);
+      color: var(--color-gold);
+    }
+    
+    .tag-mid {
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--color-muted);
+    }
+    
+    /* Interactive Charts Showcase */
+    .chart-container-showcase {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin: 2rem 0;
+    }
+    
+    .interactive-chart-card {
+      background: rgba(13, 13, 43, 0.4);
+      border: 1px solid var(--color-card-border);
+      border-radius: 14px;
+      padding: 1.5rem;
+    }
+    
+    .interactive-chart-card h4 {
+      font-size: 1.05rem;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .interactive-chart-card h4 i {
+      color: var(--color-cyan);
+    }
+    
+    /* SVG Chart styles */
+    .svg-chart {
+      width: 100%;
+      height: 200px;
+    }
+    
+    .chart-axis {
+      stroke: rgba(255, 255, 255, 0.1);
+      stroke-width: 1;
+    }
+    
+    .chart-grid-line {
+      stroke: rgba(255, 255, 255, 0.03);
+      stroke-width: 1;
+      stroke-dasharray: 4 4;
+    }
+    
+    .chart-line {
+      fill: none;
+      stroke: url(#cyan-indigo-grad);
+      stroke-width: 3;
+      stroke-linecap: round;
+      animation: drawLine 2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    }
+    
+    .chart-area {
+      fill: url(#chart-fade-grad);
+      opacity: 0.15;
+    }
+    
+    .chart-dot {
+      fill: var(--color-cyan);
+      stroke: var(--color-bg-top);
+      stroke-width: 2;
+      cursor: pointer;
+      transition: r var(--transition-speed);
+    }
+    
+    .chart-dot:hover {
+      r: 7;
+      fill: var(--color-white);
+      filter: drop-shadow(0 0 5px var(--color-cyan));
+    }
+    
+    /* Bar Chart Showcase */
+    .bar-chart-container {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      padding-top: 1rem;
+    }
+    
+    .bar-item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    
+    .bar-label-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.85rem;
+      font-weight: 500;
+    }
+    
+    .bar-track {
+      background: rgba(255, 255, 255, 0.05);
+      height: 16px;
+      border-radius: 8px;
+      overflow: hidden;
+      position: relative;
+    }
+    
+    .bar-fill {
+      height: 100%;
+      border-radius: 8px;
+      transition: width 1.5s cubic-bezier(0.1, 0.8, 0.2, 1);
+      width: 0; /* Animated via JS or CSS on load */
+    }
+    
+    .bar-fill.with-night {
+      background: linear-gradient(90deg, var(--color-indigo) 0%, var(--color-cyan) 100%);
+      box-shadow: 0 0 10px rgba(89, 199, 250, 0.3);
+    }
+    
+    .bar-fill.without-night {
+      background: rgba(255, 255, 255, 0.2);
+    }
+    
+    .bar-chart-summary {
+      font-size: 0.85rem;
+      color: var(--color-aurora);
+      background: rgba(140, 242, 186, 0.1);
+      padding: 0.75rem 1rem;
+      border-radius: 8px;
+      margin-top: 1rem;
+      border-left: 3px solid var(--color-aurora);
+    }
+    
+    /* Phase 3 Curriculum Timeline */
+    .timeline-container {
+      position: relative;
+      margin: 2.5rem 0;
+      padding-left: 2rem;
+    }
+    
+    .timeline-container::before {
+      content: '';
+      position: absolute;
+      left: 7px;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--color-indigo) 0%, var(--color-cyan) 60%, rgba(255,255,255,0.05) 100%);
+    }
+    
+    .timeline-item {
+      position: relative;
+      margin-bottom: 2.5rem;
+    }
+    
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -21px;
+      top: 6px;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--color-dark);
+      border: 3px solid var(--color-indigo);
+      transition: all var(--transition-speed);
+      z-index: 2;
+    }
+    
+    .timeline-item.active::before {
+      background: var(--color-cyan);
+      border-color: var(--color-cyan);
+      box-shadow: 0 0 10px rgba(89, 199, 250, 0.6);
+    }
+    
+    .timeline-content {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 12px;
+      padding: 1.5rem;
+      transition: all var(--transition-speed);
+    }
+    
+    .timeline-content:hover {
+      background: rgba(255, 255, 255, 0.04);
+      border-color: rgba(89, 199, 250, 0.15);
+      transform: translateX(4px);
+    }
+    
+    .timeline-header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.75rem;
+    }
+    
+    .timeline-stage-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--color-white);
+    }
+    
+    .timeline-stage-meta {
+      display: flex;
+      gap: 0.75rem;
+      font-size: 0.75rem;
+    }
+    
+    .meta-badge {
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--color-muted);
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      font-weight: 600;
+    }
+    
+    .meta-badge.badge-condition {
+      background: rgba(89, 199, 250, 0.1);
+      color: var(--color-cyan);
+    }
+    
+    /* Celebration modal styles */
+    .celebration-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(13, 13, 43, 0.95);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.5s ease;
+    }
+    
+    .celebration-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    
+    .celebration-modal {
+      background: linear-gradient(135deg, var(--color-bg-top) 0%, var(--color-bg-bot) 100%);
+      border: 2px solid var(--color-gold);
+      box-shadow: 0 0 50px rgba(242, 191, 77, 0.3);
+      border-radius: 24px;
+      padding: 3rem;
+      max-width: 500px;
+      text-align: center;
+      transform: scale(0.8);
+      transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .celebration-overlay.active .celebration-modal {
+      transform: scale(1);
+    }
+    
+    .celebration-modal i.modal-star {
+      font-size: 4rem;
+      color: var(--color-gold);
+      margin-bottom: 1.5rem;
+      text-shadow: 0 0 20px rgba(242, 191, 77, 0.6);
+      animation: spin 3s linear infinite;
+    }
+    
+    @keyframes spin {
+      100% { transform: rotate(360deg); }
+    }
+    
+    .celebration-modal h3 {
+      font-size: 2rem;
+      color: var(--color-white);
+      margin-bottom: 1rem;
+      justify-content: center;
+    }
+    
+    .celebration-modal p {
+      color: #D1D6EB;
+      margin-bottom: 2rem;
+      font-size: 1.1rem;
+    }
+    
+    .celebration-close-btn {
+      background: linear-gradient(90deg, var(--color-gold) 0%, #D4A33B 100%);
+      border: none;
+      padding: 0.8rem 2rem;
+      border-radius: 30px;
+      color: var(--color-dark);
+      font-weight: 700;
+      cursor: pointer;
+      font-family: var(--font-primary);
+      transition: all var(--transition-speed);
+      box-shadow: 0 4px 15px rgba(242, 191, 77, 0.3);
+    }
+    
+    .celebration-close-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 6px 20px rgba(242, 191, 77, 0.5);
+    }
+    
+    /* Celebration Canvas */
+    canvas#celebration-canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1001;
+    }
+    
+    .trigger-demo-btn {
+      background: rgba(242, 191, 77, 0.1);
+      border: 1px solid var(--color-gold);
+      color: var(--color-gold);
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      font-family: var(--font-primary);
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: all var(--transition-speed);
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .trigger-demo-btn:hover {
+      background: var(--color-gold);
+      color: var(--color-dark);
+      box-shadow: 0 0 15px rgba(242, 191, 77, 0.3);
+      transform: translateY(-1px);
+    }
+    
+    /* Back to Top */
+    .back-to-top {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: var(--color-indigo);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: var(--color-white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      opacity: 0;
+      visibility: hidden;
+      transition: all var(--transition-speed);
+      z-index: 99;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    }
+    
+    .back-to-top.active {
+      opacity: 1;
+      visibility: visible;
+    }
+    
+    .back-to-top:hover {
+      background: var(--color-cyan);
+      transform: translateY(-4px);
+    }
+    
+    /* Responsive */
+    @media (max-width: 1024px) {
+      aside.sidebar {
+        display: none; /* In production we would build a drawer menu, keeping it simple for spec review */
+      }
+      main.content {
+        padding: 2rem;
+      }
+      .coaching-simulator {
+        grid-template-columns: 1fr;
+      }
+      .chart-container-showcase {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Celebration Canvas & Overlay -->
+  <div class="celebration-overlay" id="celebrationOverlay">
+    <canvas id="celebration-canvas"></canvas>
+    <div class="celebration-modal">
+      <i class="fa-solid fa-moon modal-star"></i>
+      <h3>🎉 初の明晰夢達成！</h3>
+      <p>素晴らしい瞬間です！あなたは夢の探索者として大きな一歩を踏み出しました。<br>ここからは、明晰夢を安定させ、より深く体験するためのサポートをいたします。</p>
+      <button class="celebration-close-btn" id="closeCelebrationBtn">夢の探索を続ける</button>
+    </div>
+  </div>
+
+  <div class="app-container">
+    
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <a href="#" class="brand-logo">
+        <i class="fa-solid fa-moon moon"></i>
+        <span>Dreave</span>
+      </a>
+      
+      <div class="search-box">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input type="text" id="searchInput" placeholder="仕様書内を検索...">
+      </div>
+      
+      <div class="toc-title">Table of Contents</div>
+      <ul class="nav-menu">
+        <li class="nav-item">
+          <a href="#overview" class="nav-link active">
+            <i class="fa-solid fa-circle-info"></i> 概要
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="#roadmap" class="nav-link">
+            <i class="fa-solid fa-road"></i> ロードマップ
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="#phase1" class="nav-link">
+            <i class="fa-solid fa-chart-line"></i> Phase 1：分析・振り返り
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="#phase2" class="nav-link">
+            <i class="fa-solid fa-bullseye"></i> Phase 2：コーチング＆実績
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="#phase3" class="nav-link">
+            <i class="fa-solid fa-graduation-cap"></i> Phase 3：カリキュラム
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="#tech-memo" class="nav-link">
+            <i class="fa-solid fa-code"></i> 技術メモ
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="#unresolved" class="nav-link">
+            <i class="fa-solid fa-question-circle"></i> 未決事項
+          </a>
+        </li>
+      </ul>
+      
+      <div class="sidebar-footer">
+        <div>Dreave - Trainer Specs</div>
+        <div>Ver 1.0 | 2026-05-19</div>
+        <div>Yoshihiko.inc</div>
+      </div>
+    </aside>
+    
+    <!-- Main Content -->
+    <main class="content">
+      
+      <header class="doc-header">
+        <h1>Dreave トレーナー機能 仕様書</h1>
+        <div class="doc-meta">
+          <span><i class="fa-solid fa-code-branch"></i> バージョン: 1.0</span>
+          <span><i class="fa-solid fa-calendar-days"></i> 作成日: 2026-05-19</span>
+          <span><i class="fa-solid fa-user"></i> 作成者: Yoshihiko</span>
+        </div>
+      </header>
+      
+      <!-- 概要 Section -->
+      <section id="overview" class="searchable-section">
+        <h2>概要</h2>
+        <p>Dreave は<strong>「明晰夢トレーナー」</strong>として、ユーザーが明晰夢を習得・深化できるよう能動的に関与するアプリを目指します。ツール（受動的）ではなくトレーナー（能動的）として機能するために、ロードマップに沿った3つのフェーズで機能を追加していきます。</p>
+        
+        <div class="highlight-card">
+          <p><i class="fa-solid fa-triangle-exclamation" style="color: var(--color-gold); margin-right: 0.5rem;"></i> <strong>最も重要な課題:</strong> 明晰夢習得における最大のハードルは <strong>4〜14日目の離脱</strong> です。効果が現れるまでに時間がかかり、「何をすればいいか分からない」状態に陥りやすいため、トレーナー機能はこの壁を越えさせることを最優先とします。</p>
+        </div>
+      </section>
+      
+      <hr>
+      
+      <!-- ロードマップ Section -->
+      <section id="roadmap" class="searchable-section">
+        <h2>ロードマップ</h2>
+        <p>段階的にアプリ価値を高め、ユーザーの習熟度と継続率を高める3段階のフェーズ計画です。</p>
+        
+        <table>
+          <thead>
+            <tr>
+              <th style="width: 15%">フェーズ</th>
+              <th style="width: 20%">リリース</th>
+              <th style="width: 65%">内容</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Phase 1</strong></td>
+              <td><span class="meta-badge" style="background: rgba(89, 199, 250, 0.15); color: var(--color-cyan);">v1.0 (分析強化)</span></td>
+              <td>分析・振り返り強化（Night Mode効果、明晰夢率推移、ドリームサイン）</td>
+            </tr>
+            <tr>
+              <td><strong>Phase 2</strong></td>
+              <td><span class="meta-badge" style="background: rgba(89, 87, 214, 0.2); color: #9C9AFF;">v1.1 (コーチング)</span></td>
+              <td>コーチングメッセージ + マイルストーン + 課金有効化（Pro機能解放）</td>
+            </tr>
+            <tr>
+              <td><strong>Phase 3</strong></td>
+              <td><span class="meta-badge" style="background: rgba(242, 191, 77, 0.15); color: var(--color-gold);">v1.2 (カリキュラム)</span></td>
+              <td>トレーニングカリキュラム + 体験の深化（ドリームバケットリスト）</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+      
+      <hr>
+      
+      <!-- Phase 1 Section -->
+      <section id="phase1" class="searchable-section">
+        <h2>Phase 1：分析・振り返り強化（v1.0）</h2>
+        <p>ユーザー自身で気づくことが難しい夢の相関データやパターンを可視化し、翌朝の記録や振り返りそのものを価値のある体験に変えます。</p>
+        
+        <h3>1-1. Night Mode 効果グラフ</h3>
+        <p><strong>目的</strong>: Night Mode（音響刺激などの配信機能）の使用と夢の質の相関を可視化し、継続動機を作ります。「Night Mode を使った週は明晰夢が多い」というデータが出れば、Phase 2 で導入するPro課金への強力な動機付けになります。</p>
+        <p><strong>表示内容</strong>:</p>
+        <ul>
+          <li>Night Mode 使用日 / 非使用日 それぞれの平均 Recall Score（夢の想起度）を比較するバーチャート</li>
+          <li>サマリー文：「Night Mode 使用日の平均スコアは N ポイント高い」</li>
+        </ul>
+        
+        <h3>1-2. 明晰夢率の推移グラフ</h3>
+        <p><strong>目的</strong>: 単に「明晰夢を見た数」という累積値ではなく、「いつ頃から出始めたか」という時系列の確率推移を見せることで、日々の継続による確かな手応えを伝えます。</p>
+        <p><strong>表示内容</strong>:</p>
+        <ul>
+          <li>週ごとの明晰夢率（明晰夢数 ÷ 総夢記録数）を折れ線グラフで表示</li>
+          <li>y 軸：0〜100%（または 0〜1.0）</li>
+        </ul>
+        
+        <!-- Interactive Charts Showcase -->
+        <div class="interactive-demo">
+          <div class="demo-header">
+            <div class="demo-title">
+              <i class="fa-solid fa-chart-simple"></i> Phase 1 グラフ表示モックアップ（インタラクティブ）
+            </div>
+            <div class="demo-badge">PROTOTYPE</div>
+          </div>
+          <p style="font-size: 0.85rem; margin-bottom: 1.5rem; color: var(--color-muted);">※仕様書に基づくUI表現のサンプルです。グラフ上にマウスをホバーすると値を表示します。</p>
+          
+          <div class="chart-container-showcase">
+            <!-- Bar Chart: Night Mode Effect -->
+            <div class="interactive-chart-card">
+              <h4><i class="fa-solid fa-moon"></i> Night Mode 効果比較</h4>
+              <div class="bar-chart-container">
+                <div class="bar-item">
+                  <div class="bar-label-row">
+                    <span>Night Mode 使用日 (平均)</span>
+                    <span style="color: var(--color-cyan);">7.4 / 10</span>
+                  </div>
+                  <div class="bar-track">
+                    <div class="bar-fill with-night" id="barWithNight"></div>
+                  </div>
+                </div>
+                
+                <div class="bar-item">
+                  <div class="bar-label-row">
+                    <span>Night Mode 非使用日 (平均)</span>
+                    <span style="color: var(--color-muted);">4.8 / 10</span>
+                  </div>
+                  <div class="bar-track">
+                    <div class="bar-fill without-night" id="barWithoutNight"></div>
+                  </div>
+                </div>
+                
+                <div class="bar-chart-summary">
+                  <i class="fa-solid fa-wand-magic-sparkles"></i> Night Mode 使用日は夢の想起スコアが <strong>2.6ポイント</strong> 高くなっています！
+                </div>
+              </div>
+            </div>
+            
+            <!-- SVG Line Chart: Lucid Dream Rate -->
+            <div class="interactive-chart-card">
+              <h4><i class="fa-solid fa-chart-line"></i> 週次明晰夢率の推移</h4>
+              <svg class="svg-chart" viewBox="0 0 300 160">
+                <defs>
+                  <linearGradient id="cyan-indigo-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stop-color="var(--color-indigo)" />
+                    <stop offset="100%" stop-color="var(--color-cyan)" />
+                  </linearGradient>
+                  <linearGradient id="chart-fade-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" stop-color="var(--color-cyan)" stop-opacity="0.4"/>
+                    <stop offset="100%" stop-color="var(--color-bg-top)" stop-opacity="0"/>
+                  </linearGradient>
+                </defs>
+                
+                <!-- Grid Lines -->
+                <line x1="30" y1="20" x2="280" y2="20" class="chart-grid-line" />
+                <line x1="30" y1="60" x2="280" y2="60" class="chart-grid-line" />
+                <line x1="30" y1="100" x2="280" y2="100" class="chart-grid-line" />
+                <line x1="30" y1="140" x2="280" y2="140" class="chart-axis" />
+                <line x1="30" y1="20" x2="30" y2="140" class="chart-axis" />
+                
+                <!-- Y-Axis Labels -->
+                <text x="25" y="24" fill="var(--color-muted)" font-size="8" text-anchor="end">100%</text>
+                <text x="25" y="64" fill="var(--color-muted)" font-size="8" text-anchor="end">50%</text>
+                <text x="25" y="104" fill="var(--color-muted)" font-size="8" text-anchor="end">25%</text>
+                <text x="25" y="144" fill="var(--color-muted)" font-size="8" text-anchor="end">0%</text>
+                
+                <!-- X-Axis Labels -->
+                <text x="50" y="152" fill="var(--color-muted)" font-size="8" text-anchor="middle">1週目</text>
+                <text x="106" y="152" fill="var(--color-muted)" font-size="8" text-anchor="middle">2週目</text>
+                <text x="162" y="152" fill="var(--color-muted)" font-size="8" text-anchor="middle">3週目</text>
+                <text x="218" y="152" fill="var(--color-muted)" font-size="8" text-anchor="middle">4週目</text>
+                <text x="274" y="152" fill="var(--color-muted)" font-size="8" text-anchor="middle">5週目</text>
+                
+                <!-- Area Fill under path -->
+                <path d="M 50 140 L 50 140 Q 78 120 106 130 T 162 90 T 218 60 T 274 30 L 274 140 Z" class="chart-area" />
+                
+                <!-- Line Path -->
+                <path d="M 50 140 Q 78 120 106 130 T 162 90 T 218 60 T 274 30" class="chart-line" />
+                
+                <!-- Chart Dots -->
+                <circle cx="50" cy="140" r="4" class="chart-dot" title="1週目: 0%"><title>1週目: 0%</title></circle>
+                <circle cx="106" cy="130" r="4" class="chart-dot" title="2週目: 8%"><title>2週目: 8%</title></circle>
+                <circle cx="162" cy="90" r="4" class="chart-dot" title="3週目: 33%"><title>3週目: 33%</title></circle>
+                <circle cx="218" cy="60" r="4" class="chart-dot" title="4週目: 55%"><title>4週目: 55%</title></circle>
+                <circle cx="274" cy="30" r="4" class="chart-dot" title="5週目: 78%"><title>5週目: 78%</title></circle>
+              </svg>
+            </div>
+          </div>
+        </div>
+        
+        <h3>1-3. ドリームサインカード</h3>
+        <p><strong>目的</strong>: 夢に繰り返し登場するテーマやシンボルを提示し、「自分の夢のパターン」への気づきを促します。これは明晰夢習得の第2ステップ（夢であるサインの特定）に直結します。</p>
+        <p><strong>表示内容</strong>:</p>
+        <ul>
+          <li>AI 分析済みの夢から抽出した上位テーマ（最大5件）をタグ形式で表示</li>
+          <li>上位シンボル（最大5件）を同様に表示</li>
+          <li>「これがあなたのドリームサイン候補です」という説明文</li>
+        </ul>
+      </section>
+      
+      <hr>
+      
+      <!-- Phase 2 Section -->
+      <section id="phase2" class="searchable-section">
+        <h2>Phase 2：コーチングメッセージ + マイルストーン（v1.1）</h2>
+        <p>能動的な「トレーナー」として振る舞い、最も挫折しやすいタイミングでアドバイスを送り、達成を称えるゲーム感覚のシステムを導入します。</p>
+        
+        <h3>2-1. コーチングメッセージ</h3>
+        <p><strong>目的</strong>: ユーザーの現在状態や記録頻度、明晰夢の有無に応じて「次に何をすべきか」を個別最適化されたテキストで伝えます。4〜14日目の離脱防止における最大のキーマンです。</p>
+        <p><strong>表示箇所</strong>: Dashboard のトップカード（既存サマリーの上）</p>
+        
+        <!-- Interactive Coaching Simulator -->
+        <div class="interactive-demo">
+          <div class="demo-header">
+            <div class="demo-title">
+              <i class="fa-solid fa-mobile-screen-button"></i> 2-1. コーチングメッセージ シミュレータ
+            </div>
+            <div class="demo-badge">INTERACTIVE</div>
+          </div>
+          <p style="font-size: 0.85rem; margin-bottom: 1.5rem; color: var(--color-muted);">左側のトリガーを選択すると、右側のDreaveアプリ内ダッシュボードに反映されるコーチングカードが切り替わります。</p>
+          
+          <div class="coaching-simulator">
+            <!-- Simulator Controls -->
+            <div class="sim-controls">
+              <button class="sim-btn active" data-condition="init">
+                <span>初回起動（記録0件）</span>
+                <span class="trigger-tag">初回</span>
+              </button>
+              <button class="sim-btn" data-condition="streak3">
+                <span>夢の記録3日未満</span>
+                <span class="trigger-tag">習慣化</span>
+              </button>
+              <button class="sim-btn" data-condition="streak7">
+                <span>夢の記録7日到達</span>
+                <span class="trigger-tag">サイン探し</span>
+              </button>
+              <button class="sim-btn" data-condition="streak14">
+                <span>夢記録14日・明晰夢なし</span>
+                <span class="trigger-tag">訓練開始</span>
+              </button>
+              <button class="sim-btn" data-condition="inactive">
+                <span>連続3日記録なし</span>
+                <span class="trigger-tag">休眠対策</span>
+              </button>
+            </div>
+            
+            <!-- Mock Phone Preview -->
+            <div class="mock-phone">
+              <div class="phone-header">
+                <span><i class="fa-solid fa-signal"></i> LTE</span>
+                <span>09:41 AM</span>
+                <span>100% <i class="fa-solid fa-battery-three-quarters"></i></span>
+              </div>
+              
+              <div class="dashboard-preview">
+                <!-- Coaching Card -->
+                <div class="coaching-card" id="interactiveCoachingCard">
+                  <div class="card-badge" id="coachingCardTag">Day 1 アドバイス</div>
+                  <div class="card-body" id="coachingCardBody">
+                    まずは今朝見た夢を記録してみましょう。断片やキーワードだけでも大丈夫です。
+                  </div>
+                  <button class="card-action-btn" id="coachingCardBtn">
+                    <span id="coachingCardBtnLabel">夢を記録する</span>
+                    <i class="fa-solid fa-chevron-right"></i>
+                  </button>
+                </div>
+                
+                <!-- Dummy Content for visual weight -->
+                <div class="fake-graph-placeholder">
+                  <i class="fa-solid fa-scroll"></i> &nbsp;最近の夢ログはまだありません
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <h3>2-2. マイルストーン</h3>
+        <p><strong>目的</strong>: 小さなステップでの達成感を可視化します。特に「初めての明晰夢（First Lucid）」を達成した瞬間は、最高のお祝いエフェクトで飾り、アプリ体験の中で忘れられない強烈なモーメントを演出します。</p>
+        
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 1.5rem;">
+          <h4 style="margin: 0; font-size: 1.1rem; color: var(--color-cyan);">マイルストーン一覧</h4>
+          <button class="trigger-demo-btn" id="btnTriggerCelebration">
+            <i class="fa-solid fa-wand-magic-sparkles"></i> 初回明晰夢の特別演出デモを実行
+          </button>
+        </div>
+        
+        <div class="milestone-grid">
+          <!-- First Lucid -->
+          <div class="milestone-card milestone-highest">
+            <div class="milestone-icon"><i class="fa-solid fa-moon"></i></div>
+            <span class="milestone-tag tag-highest">優先度: 最高</span>
+            <h4>初めての明晰夢</h4>
+            <p>条件: <code>isLucid=true</code> の記録1件。達成時にフルスクリーンお祝いアニメーションを実行。</p>
+          </div>
+          
+          <!-- Streak 7 -->
+          <div class="milestone-card milestone-high">
+            <div class="milestone-icon"><i class="fa-solid fa-calendar-day"></i></div>
+            <span class="milestone-tag tag-high">優先度: 高</span>
+            <h4>7日連続夢記録</h4>
+            <p>条件: 夢記録を7日間連続で保存する。安定した夢想起の証。</p>
+          </div>
+          
+          <!-- Streak 30 -->
+          <div class="milestone-card milestone-high">
+            <div class="milestone-icon"><i class="fa-solid fa-calendar-days"></i></div>
+            <span class="milestone-tag tag-high">優先度: 高</span>
+            <h4>30日連続夢記録</h4>
+            <p>条件: 夢記録を30日間連続で保存する。マスターへの大きな階段。</p>
+          </div>
+          
+          <!-- Night Mode 10 -->
+          <div class="milestone-card">
+            <div class="milestone-icon"><i class="fa-solid fa-bolt"></i></div>
+            <span class="milestone-tag tag-mid">優先度: 中</span>
+            <h4>Night Mode 10回</h4>
+            <p>条件: Night Modeでのセッション数が10件に達する。刺激療法の定着。</p>
+          </div>
+        </div>
+      </section>
+      
+      <hr>
+      
+      <!-- Phase 3 Section -->
+      <section id="phase3" class="searchable-section">
+        <h2>Phase 3：トレーニングカリキュラム（v1.2）</h2>
+        <p>明晰夢をランダムな出来事から「トレーニング可能な技術」へと昇華させます。</p>
+        
+        <h3>3-1. 5段階カリキュラム</h3>
+        <p>ユーザーが現在どのステップにいるかを常に可視化し、「次にすべき行動」へ迷わないように設計されたトレーニング課程です。</p>
+        
+        <div class="timeline-container">
+          <!-- Stage 1 -->
+          <div class="timeline-item active">
+            <div class="timeline-content">
+              <div class="timeline-header-row">
+                <span class="timeline-stage-title">Stage 1: 夢の想起力を高める (1〜7日)</span>
+                <div class="timeline-stage-meta">
+                  <span class="meta-badge badge-condition">条件: 夢記録7日連続</span>
+                </div>
+              </div>
+              <p style="font-size: 0.9rem; color: var(--color-muted); margin: 0;">夢日記を習慣づけ、目覚めた直後に夢を細部まで思い出す脳の回路を活性化します。</p>
+            </div>
+          </div>
+          
+          <!-- Stage 2 -->
+          <div class="timeline-item">
+            <div class="timeline-content">
+              <div class="timeline-header-row">
+                <span class="timeline-stage-title">Stage 2: ドリームサインを見つける (8〜14日)</span>
+                <div class="timeline-stage-meta">
+                  <span class="meta-badge badge-condition">条件: AI分析でテーマ3件</span>
+                </div>
+              </div>
+              <p style="font-size: 0.9rem; color: var(--color-muted); margin: 0;">自分の夢に繰り返し出現する「鍵（シンボルやシチュエーション）」を特定します。</p>
+            </div>
+          </div>
+          
+          <!-- Stage 3 -->
+          <div class="timeline-item">
+            <div class="timeline-content">
+              <div class="timeline-header-row">
+                <span class="timeline-stage-title">Stage 3: リアリティチェックを習慣化 (15〜21日)</span>
+                <div class="timeline-stage-meta">
+                  <span class="meta-badge badge-condition">条件: チェック3日連続</span>
+                </div>
+              </div>
+              <p style="font-size: 0.9rem; color: var(--color-muted); margin: 0;">日常の中に「今、自分は夢の中にいるか？」を確認する動作（習慣）を埋め込みます。</p>
+            </div>
+          </div>
+          
+          <!-- Stage 4 -->
+          <div class="timeline-item">
+            <div class="timeline-content">
+              <div class="timeline-header-row">
+                <span class="timeline-stage-title">Stage 4: 誘発テクニックを使う (22〜30日)</span>
+                <div class="timeline-stage-meta">
+                  <span class="meta-badge badge-condition">条件: Night Mode 3回</span>
+                </div>
+              </div>
+              <p style="font-size: 0.9rem; color: var(--color-muted); margin: 0;">WBTB（二度寝法）やMILD法に、アプリのNight Mode音響ガイドを連動して実践します。</p>
+            </div>
+          </div>
+        </div>
+        
+        <h3>3-2. 体験の深化（ドリームバケットリスト）</h3>
+        <p>明晰夢を見ることに成功したあと、アプリを使い続ける動機付けとしての「夢の中のやることリスト」機能です。達成した項目には、当時の夢日記（夢記録）をリンクさせて振り返ることができます。</p>
+        <p><strong>カテゴリ例</strong>: 冒険系（空を飛ぶ、過去に行く）、セラピー系（トラウマの克服、恐怖との対話）、クリエイティブ系（脳内での作曲やアイデア出し）など。</p>
+      </section>
+      
+      <hr>
+      
+      <!-- 技術メモ Section -->
+      <section id="tech-memo" class="searchable-section">
+        <h2>技術メモ</h2>
+        <p>開発陣向けのロジック抜粋および実装定義の解説です。</p>
+        
+        <h3>CoachingMessageEngine の評価順序</h3>
+        <p>複数条件が重なる場合は、優先度の最も高いメッセージを1つだけ採択します。評価トリガーは「アプリ起動時」「新規の夢記録保存時」「日付が変更されたとき」とします。</p>
+        
+        <h3>Night Mode 効果グラフの算出ロジック (Swift)</h3>
+        <div class="code-container">
+          <div class="code-header">
+            <span class="lang">Swift</span>
+            <button class="copy-btn" onclick="copyCode(this)"><i class="fa-regular fa-copy"></i> Copy</button>
+          </div>
+          <pre><code><span class="swift-comment">// 1. Night Mode使用日の特定</span>
+<span class="swift-keyword">let</span> <span class="swift-property">nightModeDates</span> = nightSessions
+    .<span class="swift-property">filter</span> { $<span class="swift-number">0</span>.<span class="swift-property">endReason</span> != <span class="swift-string">"cancelled"</span> }
+    .<span class="swift-property">map</span> { <span class="swift-type">Calendar</span>.<span class="swift-property">current</span>.<span class="swift-property">startOfDay</span>(for: $<span class="swift-number">0</span>.<span class="swift-property">startedAt</span>) }
+    .<span class="swift-property">reduce</span>(into: <span class="swift-type">Set</span>&lt;<span class="swift-type">Date</span>&gt;()) { $<span class="swift-number">0</span>.<span class="swift-property">insert</span>($<span class="swift-number">1</span>) }
+
+<span class="swift-comment">// 2. その日の夢Recall Scoreを照合して分離</span>
+<span class="swift-keyword">let</span> <span class="swift-property">withNightMode</span> = dreams.<span class="swift-property">filter</span> { 
+    <span class="swift-property">nightModeDates</span>.<span class="swift-property">contains</span>(<span class="swift-type">Calendar</span>.<span class="swift-property">current</span>.<span class="swift-property">startOfDay</span>(for: $<span class="swift-number">0</span>.<span class="swift-property">recordedAt</span>)) 
+}
+<span class="swift-keyword">let</span> <span class="swift-property">withoutNightMode</span> = dreams.<span class="swift-property">filter</span> { 
+    !<span class="swift-property">nightModeDates</span>.<span class="swift-property">contains</span>(<span class="swift-type">Calendar</span>.<span class="swift-property">current</span>.<span class="swift-property">startOfDay</span>(for: $<span class="swift-number">0</span>.<span class="swift-property">recordedAt</span>)) 
+}</code></pre>
+        </div>
+      </section>
+      
+      <hr>
+      
+      <!-- 未決事項 Section -->
+      <section id="unresolved" class="searchable-section">
+        <h2>未決事項</h2>
+        <div class="highlight-card" style="border-color: rgba(242, 191, 77, 0.2); background: rgba(242, 191, 77, 0.02);">
+          <ul style="padding-left: 1rem; color: #D1D6EB;">
+            <li style="margin-bottom: 0.75rem;">マイルストーン（実績）の表示場所：設定タブ内に置くか、専用のコレクションタブを用意するか。</li>
+            <li style="margin-bottom: 0.75rem;">コーチングメッセージの個別最適化：ルールベースで開始するが、ユーザー行動データに基づくMLパーソナライズを視野に入れるか。</li>
+            <li style="margin-bottom: 0.75rem;">ドリームバケットリストの追加コンテンツの提供ペース、ローカル永続化モデルの構造。</li>
+            <li style="margin-bottom: 0;">v1.1でのPro課金移行に伴う、既存無料ユーザーへの段階的ゲーティング（制限）の強度の決定。</li>
+          </ul>
+        </div>
+      </section>
+      
+    </main>
+  </div>
+  
+  <!-- Back to Top -->
+  <button class="back-to-top" id="backToTop"><i class="fa-solid fa-arrow-up"></i></button>
+
+  <script>
+    // 1. Code copy script
+    function copyCode(btn) {
+      const codeBlock = btn.parentElement.nextElementSibling.querySelector('code');
+      const textToCopy = codeBlock.innerText;
+      
+      navigator.clipboard.writeText(textToCopy).then(() => {
+        btn.innerHTML = '<i class="fa-solid fa-check" style="color: var(--color-aurora)"></i> Copied!';
+        setTimeout(() => {
+          btn.innerHTML = '<i class="fa-regular fa-copy"></i> Copy';
+        }, 2000);
+      });
+    }
+
+    // 2. Load animations for Bar Chart on scroll
+    document.addEventListener('DOMContentLoaded', () => {
+      setTimeout(() => {
+        document.getElementById('barWithNight').style.width = '74%';
+        document.getElementById('barWithoutNight').style.width = '48%';
+      }, 500);
+    });
+
+    // 3. Search Filter functionality
+    const searchInput = document.getElementById('searchInput');
+    const searchableSections = document.querySelectorAll('.searchable-section');
+
+    searchInput.addEventListener('input', (e) => {
+      const query = e.target.value.toLowerCase().trim();
+      
+      searchableSections.forEach(section => {
+        const text = section.innerText.toLowerCase();
+        if (text.includes(query)) {
+          section.style.display = 'block';
+        } else {
+          section.style.display = 'none';
+        }
+      });
+    });
+
+    // 4. Interactive Coaching Message Simulator Data
+    const coachingData = {
+      init: {
+        tag: "Day 1 アドバイス",
+        body: "まずは今朝見た夢を記録してみましょう。断片やキーワードだけでも立派な一歩です。",
+        btn: "夢を記録する"
+      },
+      streak3: {
+        tag: "習慣化のコツ",
+        body: "記録を上手に続けられています！夢を思い出せない日も、「記録なし」として残すと習慣が途切れません。",
+        btn: "夢を思い出すコツを読む"
+      },
+      streak7: {
+        tag: "Day 7 アドバイス",
+        body: "7日連続記録おめでとうございます！次は夢日記を見返して、繰り返し現れる「ドリームサイン」を見つけてみましょう。",
+        btn: "分析タブを開く"
+      },
+      streak14: {
+        tag: "訓練の提案",
+        body: "14日間継続できています。夢の中で「ここは夢だ」と気づくために、1日に3回のリアリティチェックを試してみましょう。",
+        btn: "リアリティチェックのやり方"
+      },
+      inactive: {
+        tag: "休眠復帰ヒント",
+        body: "記録が少し途絶えていますね。今夜眠る前に、「夢の中でやりたいこと」を1つだけ強くイメージしてみませんか？",
+        btn: "バケットリストを見る"
+      }
+    };
+
+    const simButtons = document.querySelectorAll('.sim-btn');
+    const coachingCard = document.getElementById('interactiveCoachingCard');
+    const cardTag = document.getElementById('coachingCardTag');
+    const cardBody = document.getElementById('coachingCardBody');
+    const cardBtnLabel = document.getElementById('coachingCardBtnLabel');
+
+    simButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        // Change active class
+        simButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        
+        // Fetch data
+        const cond = btn.getAttribute('data-condition');
+        const data = coachingData[cond];
+        
+        // Animate swap elegantly
+        coachingCard.style.opacity = '0';
+        coachingCard.style.transform = 'translateY(10px)';
+        
+        setTimeout(() => {
+          cardTag.innerText = data.tag;
+          cardBody.innerText = data.body;
+          cardBtnLabel.innerText = data.btn;
+          
+          coachingCard.style.opacity = '1';
+          coachingCard.style.transform = 'translateY(0)';
+        }, 200);
+      });
+    });
+
+    // 5. Back to Top behavior
+    const backToTopBtn = document.getElementById('backToTop');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 300) {
+        backToTopBtn.classList.add('active');
+      } else {
+        backToTopBtn.classList.remove('active');
+      }
+    });
+    
+    backToTopBtn.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // 6. Navigation Active state sync (Intersection Observer)
+    const sections = document.querySelectorAll('section');
+    const navLinks = document.querySelectorAll('.nav-link');
+    
+    const observerOptions = {
+      root: null,
+      rootMargin: '0px -20% -60% 0px', // trigger when section is in main focus
+      threshold: 0
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const id = entry.target.getAttribute('id');
+          navLinks.forEach(link => {
+            if (link.getAttribute('href') === `#${id}`) {
+              link.classList.add('active');
+            } else {
+              link.classList.remove('active');
+            }
+          });
+        }
+      });
+    }, observerOptions);
+    
+    sections.forEach(section => observer.observe(section));
+
+    // 7. Particle Celebration System (Canvas-based)
+    const celebrationOverlay = document.getElementById('celebrationOverlay');
+    const triggerCelBtn = document.getElementById('btnTriggerCelebration');
+    const closeCelBtn = document.getElementById('closeCelebrationBtn');
+    const canvas = document.getElementById('celebration-canvas');
+    const ctx = canvas.getContext('2d');
+    
+    let animationId;
+    let particles = [];
+    
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    
+    window.addEventListener('resize', resizeCanvas);
+    
+    class Particle {
+      constructor(x, y) {
+        this.x = x;
+        this.y = y;
+        this.size = Math.random() * 6 + 2;
+        this.speedX = Math.random() * 8 - 4;
+        this.speedY = Math.random() * -10 - 4;
+        this.gravity = 0.25;
+        this.color = this.getRandomColor();
+        this.alpha = 1;
+        this.decay = Math.random() * 0.015 + 0.005;
+      }
+      
+      getRandomColor() {
+        const colors = [
+          '#59C7FA', // Cyan
+          '#5957D6', // Indigo
+          '#8CF2BA', // Aurora
+          '#F2BF4D', // Gold
+          '#FFFFFF'  // White
+        ];
+        return colors[Math.floor(Math.random() * colors.length)];
+      }
+      
+      update() {
+        this.speedY += this.gravity;
+        this.x += this.speedX;
+        this.y += this.speedY;
+        this.alpha -= this.decay;
+      }
+      
+      draw() {
+        ctx.save();
+        ctx.globalAlpha = this.alpha;
+        ctx.fillStyle = this.color;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+      }
+    }
+    
+    function spawnExplosion() {
+      // Spawn at multiple locations
+      const locations = [
+        { x: window.innerWidth * 0.3, y: window.innerHeight * 0.8 },
+        { x: window.innerWidth * 0.5, y: window.innerHeight * 0.8 },
+        { x: window.innerWidth * 0.7, y: window.innerHeight * 0.8 }
+      ];
+      
+      locations.forEach(loc => {
+        for (let i = 0; i < 60; i++) {
+          particles.push(new Particle(loc.x, loc.y));
+        }
+      });
+    }
+    
+    function animateParticles() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      
+      for (let i = particles.length - 1; i >= 0; i--) {
+        particles[i].update();
+        particles[i].draw();
+        
+        if (particles[i].alpha <= 0) {
+          particles.splice(i, 1);
+        }
+      }
+      
+      // Randomly spawn more sparkles
+      if (Math.random() < 0.1 && particles.length < 150) {
+        particles.push(new Particle(Math.random() * canvas.width, Math.random() * (canvas.height * 0.5)));
+      }
+      
+      animationId = requestAnimationFrame(animateParticles);
+    }
+    
+    triggerCelBtn.addEventListener('click', () => {
+      resizeCanvas();
+      particles = [];
+      celebrationOverlay.classList.add('active');
+      spawnExplosion();
+      animateParticles();
+    });
+    
+    closeCelBtn.addEventListener('click', () => {
+      celebrationOverlay.classList.remove('active');
+      cancelAnimationFrame(animationId);
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+    });
+  </script>
+</body>
+</html>

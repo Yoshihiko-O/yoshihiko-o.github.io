@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dreave - Lucid Dream Inducer — 明晰夢を、科学する。</title>
+<meta name="description" content="REM 周期推定 × 40Hz 音響刺激で、脳を夢の扉へ導く iOS アプリ。Dream Journal・Reality Check・詳細分析で、明晰夢を科学的にトレーニング。買い切り型 Lucid Pro で全機能解放。">
+<meta property="og:title" content="Dreave - Lucid Dream Inducer — 明晰夢を、科学する。">
+<meta property="og:description" content="REM 周期推定 × 40Hz 音響刺激で、脳を夢の扉へ導く iOS アプリ。">
+<meta property="og:image" content="og-image.png">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<style>
+:root {
+  --cyan:   #59C7FA;
+  --indigo: #5957D6;
+  --aurora: #8CF2BA;
+  --gold:   #F2BF4D;
+  --bg-top: #14142E;
+  --bg-bot: #261F4D;
+  --white:  #FFFFFF;
+  --muted:  #B0B8D8;
+  --dark:   #0D0D2B;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Noto Sans JP','Hiragino Sans',Inter,system-ui,sans-serif;background:var(--bg-top);color:var(--white);-webkit-font-smoothing:antialiased}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:16px 24px;display:flex;align-items:center;justify-content:space-between;background:rgba(20,20,46,.85);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,.08)}
+.nav-logo{display:flex;align-items:center;gap:8px;font-size:17px;font-weight:700;color:var(--white)}
+.nav-logo-icon{font-size:20px;color:var(--cyan)}
+.nav-logo-tagline{font-size:11px;font-weight:400;color:var(--muted);margin-left:4px;opacity:.8}
+@media(max-width:480px){.nav-logo-tagline{display:none}}
+.nav-cta{background:var(--indigo);color:var(--white);border:none;padding:9px 20px;border-radius:10px;font-size:14px;font-weight:600;cursor:pointer;text-decoration:none}
+.nav-cta:hover{background:#4A48C4}
+
+/* HERO */
+#hero{min-height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:100px 24px 60px;background:linear-gradient(180deg,var(--bg-top) 0%,var(--bg-bot) 100%);position:relative;overflow:hidden}
+#stars{position:absolute;inset:0;pointer-events:none}
+.star{position:absolute;border-radius:50%;background:var(--white)}
+.hero-icon{font-size:56px;color:var(--cyan);margin-bottom:20px;animation:float 4s ease-in-out infinite}
+h1{font-size:clamp(36px,7vw,64px);font-weight:700;letter-spacing:-.02em;line-height:1.15;margin-bottom:16px}
+h1 span{color:var(--cyan)}
+.hero-sub{font-size:clamp(16px,2.5vw,20px);color:var(--muted);line-height:1.7;max-width:560px;margin:0 auto 36px}
+.hero-btns{display:flex;flex-direction:column;align-items:center;gap:12px}
+.btn-primary{display:inline-flex;align-items:center;gap:10px;background:var(--indigo);color:var(--white);padding:15px 32px;border-radius:14px;font-size:16px;font-weight:600;text-decoration:none;box-shadow:0 4px 32px rgba(89,87,214,.4)}
+.btn-primary:hover{background:#4A48C4;transform:translateY(-2px)}
+.btn-sub{font-size:13px;color:var(--muted)}
+.hero-card{margin-top:48px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:20px;padding:24px 32px;max-width:320px;text-align:left;animation:floatCard 4s ease-in-out infinite}
+.hero-card-label{font-size:11px;letter-spacing:.08em;color:var(--cyan);text-transform:uppercase;margin-bottom:8px}
+.hero-card-countdown{font-size:42px;font-weight:700;font-variant-numeric:tabular-nums;color:var(--cyan);letter-spacing:-.02em;margin-bottom:4px}
+.hero-card-phase{font-size:13px;color:var(--muted)}
+.hero-card-badge{display:inline-flex;align-items:center;gap:6px;margin-top:16px;background:rgba(89,199,250,.12);border:1px solid rgba(89,199,250,.3);border-radius:20px;padding:6px 14px;font-size:12px;color:var(--cyan)}
+
+/* SECTIONS */
+section{padding:80px 24px}
+.container{max-width:1100px;margin:0 auto}
+.section-label{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--cyan);margin-bottom:12px;display:block}
+.section-h2{font-size:clamp(28px,4vw,40px);font-weight:700;letter-spacing:-.01em;line-height:1.25;margin-bottom:16px}
+.section-sub{font-size:16px;color:var(--muted);line-height:1.7;max-width:560px}
+
+/* PAIN */
+#pain{background:linear-gradient(180deg,var(--bg-bot) 0%,var(--dark) 100%)}
+.pain-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;margin-top:48px}
+.pain-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:28px 24px}
+.pain-icon{font-size:32px;margin-bottom:16px;color:var(--muted)}
+.pain-card h3{font-size:18px;font-weight:700;margin-bottom:10px}
+.pain-card p{font-size:14px;color:var(--muted);line-height:1.7}
+
+/* FEATURES */
+#features{background:var(--dark)}
+.features-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;margin-top:48px}
+.feat-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:20px;padding:28px 24px;position:relative;transition:border-color .2s}
+.feat-card:hover{border-color:rgba(255,255,255,.18)}
+.feat-card.night{border-color:rgba(89,199,250,.25);grid-column:1/-1}
+.feat-icon{font-size:28px;margin-bottom:16px}
+.feat-icon.cyan{color:var(--cyan)}
+.feat-icon.indigo{color:var(--indigo)}
+.feat-icon.aurora{color:var(--aurora)}
+.feat-icon.gold{color:var(--gold)}
+.feat-card h3{font-size:20px;font-weight:700;margin-bottom:8px}
+.feat-card .tagline{font-size:13px;color:var(--cyan);margin-bottom:12px;font-weight:600}
+.feat-card p{font-size:14px;color:var(--muted);line-height:1.7}
+.pro-badge{position:absolute;top:20px;right:20px;background:linear-gradient(135deg,#F2BF4D,#D99933);color:#111;font-size:10px;font-weight:700;padding:3px 10px;border-radius:6px;letter-spacing:.06em;text-transform:uppercase}
+
+/* HOW */
+#how{background:linear-gradient(180deg,var(--dark) 0%,#0F0F2A 100%)}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:32px;margin-top:48px}
+.step{text-align:center}
+.step-num{width:48px;height:48px;border-radius:50%;background:var(--indigo);display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:700;margin:0 auto 20px}
+.step h3{font-size:18px;font-weight:700;margin-bottom:10px}
+.step p{font-size:14px;color:var(--muted);line-height:1.7}
+.step-arrow{display:none}
+@media(min-width:768px){.steps{grid-template-columns:repeat(3,1fr);align-items:start}.step-arrow{display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:24px;margin-top:24px}}
+
+/* SCIENCE */
+#science{background:#0F0F2A}
+.science-inner{display:grid;grid-template-columns:1fr;gap:40px;margin-top:48px}
+@media(min-width:768px){.science-inner{grid-template-columns:3fr 2fr}}
+.science-note{font-size:12px;color:var(--muted);margin-top:24px;opacity:.7}
+.rem-chart{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:20px;height:200px;position:relative;display:flex;flex-direction:column;justify-content:space-between}
+.rem-chart-title{font-size:11px;color:var(--muted);letter-spacing:.06em;text-transform:uppercase}
+.rem-bars{display:flex;align-items:flex-end;gap:4px;height:120px;margin-top:12px}
+.rem-bar{flex:1;border-radius:4px 4px 0 0;background:var(--indigo);opacity:.5;transition:opacity .2s}
+.rem-bar.rem{background:var(--cyan);opacity:1}
+.rem-bar.highlight{background:var(--cyan);opacity:1;box-shadow:0 0 12px rgba(89,199,250,.4)}
+.rem-label{font-size:10px;color:var(--muted);text-align:center;margin-top:8px}
+.marker{font-size:11px;color:var(--cyan);text-align:center;margin-top:4px}
+.stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:24px}
+.stat{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:16px}
+.stat-num{font-size:32px;font-weight:700;color:var(--cyan)}
+.stat-label{font-size:12px;color:var(--muted);margin-top:4px}
+
+/* PRICING */
+#pricing{background:var(--dark)}
+.pricing-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;margin-top:48px}
+.price-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:20px;padding:32px 24px}
+.price-card.featured{border-color:var(--indigo);background:rgba(89,87,214,.08);position:relative}
+.price-card.featured::before{content:'MOST POPULAR';position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:var(--gold);color:#111;font-size:10px;font-weight:700;padding:4px 14px;border-radius:20px;letter-spacing:.08em;white-space:nowrap}
+.price-name{font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+.price-val{font-size:40px;font-weight:700;margin-bottom:4px}
+.price-val span{font-size:16px;font-weight:400;color:var(--muted)}
+.price-list{margin:20px 0;list-style:none}
+.price-list li{font-size:14px;color:var(--muted);padding:7px 0;border-bottom:1px solid rgba(255,255,255,.06);display:flex;align-items:center;gap:8px}
+.price-list li::before{content:'✓';color:var(--aurora);font-weight:700;flex-shrink:0}
+.btn-price{display:block;text-align:center;padding:13px;border-radius:12px;font-size:15px;font-weight:600;cursor:pointer;text-decoration:none;margin-top:20px}
+.btn-outline{background:transparent;color:var(--cyan);border:1px solid var(--cyan)}
+.btn-outline:hover{background:rgba(89,199,250,.08)}
+.btn-solid{background:var(--indigo);color:var(--white);border:none;box-shadow:0 4px 24px rgba(89,87,214,.4)}
+.btn-solid:hover{background:#4A48C4}
+.btn-gray{background:rgba(255,255,255,.08);color:var(--white);border:none}
+.btn-gray:hover{background:rgba(255,255,255,.12)}
+.life-icons{display:flex;gap:4px;margin-bottom:16px}
+.life-icon{width:20px;height:20px;border-radius:50%;background:var(--cyan);opacity:.3}
+.life-icon.full{opacity:1}
+
+/* FINAL CTA */
+#cta{background:linear-gradient(180deg,var(--dark) 0%,var(--bg-top) 100%);text-align:center;padding:100px 24px;position:relative;overflow:hidden}
+#cta-stars{position:absolute;inset:0;pointer-events:none;opacity:.5}
+
+/* FOOTER */
+footer{background:var(--dark);padding:40px 24px;border-top:1px solid rgba(255,255,255,.08)}
+.footer-inner{max-width:1100px;margin:0 auto;display:flex;flex-direction:column;gap:24px}
+@media(min-width:600px){.footer-inner{flex-direction:row;justify-content:space-between;align-items:flex-start}}
+.footer-logo{font-size:18px;font-weight:700;color:var(--white);margin-bottom:8px}
+.footer-tagline{font-size:13px;color:var(--muted)}
+.footer-links{display:flex;gap:20px;flex-wrap:wrap}
+.footer-links a{font-size:13px;color:var(--muted);text-decoration:none}
+.footer-links a:hover{color:var(--white)}
+.footer-copy{font-size:12px;color:var(--muted);opacity:.6;text-align:center;margin-top:20px;padding-top:20px;border-top:1px solid rgba(255,255,255,.06)}
+
+/* ANIMS */
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@keyframes floatCard{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@keyframes twinkle{0%,100%{opacity:.2}50%{opacity:.9}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+.fade-up{animation:fadeUp .6s ease-out both}
+.delay-1{animation-delay:.15s}
+.delay-2{animation-delay:.3s}
+.delay-3{animation-delay:.45s}
+.delay-4{animation-delay:.6s}
+
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    <span class="nav-logo-icon">☽</span>
+    Dreave
+    <span class="nav-logo-tagline">- Lucid Dream Inducer</span>
+  </div>
+  <a href="#pricing" class="nav-cta">無料で始める</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <canvas id="stars"></canvas>
+  <div class="hero-icon fade-up">☽</div>
+  <h1 class="fade-up delay-1">明晰夢を、<span>科学する</span>。</h1>
+  <p class="hero-sub fade-up delay-2">REM 周期推定 × 40Hz 音響刺激で、<br>脳を夢の扉へ導く。</p>
+  <div class="hero-btns fade-up delay-3">
+    <a href="https://apps.apple.com" class="btn-primary">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+      App Store からダウンロード
+    </a>
+    <span class="btn-sub">無料で始められます · Night Mode ♥ 7 回分プレゼント</span>
+  </div>
+  <div class="hero-card fade-up delay-4">
+    <div class="hero-card-label">Night Mode アクティブ</div>
+    <div class="hero-card-countdown" id="countdown">04:28:36</div>
+    <div class="hero-card-phase">第3REM周期まで · 信頼度 70%</div>
+    <div class="hero-card-badge">
+      <span style="width:8px;height:8px;border-radius:50%;background:var(--cyan);display:inline-block"></span>
+      40Hz パルス 配信待機中
+    </div>
+  </div>
+</section>
+
+<!-- PAIN -->
+<section id="pain">
+  <div class="container">
+    <span class="section-label">共感</span>
+    <h2 class="section-h2">あなたにも、<br>こんな経験ありませんか？</h2>
+    <div class="pain-grid">
+      <div class="pain-card">
+        <div class="pain-icon">◎</div>
+        <h3>目が覚めたら、夢が消えていた</h3>
+        <p>せっかく見た夢も、起きた瞬間に霧散する。それが毎朝続いている。記録したくても、もう何も思い出せない。</p>
+      </div>
+      <div class="pain-card">
+        <div class="pain-icon">◇</div>
+        <h3>明晰夢の方法を試したが続かなかった</h3>
+        <p>リアリティチェックや夢日記を試したが、効果が出る前に挫折してしまう。正しいやり方がわからない。</p>
+      </div>
+      <div class="pain-card">
+        <div class="pain-icon">△</div>
+        <h3>科学的に正しいアプローチがわからない</h3>
+        <p>ネットの情報はバラバラで、何を信じれば効果があるのか不明なまま。根拠のある方法を探していた。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section id="features">
+  <div class="container">
+    <span class="section-label">機能</span>
+    <h2 class="section-h2">Dreave のできること</h2>
+    <p class="section-sub">4 つのアプローチで、明晰夢体質をつくる。</p>
+    <div class="features-grid">
+      <div class="feat-card night">
+        <div class="feat-icon cyan">◐</div>
+        <h3>Night Mode</h3>
+        <div class="tagline">第 3 REM 周期に、40Hz の音響刺激を。</div>
+        <p>就寝時刻を設定するだけで、REM 周期を自動推定。最も明晰夢が起きやすい第 3 周期（約 4.5 時間後）に、ピンクノイズと 40Hz サイン波を静かに届けます。バックグラウンドで動作するため、充電しながら枕元に置くだけ。</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon indigo">≡</div>
+        <h3>Dream Journal</h3>
+        <div class="tagline">起きたらすぐ、音声で記録。</div>
+        <p>寝ぼけていても OK。声でそのまま話すと自動でテキスト化。Recall Score と感情タグが自動付与されます。</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon aurora">◉</div>
+        <h3>Reality Check</h3>
+        <div class="tagline">日中の通知が、夢の中の気づきを育てる。</div>
+        <p>ランダムな通知に答えるだけ。現実確認の習慣が夢の中でも「これは夢だ」という気づきを増やします。</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon gold">≋</div>
+        <h3>Analytics</h3>
+        <div class="tagline">30 日で、明晰夢体質になる。</div>
+        <p>Recall Score・Growth Index・明晰夢発生率をグラフで可視化。あなたの上達を数字で証明します。</p>
+        <span class="pro-badge">PRO</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how">
+  <div class="container">
+    <span class="section-label">使い方</span>
+    <h2 class="section-h2">たった 3 ステップ</h2>
+    <p class="section-sub">今夜から始められる。難しい設定は一切なし。</p>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <h3>就寝前に設定する</h3>
+        <p>就寝時刻を入力して Night Mode をオン。アプリを充電しながら枕元に置くだけ。</p>
+      </div>
+      <div class="step">
+        <div class="step-num" style="background:var(--cyan);color:var(--dark)">2</div>
+        <h3>眠っている間に刺激が届く</h3>
+        <p>REM 周期を推定し、最適なタイミングで 40Hz パルスが静かに再生されます。</p>
+      </div>
+      <div class="step">
+        <div class="step-num" style="background:var(--aurora);color:var(--dark)">3</div>
+        <h3>起きたら夢を記録する</h3>
+        <p>目が覚めたらすぐに声で録音。Recall Score が毎日積み上がっていきます。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SCIENCE -->
+<section id="science">
+  <div class="container">
+    <span class="section-label">Behind the Science</span>
+    <h2 class="section-h2">なぜ 4.5 時間後なのか</h2>
+    <div class="science-inner">
+      <div>
+        <p style="font-size:16px;line-height:1.8;color:var(--muted)">睡眠は 90 分周期で繰り返されます。第 3 周期（入眠から約 4.5 時間後）の REM 睡眠が、最も長く・最も鮮明な夢が見やすい時間帯です。</p>
+        <p style="font-size:16px;line-height:1.8;color:var(--muted);margin-top:16px">Dreave は、この<strong style="color:var(--cyan)">"黄金の窓"</strong>を自動で推定し、40Hz の音響刺激を届けます。40Hz 刺激はガンマ波活動との関連が研究されており、覚醒中の脳活動に近い状態を誘発する可能性が示唆されています。</p>
+        <div class="stat-grid">
+          <div class="stat"><div class="stat-num">90<span style="font-size:16px">分</span></div><div class="stat-label">睡眠周期の長さ</div></div>
+          <div class="stat"><div class="stat-num">70<span style="font-size:16px">%</span></div><div class="stat-label">第3周期の推定信頼度</div></div>
+          <div class="stat"><div class="stat-num">40<span style="font-size:16px">Hz</span></div><div class="stat-label">音響刺激周波数</div></div>
+          <div class="stat"><div class="stat-num">6<span style="font-size:16px">周期</span></div><div class="stat-label">最大推定周期数</div></div>
+        </div>
+        <p class="science-note">※ 効果には個人差があります。本アプリは医療機器ではありません。</p>
+      </div>
+      <div>
+        <div class="rem-chart">
+          <div class="rem-chart-title">REM 周期推定モデル</div>
+          <div class="rem-bars">
+            <div class="rem-bar" style="height:30%"></div>
+            <div class="rem-bar" style="height:70%"></div>
+            <div class="rem-bar" style="height:90%"></div>
+            <div class="rem-bar rem" style="height:40%"></div>
+            <div class="rem-bar" style="height:80%"></div>
+            <div class="rem-bar" style="height:95%"></div>
+            <div class="rem-bar rem" style="height:30%"></div>
+            <div class="rem-bar" style="height:60%"></div>
+            <div class="rem-bar" style="height:85%"></div>
+            <div class="rem-bar highlight" style="height:25%"></div>
+            <div class="rem-bar" style="height:50%"></div>
+            <div class="rem-bar" style="height:75%"></div>
+            <div class="rem-bar rem" style="height:20%"></div>
+          </div>
+          <div style="display:flex;justify-content:space-between">
+            <div class="rem-label">0h</div>
+            <div class="rem-label">3h</div>
+            <div style="text-align:center"><div class="marker">☽ 4.5h</div></div>
+            <div class="rem-label">8h</div>
+          </div>
+        </div>
+        <div style="margin-top:12px;display:flex;gap:12px;font-size:12px;color:var(--muted)">
+          <span style="display:flex;align-items:center;gap:4px"><span style="width:12px;height:12px;border-radius:2px;background:var(--indigo);opacity:.5;display:inline-block"></span>深い睡眠</span>
+          <span style="display:flex;align-items:center;gap:4px"><span style="width:12px;height:12px;border-radius:2px;background:var(--cyan);display:inline-block"></span>REM</span>
+          <span style="display:flex;align-items:center;gap:4px"><span style="width:12px;height:12px;border-radius:2px;background:var(--cyan);box-shadow:0 0 8px rgba(89,199,250,.6);display:inline-block"></span>刺激タイミング</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing">
+  <div class="container">
+    <span class="section-label">料金プラン</span>
+    <h2 class="section-h2">あなたのペースで。</h2>
+    <p class="section-sub">全プランで夢日記と Reality Check は無制限。Night Mode の使用回数で選んでください。</p>
+    <div class="pricing-grid">
+      <!-- Free -->
+      <div class="price-card">
+        <div class="price-name">Free</div>
+        <div class="price-val">¥0 <span>/ 月</span></div>
+        <div class="life-icons">
+          <div class="life-icon full"></div><div class="life-icon full"></div><div class="life-icon full"></div>
+          <div class="life-icon"></div><div class="life-icon"></div>
+        </div>
+        <ul class="price-list">
+          <li>夢日記（無制限）</li>
+          <li>Reality Check（無制限）</li>
+          <li>Night Mode ♥ 7 回分（初回）</li>
+          <li>基本統計（7 日間）</li>
+        </ul>
+        <a href="#" class="btn-price btn-outline">無料で始める</a>
+      </div>
+      <!-- Lives Pack -->
+      <div class="price-card">
+        <div class="price-name">ライフパック</div>
+        <div class="price-val">¥160 <span>〜</span></div>
+        <div style="font-size:13px;color:var(--muted);margin-bottom:16px">Night Mode を追加で使いたい夜に。<br>サブスクリプション不要。</div>
+        <ul class="price-list">
+          <li>♥ 3 ライフ — ¥160</li>
+          <li>♥ 10 ライフ — ¥480</li>
+          <li>♥ 30 ライフ — ¥1,200</li>
+        </ul>
+        <a href="#" class="btn-price btn-gray">パックを選ぶ</a>
+      </div>
+      <!-- Pro -->
+      <div class="price-card featured">
+        <div class="price-name">Pro</div>
+        <div class="price-val">¥600 <span>/ 月</span></div>
+        <div style="font-size:13px;color:var(--muted);margin-bottom:16px">7 日間無料体験あり</div>
+        <ul class="price-list">
+          <li>Night Mode 無制限</li>
+          <li>夢日記（無制限）</li>
+          <li>Reality Check（無制限）</li>
+          <li>詳細分析（30 / 90 日）</li>
+          <li>Growth Index 追跡</li>
+          <li>優先サポート</li>
+        </ul>
+        <a href="#" class="btn-price btn-solid">Pro を 7 日間無料体験</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section id="cta">
+  <canvas id="cta-stars"></canvas>
+  <div class="container" style="position:relative;z-index:1">
+    <h2 style="font-size:clamp(32px,5vw,52px);font-weight:700;letter-spacing:-.02em;margin-bottom:16px">今夜、初めての<br>明晰夢を。</h2>
+    <p style="font-size:16px;color:var(--muted);margin-bottom:36px;line-height:1.7">Dreave は無料でダウンロードできます。<br>週 3 回の Dream Pass で、今夜から始めましょう。</p>
+    <a href="https://apps.apple.com" class="btn-primary" style="display:inline-flex">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+      App Store からダウンロード
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <a href="index.html" class="footer-logo">☽ Dreave</a>
+      <div class="footer-tagline">明晰夢を、科学する。</div>
+    </div>
+    <div class="footer-links">
+      <a href="features.html">機能詳細</a>
+      <a href="science.html">科学的根拠</a>
+      <a href="pricing.html">料金プラン</a>
+      <a href="journal-tips.html">夢日記 Tips</a>
+      <a href="privacy.html">プライバシーポリシー</a>
+      <a href="terms.html">利用規約</a>
+      <a href="contact.html">お問い合わせ</a>
+    </div>
+  </div>
+  <div class="footer-copy">© 2026 Dreave. All rights reserved.</div>
+</footer>
+
+<script>
+function makeStars(canvasId, count){
+  const c=document.getElementById(canvasId);
+  if(!c)return;
+  const ctx=c.getContext('2d');
+  function resize(){c.width=c.offsetWidth;c.height=c.offsetHeight}
+  resize();
+  window.addEventListener('resize',resize);
+  const stars=Array.from({length:count},()=>({
+    x:Math.random(),y:Math.random(),
+    r:Math.random()*1.5+.5,
+    t:Math.random()*Math.PI*2,
+    speed:Math.random()*.003+.001
+  }));
+  function draw(){
+    ctx.clearRect(0,0,c.width,c.height);
+    stars.forEach(s=>{
+      s.t+=s.speed;
+      const a=.2+.7*(.5+.5*Math.sin(s.t));
+      ctx.beginPath();
+      ctx.arc(s.x*c.width,s.y*c.height,s.r,0,Math.PI*2);
+      ctx.fillStyle=`rgba(255,255,255,${a})`;
+      ctx.fill();
+    });
+    requestAnimationFrame(draw);
+  }
+  draw();
+}
+makeStars('stars',80);
+makeStars('cta-stars',40);
+
+let s=4*3600+28*60+36;
+setInterval(()=>{
+  s=Math.max(0,s-1);
+  const h=String(Math.floor(s/3600)).padStart(2,'0');
+  const m=String(Math.floor(s%3600/60)).padStart(2,'0');
+  const sec=String(s%60).padStart(2,'0');
+  const el=document.getElementById('countdown');
+  if(el)el.textContent=`${h}:${m}:${sec}`;
+},1000);
+
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.style.opacity=1;e.target.style.transform='none'}});
+},{threshold:.15});
+document.querySelectorAll('.pain-card,.feat-card,.step,.price-card').forEach(el=>{
+  el.style.opacity=0;el.style.transform='translateY(28px)';
+  el.style.transition='opacity .5s ease-out,transform .5s ease-out';
+  obs.observe(el);
+});
+</script>
+</body>
+</html>
