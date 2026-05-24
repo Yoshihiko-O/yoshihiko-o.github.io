@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>料金プラン — Dreave</title>
-<meta name="description" content="Dreave の Free・ライフパック・Pro プランを比較。Night Mode ライフ制の仕組みと各プランの違いを詳しく説明。">
+<meta name="description" content="Dreave の Free・Dreave Pro プランを比較。Dream Pass（週3回）の仕組みと各プランの違いを詳しく説明。">
 <link rel="stylesheet" href="style.css">
 <meta property="og:title" content="料金プラン — Dreave">
 <meta property="og:description" content="Dreave の料金プランをご案内。">
@@ -29,8 +29,8 @@
   <canvas id="header-stars" class="header-stars"></canvas>
   <div class="container fade-up">
     <span class="section-label">Pricing</span>
-    <h1>あなたのペースで選ぶ、3 つのプラン。</h1>
-    <p class="header-sub">すべての人が明晰夢の入り口に立てるように。</p>
+    <h1>あなたのペースで選ぶ、2 つのプラン。</h1>
+    <p class="header-sub">コア機能はすべて無料。Dreave Pro で全機能を解放。</p>
   </div>
 </header>
 
@@ -43,14 +43,12 @@
           <tr>
             <th class="td-left">機能</th>
             <th>Free</th>
-            <th>ライフパック</th>
-            <th>Pro</th>
+            <th>Dreave Pro</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td class="td-left">夢日記 (記録)</td>
-            <td class="check">無制限</td>
+            <td class="td-left">夢日記（記録）</td>
             <td class="check">無制限</td>
             <td class="check">無制限</td>
           </tr>
@@ -58,43 +56,46 @@
             <td class="td-left">Reality Check 通知</td>
             <td class="check">無制限</td>
             <td class="check">無制限</td>
+          </tr>
+          <tr>
+            <td class="td-left">Night Mode（Dream Pass）</td>
+            <td>週 3 回</td>
             <td class="check">無制限</td>
           </tr>
           <tr>
-            <td class="td-left">Night Mode セッション</td>
-            <td>♥ 7 回 (初回)</td>
-            <td>購入分のみ</td>
-            <td class="check">無制限</td>
-          </tr>
-          <tr>
-            <td class="td-left">基本統計 (7日)</td>
-            <td class="check">◯</td>
-            <td class="check">◯</td>
+            <td class="td-left">7 日間無制限トライアル</td>
+            <td class="check">◯（初回のみ）</td>
             <td class="check">◯</td>
           </tr>
           <tr>
-            <td class="td-left">詳細分析 (30/90日)</td>
-            <td class="cross">×</td>
-            <td class="cross">×</td>
+            <td class="td-left">Analytics 基本分析</td>
+            <td class="check">◯</td>
             <td class="check">◯</td>
           </tr>
           <tr>
-            <td class="td-left">Growth Index 追跡</td>
-            <td class="cross">×</td>
-            <td class="cross">×</td>
+            <td class="td-left">AI 分析</td>
+            <td>リワード広告</td>
+            <td class="check">広告なし</td>
+          </tr>
+          <tr>
+            <td class="td-left">コーチングメッセージ</td>
+            <td class="check">◯</td>
             <td class="check">◯</td>
           </tr>
           <tr>
-            <td class="td-left">優先サポート</td>
-            <td class="cross">×</td>
+            <td class="td-left">マイルストーン</td>
+            <td class="check">◯</td>
+            <td class="check">◯</td>
+          </tr>
+          <tr>
+            <td class="td-left">CSV エクスポート</td>
             <td class="cross">×</td>
             <td class="check">◯</td>
           </tr>
           <tr>
             <td class="td-left">価格</td>
             <td>¥0</td>
-            <td>¥160 〜</td>
-            <td>¥600 / 月</td>
+            <td>価格未定（買い切り）</td>
           </tr>
         </tbody>
       </table>
@@ -102,18 +103,18 @@
   </div>
 </section>
 
-<!-- LIFE SYSTEM -->
+<!-- DREAM PASS SYSTEM -->
 <section style="background:var(--dark)">
   <div class="container">
     <div class="content-block fade-up">
       <span class="section-label">System</span>
-      <h3>ライフ制について</h3>
-      <p>Dreave の Night Mode は「ライフ（♥）」を消費して使用します。サブスクリプションなしでも、自分のペースで必要な時だけ使うことができます。</p>
+      <h3>Dream Pass について</h3>
+      <p>Dreave の Night Mode は「Dream Pass」制です。無料プランでも毎週 3 回まで Night Mode を使用でき、追加で使いたい夜はリワード広告で補充できます。</p>
       <ul>
-        <li><strong>ライフとは？:</strong> Night Mode 1 セッションにつき ♥ 1 を消費します。残量がゼロになると Night Mode は起動できません。</li>
-        <li><strong>自然回復:</strong> 24 時間ごとに ♥ 1 が自動回復します（最大 ♥ 5 まで）。</li>
-        <li><strong>ストリークボーナス:</strong> 7 日連続で夢を記録すると、ボーナスとして ♥ 1 が付与されます。</li>
-        <li><strong>Pro の場合:</strong> ライフの概念がなくなり、いつでも何回でも Night Mode を使用可能です。</li>
+        <li><strong>週 3 回の無料枠:</strong> 毎週月曜 0:00 に自動リセット。週 3 回分の Night Mode が付与されます。</li>
+        <li><strong>リワード広告で補充:</strong> Pass が不足した場合、約 30 秒のリワード広告を視聴することで 1 日 1 回まで補充できます。</li>
+        <li><strong>初回トライアル:</strong> 初回インストールから 7 日間は Night Mode が無制限で使用できます。</li>
+        <li><strong>Dreave Pro の場合:</strong> Dream Pass の制限がなくなり、いつでも何回でも Night Mode を使用可能です。</li>
       </ul>
     </div>
   </div>
@@ -125,12 +126,12 @@
     <h2 class="section-h2">よくある質問</h2>
     <div class="faq-grid">
       <div class="faq-item fade-up">
-        <div class="faq-q">Lucid Pro は一度買えばずっと使えますか？</div>
+        <div class="faq-q">Dreave Pro は一度買えばずっと使えますか？</div>
         <div class="faq-a">はい。月額課金（サブスクリプション）ではなく「買い切り型」のライセンスです。一度の購入で、将来追加される Pro 機能も含めて永続的にご利用いただけます。</div>
       </div>
       <div class="faq-item fade-up">
         <div class="faq-q">Dream Pass が足りなくなったらどうすればいいですか？</div>
-        <div class="faq-a">毎週月曜日の自動リセットを待つか、リワード広告を視聴することで 1 日 1 回までパスを補充できます。制限なしで使いたい場合は、Lucid Pro へのアップグレードをご検討ください。</div>
+        <div class="faq-a">毎週月曜日の自動リセットを待つか、リワード広告を視聴することで 1 日 1 回までパスを補充できます。制限なしで使いたい場合は、Dreave Pro へのアップグレードをご検討ください。</div>
       </div>
       <div class="faq-item fade-up">
         <div class="faq-q">機種変更しても Pro 権限は引き継げますか？</div>
