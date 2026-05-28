@@ -4,136 +4,165 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>夢日記を続けるための 7 つのコツ — Dreave</title>
-<meta name="description" content="夢日記を習慣化するための実践的なヒントを紹介。起床直後の記録・音声メモ・感情タグの活用など、Recall Score を上げるテクニック。">
-<link rel="stylesheet" href="style.css">
-<meta property="og:title" content="ジャーナル記録のコツ — Dreave">
-<meta property="og:description" content="夢の記録を効果的に。">
+<meta name="description" content="夢日記を習慣化するための実践的なヒント。起床直後の記録、音声メモ、感情タグの活用などで Recall Score を上げる。">
+<meta property="og:title" content="夢日記を続けるための 7 つのコツ — Dreave">
+<meta property="og:description" content="夢日記を習慣化するための実践的なヒント。起床直後の記録、音声メモ、感情タグの活用などで Recall Score を上げる。">
 <meta property="og:image" content="og-image.png">
 <link rel="icon" type="image/png" href="favicon.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="stylesheet" href="style.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@400;500;700;800&family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
 </head>
 <body>
 
-<!-- NAV -->
-<nav>
-  <a href="index.html" class="nav-logo">
-    <span class="nav-logo-icon">☽</span>
-    Dreave
-    <span class="nav-logo-tagline">- Lucid Dream Inducer</span>
-  </a>
-  <a href="pricing.html" class="nav-cta">無料で始める</a>
+<div class="stars" aria-hidden="true"><canvas id="starfield"></canvas></div>
+
+<nav class="top">
+  <div class="shell">
+    <a href="index.html" class="brand">
+      <div class="mark"></div>
+      <div>
+        <span class="name">Dreave</span>
+        <span class="sub">Lucid Dream Inducer</span>
+      </div>
+    </a>
+    <div class="nav-links">
+      <a href="index.html#features">Features</a>
+      <a href="index.html#science">About REM</a>
+      <a href="index.html#how">How it works</a>
+      <a href="News.html">News</a>
+      <a href="index.html#pricing">Pricing</a>
+    </div>
+    <a href="index.html#pricing" class="nav-cta">無料で始める</a>
+  </div>
 </nav>
 
-<!-- HEADER -->
-<header class="page-header">
-  <canvas id="header-stars" class="header-stars"></canvas>
-  <div class="container fade-up">
-    <span class="section-label">Journal Tips</span>
-    <h1>夢日記を続けるための 7 つのコツ。</h1>
-    <p class="header-sub">夢を覚える能力は、筋肉のように鍛えることができます。</p>
+<header class="page-head">
+  <div class="content-shell">
+    <div class="breadcrumb">
+      <a href="index.html">Home</a>
+      <span class="sep">/</span>
+      <span>Journal Tips</span>
+    </div>
+    <div class="section-label" style="margin-top:32px;">Journal Tips</div>
+    <h1>夢日記を続けるための<br><span class="em">7</span> つのコツ。</h1>
+    <p class="lede">夢を覚える能力は、筋肉のように鍛えることができます。毎晩のちょっとした工夫が、明日の鮮明さを育てます。</p>
   </div>
 </header>
 
-<!-- TIPS CONTENT -->
-<section>
-  <div class="container">
-    
-    <div class="content-block fade-up">
-      <h3>1. 目が覚めたら、まず動かない</h3>
+<main class="content">
+  <div class="content-shell">
+
+    <div class="content-block">
+      <h3>目が覚めたら、まず動かない</h3>
       <p>目を覚ました瞬間に体を動かしたり、急に明るい光を見たりすると、レム睡眠中の記憶が急速に薄れてしまいます。数分間、目をつぶったまま「さっきまで何をしていたか？」と自分に問いかけてください。</p>
     </div>
 
-    <div class="content-block fade-up">
-      <h3>2. 音声メモを活用する</h3>
-      <p>ペンで紙に書くのは時間がかかり、書いている途中で次の場面を忘れてしまうことがあります。Dreave の音声録音機能を使えば、寝ぼけたままでも素早く詳細を残せます。</p>
+    <div class="content-block">
+      <h3>音声メモを活用する</h3>
+      <p>ペンで紙に書くのは時間がかかり、書いている途中で次の場面を忘れてしまうことがあります。Dreave の<b>音声録音機能</b>を使えば、寝ぼけたままでも素早く詳細を残せます。</p>
     </div>
 
-    <div class="content-block fade-up">
-      <h3>3. 感情から思い出す</h3>
-      <p>具体的な場面や場所が思い出せなくても、「怖かった」「楽しかった」「不思議な感覚だった」といった感情は記憶に残りやすいものです。感情を入り口にすると、芋づる式に映像が戻ってくることがあります。</p>
+    <div class="content-block">
+      <h3>感情から思い出す</h3>
+      <p>具体的な場面や場所が思い出せなくても、「怖かった」「楽しかった」「不思議な感覚だった」といった<b>感情</b>は記憶に残りやすいものです。感情を入り口にすると、芋づる式に映像が戻ってくることがあります。</p>
     </div>
 
-    <div class="content-block fade-up">
-      <h3>4. 断片でも記録する</h3>
+    <div class="content-block">
+      <h3>断片でも記録する</h3>
       <p>「青い海を見た」「誰かと話した」といった一行だけの記録でも十分価値があります。毎日記録をつけるという行為自体が、脳に「夢は重要な情報だ」と教え込むことになります。</p>
     </div>
 
-    <div class="content-block fade-up">
-      <h3>5. 就寝前のルーティンを作る</h3>
+    <div class="content-block">
+      <h3>就寝前のルーティンを作る</h3>
       <p>寝る前に過去の夢日記をパラパラと読み返すと、夢への意識が高まります。Dreave の Night Mode をオンにするタイミングで、昨夜の夢を思い出す習慣をつけましょう。</p>
     </div>
 
-    <div class="content-block fade-up">
-      <h3>6. Reality Check と組み合わせる</h3>
+    <div class="content-block">
+      <h3>Reality Check と組み合わせる</h3>
       <p>日中に現実確認（これは夢か？）を行う習慣がつくと、夢の中でも同じ疑問を持つ確率が上がります。夢日記と現実確認は、明晰夢という車の両輪です。</p>
     </div>
 
-    <div class="content-block fade-up">
-      <h3>7. Recall Score で進捗を見る</h3>
+    <div class="content-block">
+      <h3>Recall Score で進捗を見る</h3>
       <p>Dreave はあなたの記録から「夢の想起レベル」を数値化します。数字が上がっていくのを楽しむことが、継続の最大のモチベーションになります。</p>
     </div>
 
-  </div>
-</section>
+    <div class="content-foot">毎晩、ほんの一行から。</div>
 
-<!-- FOOTER -->
+  </div>
+</main>
+
+
 <footer>
-  <div class="footer-inner">
-    <div>
-      <a href="index.html" class="footer-logo">☽ Dreave</a>
-      <div class="footer-tagline">明晰夢を、科学する。</div>
+  <div class="shell">
+    <div class="col-brand">
+      <a href="index.html" class="brand">
+        <div class="mark"></div>
+        <span class="name">Dreave</span>
+      </a>
+      <div class="tag" style="margin-top:16px;">夢の中で、目を覚ます。</div>
     </div>
-    <div class="footer-links">
-      <a href="features.html">機能詳細</a>
-      <a href="science.html">科学的根拠</a>
-      <a href="pricing.html">料金プラン</a>
+    <div class="links">
+      <a href="index.html#features">機能詳細</a>
+      <a href="index.html#science">REM について</a>
+      <a href="index.html#pricing">料金プラン</a>
+      <a href="News.html">お知らせ</a>
       <a href="journal-tips.html">夢日記 Tips</a>
       <a href="privacy.html">プライバシーポリシー</a>
       <a href="terms.html">利用規約</a>
       <a href="contact.html">お問い合わせ</a>
     </div>
+    <div class="copy">© 2026 DREAVE<br>ALL RIGHTS RESERVED</div>
   </div>
-  <div class="footer-copy">© 2026 Dreave. All rights reserved.</div>
 </footer>
 
 <script>
-function makeStars(canvasId, count){
-  const c=document.getElementById(canvasId);
-  if(!c)return;
-  const ctx=c.getContext('2d');
-  function resize(){c.width=c.offsetWidth;c.height=c.offsetHeight}
+// Starfield (shared)
+(() => {
+  const c = document.getElementById('starfield');
+  if (!c) return;
+  const ctx = c.getContext('2d');
+  let stars = [];
+  function resize() {
+    c.width = innerWidth * devicePixelRatio;
+    c.height = innerHeight * devicePixelRatio;
+    c.style.width = innerWidth + 'px';
+    c.style.height = innerHeight + 'px';
+    const count = Math.floor((innerWidth * innerHeight) / 5500);
+    stars = Array.from({length: count}, () => ({
+      x: Math.random() * c.width,
+      y: Math.random() * c.height,
+      r: Math.random() * 1.2 * devicePixelRatio + 0.2 * devicePixelRatio,
+      a: Math.random() * 0.8 + 0.1,
+      tw: Math.random() * 0.02 + 0.003,
+      tp: Math.random() * Math.PI * 2,
+    }));
+  }
   resize();
-  window.addEventListener('resize',resize);
-  const stars=Array.from({length:count},()=>({
-    x:Math.random(),y:Math.random(),
-    r:Math.random()*1.5+.5,
-    t:Math.random()*Math.PI*2,
-    speed:Math.random()*.003+.001
-  }));
-  function draw(){
-    ctx.clearRect(0,0,c.width,c.height);
-    stars.forEach(s=>{
-      s.t+=s.speed;
-      const a=.2+.7*(.5+.5*Math.sin(s.t));
+  addEventListener('resize', resize);
+  function draw(t) {
+    ctx.clearRect(0, 0, c.width, c.height);
+    for (const s of stars) {
+      const a = s.a * (0.5 + 0.5 * Math.sin(t * s.tw + s.tp));
       ctx.beginPath();
-      ctx.arc(s.x*c.width,s.y*c.height,s.r,0,Math.PI*2);
-      ctx.fillStyle=`rgba(255,255,255,${a})`;
+      ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(236,230,211,${a})`;
       ctx.fill();
-    });
+    }
     requestAnimationFrame(draw);
   }
-  draw();
-}
-makeStars('header-stars',60);
+  requestAnimationFrame(draw);
+})();
 
-const obs=new IntersectionObserver(entries=>{
-  entries.forEach(e=>{if(e.isIntersecting){e.target.style.opacity=1;e.target.style.transform='none'}});
-},{threshold:.15});
-document.querySelectorAll('.content-block').forEach(el=>{
-  el.style.opacity=0;el.style.transform='translateY(28px)';
-  el.style.transition='opacity .5s ease-out,transform .5s ease-out';
-  obs.observe(el);
-});
+// Reveal content blocks on scroll
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); } });
+}, { threshold: 0.15 });
+document.querySelectorAll('.content-block').forEach(el => obs.observe(el));
 </script>
+
 </body>
 </html>

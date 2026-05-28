@@ -4,95 +4,150 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>お問い合わせ — Dreave</title>
-<link rel="stylesheet" href="style.css">
+<meta name="description" content="Dreave へのお問い合わせ。バグ報告、機能のご要望など、お気軽にご連絡ください。">
 <meta property="og:title" content="お問い合わせ — Dreave">
-<meta property="og:description" content="Dreave に関するお問い合わせ。">
+<meta property="og:description" content="Dreave へのお問い合わせ。バグ報告、機能のご要望など、お気軽にご連絡ください。">
 <meta property="og:image" content="og-image.png">
 <link rel="icon" type="image/png" href="favicon.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="stylesheet" href="style.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@400;500;700;800&family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
 </head>
 <body>
 
-<!-- NAV -->
-<nav>
-  <a href="index.html" class="nav-logo">
-    <span class="nav-logo-icon">☽</span>
-    Dreave
-    <span class="nav-logo-tagline">- Lucid Dream Inducer</span>
-  </a>
+<div class="stars" aria-hidden="true"><canvas id="starfield"></canvas></div>
+
+<nav class="top">
+  <div class="shell">
+    <a href="index.html" class="brand">
+      <div class="mark"></div>
+      <div>
+        <span class="name">Dreave</span>
+        <span class="sub">Lucid Dream Inducer</span>
+      </div>
+    </a>
+    <div class="nav-links">
+      <a href="index.html#features">Features</a>
+      <a href="index.html#science">About REM</a>
+      <a href="index.html#how">How it works</a>
+      <a href="News.html">News</a>
+      <a href="index.html#pricing">Pricing</a>
+    </div>
+    <a href="index.html#pricing" class="nav-cta">無料で始める</a>
+  </div>
 </nav>
 
-<header class="page-header">
-  <canvas id="header-stars" class="header-stars"></canvas>
-  <div class="container fade-up">
-    <span class="section-label">Contact</span>
-    <h1>お問い合わせ</h1>
-    <p class="header-sub">バグ報告、機能のご要望など、お気軽にご連絡ください。</p>
+<header class="page-head">
+  <div class="content-shell">
+    <div class="breadcrumb">
+      <a href="index.html">Home</a>
+      <span class="sep">/</span>
+      <span>Contact</span>
+    </div>
+    <div class="section-label" style="margin-top:32px;">Contact</div>
+    <h1>お問い<span class="em">合わせ</span>。</h1>
+    <p class="lede">バグ報告、機能のご要望、メディア取材など、お気軽にご連絡ください。一通ずつ目を通しています。</p>
   </div>
 </header>
 
-<section>
-  <div class="container" style="max-width:600px; text-align:center">
-    <div class="content-block fade-up">
-      <p>現在、お問い合わせはメールにて受け付けております。</p>
-      <a href="mailto:kimuraenator@gmail.com" class="btn-primary" style="margin-top:20px">メールを送る</a>
-      <p style="margin-top:32px; font-size:14px; color:var(--muted)">通常、3〜5 営業日以内に返信いたします。</p>
-    </div>
-  </div>
-</section>
+<main class="content">
+  <div class="content-shell">
 
-<!-- FOOTER -->
-<footer>
-  <div class="footer-inner">
-    <div>
-      <a href="index.html" class="footer-logo">☽ Dreave</a>
+    <div class="content-block no-num contact-card">
+      <span class="glyph">✉</span>
+      <p>現在、お問い合わせは<b>メール</b>にて受け付けております。</p>
+      <a href="mailto:kimuraenator@gmail.com" class="btn-primary">
+        メールを送る
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M7 3l4 4-4 4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <div class="note">通常 3 〜 5 営業日以内に返信いたします</div>
     </div>
-    <div class="footer-links">
-      <a href="index.html">ホーム</a>
+
+    <div class="content-block no-num" style="margin-top: 48px;">
+      <h3>お問い合わせの種類</h3>
+      <p>件名に下記のいずれかを含めていただくと、対応がスムーズになります。</p>
+      <ul>
+        <li><b>[バグ]</b> 動作不具合のご報告</li>
+        <li><b>[要望]</b> 機能のご提案・改善希望</li>
+        <li><b>[購入]</b> Dreave Pro に関するお問い合わせ</li>
+        <li><b>[取材]</b> メディア・プレスからのご連絡</li>
+        <li><b>[その他]</b> 上記以外のお問い合わせ</li>
+      </ul>
+    </div>
+
+  </div>
+</main>
+
+
+<footer>
+  <div class="shell">
+    <div class="col-brand">
+      <a href="index.html" class="brand">
+        <div class="mark"></div>
+        <span class="name">Dreave</span>
+      </a>
+      <div class="tag" style="margin-top:16px;">夢の中で、目を覚ます。</div>
+    </div>
+    <div class="links">
+      <a href="index.html#features">機能詳細</a>
+      <a href="index.html#science">REM について</a>
+      <a href="index.html#pricing">料金プラン</a>
+      <a href="News.html">お知らせ</a>
+      <a href="journal-tips.html">夢日記 Tips</a>
       <a href="privacy.html">プライバシーポリシー</a>
       <a href="terms.html">利用規約</a>
+      <a href="contact.html">お問い合わせ</a>
     </div>
+    <div class="copy">© 2026 DREAVE<br>ALL RIGHTS RESERVED</div>
   </div>
 </footer>
 
 <script>
-function makeStars(canvasId, count){
-  const c=document.getElementById(canvasId);
-  if(!c)return;
-  const ctx=c.getContext('2d');
-  function resize(){c.width=c.offsetWidth;c.height=c.offsetHeight}
+// Starfield (shared)
+(() => {
+  const c = document.getElementById('starfield');
+  if (!c) return;
+  const ctx = c.getContext('2d');
+  let stars = [];
+  function resize() {
+    c.width = innerWidth * devicePixelRatio;
+    c.height = innerHeight * devicePixelRatio;
+    c.style.width = innerWidth + 'px';
+    c.style.height = innerHeight + 'px';
+    const count = Math.floor((innerWidth * innerHeight) / 5500);
+    stars = Array.from({length: count}, () => ({
+      x: Math.random() * c.width,
+      y: Math.random() * c.height,
+      r: Math.random() * 1.2 * devicePixelRatio + 0.2 * devicePixelRatio,
+      a: Math.random() * 0.8 + 0.1,
+      tw: Math.random() * 0.02 + 0.003,
+      tp: Math.random() * Math.PI * 2,
+    }));
+  }
   resize();
-  window.addEventListener('resize',resize);
-  const stars=Array.from({length:count},()=>({
-    x:Math.random(),y:Math.random(),
-    r:Math.random()*1.5+.5,
-    t:Math.random()*Math.PI*2,
-    speed:Math.random()*.003+.001
-  }));
-  function draw(){
-    ctx.clearRect(0,0,c.width,c.height);
-    stars.forEach(s=>{
-      s.t+=s.speed;
-      const a=.2+.7*(.5+.5*Math.sin(s.t));
+  addEventListener('resize', resize);
+  function draw(t) {
+    ctx.clearRect(0, 0, c.width, c.height);
+    for (const s of stars) {
+      const a = s.a * (0.5 + 0.5 * Math.sin(t * s.tw + s.tp));
       ctx.beginPath();
-      ctx.arc(s.x*c.width,s.y*c.height,s.r,0,Math.PI*2);
-      ctx.fillStyle=`rgba(255,255,255,${a})`;
+      ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(236,230,211,${a})`;
       ctx.fill();
-    });
+    }
     requestAnimationFrame(draw);
   }
-  draw();
-}
-makeStars('header-stars',60);
+  requestAnimationFrame(draw);
+})();
 
-const obs=new IntersectionObserver(entries=>{
-  entries.forEach(e=>{if(e.isIntersecting){e.target.style.opacity=1;e.target.style.transform='none'}});
-},{threshold:.15});
-document.querySelectorAll('.content-block').forEach(el=>{
-  el.style.opacity=0;el.style.transform='translateY(28px)';
-  el.style.transition='opacity .5s ease-out,transform .5s ease-out';
-  obs.observe(el);
-});
+// Reveal content blocks on scroll
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); } });
+}, { threshold: 0.15 });
+document.querySelectorAll('.content-block').forEach(el => obs.observe(el));
 </script>
+
 </body>
 </html>

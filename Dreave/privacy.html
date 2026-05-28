@@ -4,31 +4,64 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>プライバシーポリシー — Dreave</title>
-<link rel="stylesheet" href="style.css">
+<meta name="description" content="Dreave のプライバシーポリシー。録音音声・夢日記データは端末内に保存され、外部送信は行いません。">
 <meta property="og:title" content="プライバシーポリシー — Dreave">
-<meta property="og:description" content="Dreave のプライバシーポリシー。">
+<meta property="og:description" content="Dreave のプライバシーポリシー。録音音声・夢日記データは端末内に保存され、外部送信は行いません。">
 <meta property="og:image" content="og-image.png">
 <link rel="icon" type="image/png" href="favicon.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="stylesheet" href="style.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@400;500;700;800&family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
 </head>
 <body>
 
-<!-- NAV -->
-<nav>
-  <a href="index.html" class="nav-logo">
-    <span class="nav-logo-icon">☽</span>
-    Dreave
-    <span class="nav-logo-tagline">- Lucid Dream Inducer</span>
-  </a>
+<div class="stars" aria-hidden="true"><canvas id="starfield"></canvas></div>
+
+<nav class="top">
+  <div class="shell">
+    <a href="index.html" class="brand">
+      <div class="mark"></div>
+      <div>
+        <span class="name">Dreave</span>
+        <span class="sub">Lucid Dream Inducer</span>
+      </div>
+    </a>
+    <div class="nav-links">
+      <a href="index.html#features">Features</a>
+      <a href="index.html#science">About REM</a>
+      <a href="index.html#how">How it works</a>
+      <a href="News.html">News</a>
+      <a href="index.html#pricing">Pricing</a>
+    </div>
+    <a href="index.html#pricing" class="nav-cta">無料で始める</a>
+  </div>
 </nav>
 
-<section>
-  <div class="container">
-    <h1>プライバシーポリシー</h1>
-    <div class="content-block" style="margin-top:40px">
-      <p>Dreave（以下「本アプリ」）は、お客様のプライバシーを最優先に考え、個人情報の保護に努めます。</p>
-      
-      <h3>1. 収集する情報</h3>
+<header class="page-head">
+  <div class="content-shell">
+    <div class="breadcrumb">
+      <a href="index.html">Home</a>
+      <span class="sep">/</span>
+      <span>Privacy Policy</span>
+    </div>
+    <div class="section-label" style="margin-top:32px;">Privacy Policy</div>
+    <h1>プライバシー<br><span class="em">ポリシー</span>。</h1>
+    <p class="lede">Dreave は、お客様のプライバシーを最優先に考え、個人情報の保護に努めます。録音音声と夢日記は端末内にとどまり、外部に送信されることはありません。</p>
+    <div class="meta">
+      <span>Effective <b style="color:var(--accent); font-family:var(--mono); font-size:11px; letter-spacing:0.14em;">2026.05.03</b></span>
+      <span class="div"></span>
+      <span>Last updated 2026.05.28</span>
+    </div>
+  </div>
+</header>
+
+<main class="content">
+  <div class="content-shell">
+
+    <div class="content-block">
+      <h3>収集する情報</h3>
       <p>本アプリは、以下の情報を収集・利用する場合があります。</p>
       <ul>
         <li>夢日記のテキストデータ（AI分析機能のご利用時に外部APIへ送信されます。詳細は第3項をご参照ください）</li>
@@ -36,50 +69,114 @@
         <li>睡眠設定データ（就寝時刻、通知設定など。端末内にのみ保存）</li>
         <li>アプリの使用状況統計（機能の改善目的）</li>
       </ul>
+    </div>
 
-      <h3>2. データの保存と処理</h3>
-      <p>夢日記のテキストデータおよびすべての記録データは、原則としてお客様の端末内（SwiftData）に保存されます。当社がお客様の音声ファイルを外部サーバーに送信することはありません。</p>
+    <div class="content-block">
+      <h3>データの保存と処理</h3>
+      <p>夢日記のテキストデータおよびすべての記録データは、原則としてお客様の端末内（<b>SwiftData</b>）に保存されます。当社がお客様の音声ファイルを外部サーバーに送信することはありません。</p>
+    </div>
 
-      <h3>3. 第三者サービスへのデータ送信</h3>
+    <div class="content-block">
+      <h3>第三者サービスへのデータ送信</h3>
       <p>本アプリは、以下のサードパーティサービスを利用しています。</p>
       <ul>
         <li>
-          <strong>Google Gemini API（Google LLC）</strong><br>
+          <b>Google Gemini API（Google LLC）</b><br>
           AIコメント生成機能をご利用の際、入力された夢の記録テキストをGoogle Gemini APIに送信し、分析結果の生成に使用します。送信されるデータにはお客様の氏名・端末ID等の個人識別情報は含まれません。<br>
-          Googleのプライバシーポリシー：<a href="https://policies.google.com/privacy" target="_blank">https://policies.google.com/privacy</a>
+          Googleのプライバシーポリシー：<a href="https://policies.google.com/privacy" target="_blank" rel="noopener">https://policies.google.com/privacy</a>
         </li>
         <li>
-          <strong>Apple Speech Framework（Apple Inc.）</strong><br>
+          <b>Apple Speech Framework（Apple Inc.）</b><br>
           音声文字起こし機能に使用します。処理はAppleのフレームワークにより行われます。<br>
-          Appleのプライバシーポリシー：<a href="https://www.apple.com/jp/legal/privacy/" target="_blank">https://www.apple.com/jp/legal/privacy/</a>
+          Appleのプライバシーポリシー：<a href="https://www.apple.com/jp/legal/privacy/" target="_blank" rel="noopener">https://www.apple.com/jp/legal/privacy/</a>
         </li>
       </ul>
+    </div>
 
-      <h3>4. 第三者への個人情報の提供</h3>
+    <div class="content-block">
+      <h3>第三者への個人情報の提供</h3>
       <p>上記サードパーティサービスへの送信を除き、法令に基づく場合を除いてお客様の同意なく個人情報を第三者に提供することはありません。</p>
-
-      <h3>5. お問い合わせ</h3>
-      <p>プライバシーに関するお問い合わせは、以下のメールアドレスまでご連絡ください。<br>
-      Email: kimuraenator@gmail.com</p>
-
-      <p style="margin-top:40px; font-size:12px">最終更新日：2026年5月24日</p>
     </div>
+
+    <div class="content-block">
+      <h3>お問い合わせ</h3>
+      <p>プライバシーに関するお問い合わせは、以下のメールアドレスまでご連絡ください。</p>
+      <p>Email: <a href="mailto:kimuraenator@gmail.com">kimuraenator@gmail.com</a></p>
+    </div>
+
+    <div class="content-foot">最終更新日 · 2026 年 5 月 24 日</div>
+
   </div>
-</section>
+</main>
 
-<!-- FOOTER -->
+
 <footer>
-  <div class="footer-inner">
-    <div>
-      <a href="index.html" class="footer-logo">☽ Dreave</a>
+  <div class="shell">
+    <div class="col-brand">
+      <a href="index.html" class="brand">
+        <div class="mark"></div>
+        <span class="name">Dreave</span>
+      </a>
+      <div class="tag" style="margin-top:16px;">夢の中で、目を覚ます。</div>
     </div>
-    <div class="footer-links">
+    <div class="links">
+      <a href="index.html#features">機能詳細</a>
+      <a href="index.html#science">REM について</a>
+      <a href="index.html#pricing">料金プラン</a>
+      <a href="News.html">お知らせ</a>
+      <a href="journal-tips.html">夢日記 Tips</a>
       <a href="privacy.html">プライバシーポリシー</a>
       <a href="terms.html">利用規約</a>
+      <a href="contact.html">お問い合わせ</a>
     </div>
+    <div class="copy">© 2026 DREAVE<br>ALL RIGHTS RESERVED</div>
   </div>
-  <div class="footer-copy">© 2026 Dreave. All rights reserved.</div>
 </footer>
+
+<script>
+// Starfield (shared)
+(() => {
+  const c = document.getElementById('starfield');
+  if (!c) return;
+  const ctx = c.getContext('2d');
+  let stars = [];
+  function resize() {
+    c.width = innerWidth * devicePixelRatio;
+    c.height = innerHeight * devicePixelRatio;
+    c.style.width = innerWidth + 'px';
+    c.style.height = innerHeight + 'px';
+    const count = Math.floor((innerWidth * innerHeight) / 5500);
+    stars = Array.from({length: count}, () => ({
+      x: Math.random() * c.width,
+      y: Math.random() * c.height,
+      r: Math.random() * 1.2 * devicePixelRatio + 0.2 * devicePixelRatio,
+      a: Math.random() * 0.8 + 0.1,
+      tw: Math.random() * 0.02 + 0.003,
+      tp: Math.random() * Math.PI * 2,
+    }));
+  }
+  resize();
+  addEventListener('resize', resize);
+  function draw(t) {
+    ctx.clearRect(0, 0, c.width, c.height);
+    for (const s of stars) {
+      const a = s.a * (0.5 + 0.5 * Math.sin(t * s.tw + s.tp));
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(236,230,211,${a})`;
+      ctx.fill();
+    }
+    requestAnimationFrame(draw);
+  }
+  requestAnimationFrame(draw);
+})();
+
+// Reveal content blocks on scroll
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); } });
+}, { threshold: 0.15 });
+document.querySelectorAll('.content-block').forEach(el => obs.observe(el));
+</script>
 
 </body>
 </html>

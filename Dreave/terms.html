@@ -4,61 +4,160 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>利用規約 — Dreave</title>
-<link rel="stylesheet" href="style.css">
+<meta name="description" content="Dreave の利用規約。サービスの定義、課金、免責事項、禁止事項などを記載しています。">
 <meta property="og:title" content="利用規約 — Dreave">
-<meta property="og:description" content="Dreave の利用規約。">
+<meta property="og:description" content="Dreave の利用規約。サービスの定義、課金、免責事項、禁止事項などを記載しています。">
 <meta property="og:image" content="og-image.png">
 <link rel="icon" type="image/png" href="favicon.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="stylesheet" href="style.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@400;500;700;800&family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
 </head>
 <body>
 
-<!-- NAV -->
-<nav>
-  <a href="index.html" class="nav-logo">
-    <span class="nav-logo-icon">☽</span>
-    Dreave
-    <span class="nav-logo-tagline">- Lucid Dream Inducer</span>
-  </a>
+<div class="stars" aria-hidden="true"><canvas id="starfield"></canvas></div>
+
+<nav class="top">
+  <div class="shell">
+    <a href="index.html" class="brand">
+      <div class="mark"></div>
+      <div>
+        <span class="name">Dreave</span>
+        <span class="sub">Lucid Dream Inducer</span>
+      </div>
+    </a>
+    <div class="nav-links">
+      <a href="index.html#features">Features</a>
+      <a href="index.html#science">About REM</a>
+      <a href="index.html#how">How it works</a>
+      <a href="News.html">News</a>
+      <a href="index.html#pricing">Pricing</a>
+    </div>
+    <a href="index.html#pricing" class="nav-cta">無料で始める</a>
+  </div>
 </nav>
 
-<section>
-  <div class="container">
-    <h1>利用規約</h1>
-    <div class="content-block" style="margin-top:40px">
-      <h3>1. サービスの定義</h3>
-      <p>本規約は、Dreave（以下「本アプリ」）が提供するすべてのサービスに適用されます。本アプリは iOS 17 以上を搭載した端末を対象としています。</p>
-
-      <h3>2. 課金と購入</h3>
-      <p>Lucid Pro ライセンスの購入は App Store の決済システムを通じて行われます。買い切り型のライセンスであり、一度の購入で永続的にご利用いただけます。返金等については Apple のポリシーに従います。</p>
-
-      <h3>3. 免責事項</h3>
-      <p>本アプリが提供する明晰夢の誘発効果には個人差があります。当社は、特定の効果を保証するものではありません。また、本アプリは医療機器ではなく、健康上の問題を診断または治療するものではありません。使用による不利益について、当社は一切の責任を負いません。</p>
-
-      <h3>4. 禁止事項</h3>
-      <p>本アプリのリバースエンジニアリング、不正なデータ改ざん、およびサービスの運営を妨げる行為を禁止します。</p>
-
-      <h3>5. 準拠法</h3>
-      <p>本規約は日本法に基づき解釈されます。</p>
-
-      <p style="margin-top:40px; font-size:12px">最終更新日：2026年5月3日</p>
+<header class="page-head">
+  <div class="content-shell">
+    <div class="breadcrumb">
+      <a href="index.html">Home</a>
+      <span class="sep">/</span>
+      <span>Terms of Service</span>
+    </div>
+    <div class="section-label" style="margin-top:32px;">Terms of Service</div>
+    <h1>利用<span class="em">規約</span>。</h1>
+    <p class="lede">本規約は、Dreave が提供するすべてのサービスに適用されます。ご利用前にお読みください。</p>
+    <div class="meta">
+      <span>Effective <b style="color:var(--accent); font-family:var(--mono); font-size:11px; letter-spacing:0.14em;">2026.05.03</b></span>
+      <span class="div"></span>
+      <span>Governed by Japan</span>
     </div>
   </div>
-</section>
+</header>
 
-<!-- FOOTER -->
-<footer>
-  <div class="footer-inner">
-    <div>
-      <a href="index.html" class="footer-logo">☽ Dreave</a>
+<main class="content">
+  <div class="content-shell">
+
+    <div class="content-block">
+      <h3>サービスの定義</h3>
+      <p>本規約は、Dreave（以下「本アプリ」）が提供するすべてのサービスに適用されます。本アプリは <b>iOS 17 以上</b>を搭載した端末を対象としています。</p>
     </div>
-    <div class="footer-links">
+
+    <div class="content-block">
+      <h3>課金と購入</h3>
+      <p>Dreave Pro ライセンスの購入は App Store の決済システムを通じて行われます。<b>買い切り型</b>のライセンスであり、一度の購入で永続的にご利用いただけます。返金等については Apple のポリシーに従います。</p>
+    </div>
+
+    <div class="content-block">
+      <h3>免責事項</h3>
+      <p>本アプリが提供する明晰夢の誘発効果には個人差があります。当社は、特定の効果を保証するものではありません。また、本アプリは医療機器ではなく、健康上の問題を診断または治療するものではありません。使用による不利益について、当社は一切の責任を負いません。</p>
+    </div>
+
+    <div class="content-block">
+      <h3>禁止事項</h3>
+      <p>本アプリのリバースエンジニアリング、不正なデータ改ざん、およびサービスの運営を妨げる行為を禁止します。</p>
+    </div>
+
+    <div class="content-block">
+      <h3>準拠法</h3>
+      <p>本規約は日本法に基づき解釈されます。</p>
+    </div>
+
+    <div class="content-foot">最終更新日 · 2026 年 5 月 3 日</div>
+
+  </div>
+</main>
+
+
+<footer>
+  <div class="shell">
+    <div class="col-brand">
+      <a href="index.html" class="brand">
+        <div class="mark"></div>
+        <span class="name">Dreave</span>
+      </a>
+      <div class="tag" style="margin-top:16px;">夢の中で、目を覚ます。</div>
+    </div>
+    <div class="links">
+      <a href="index.html#features">機能詳細</a>
+      <a href="index.html#science">REM について</a>
+      <a href="index.html#pricing">料金プラン</a>
+      <a href="News.html">お知らせ</a>
+      <a href="journal-tips.html">夢日記 Tips</a>
       <a href="privacy.html">プライバシーポリシー</a>
       <a href="terms.html">利用規約</a>
+      <a href="contact.html">お問い合わせ</a>
     </div>
+    <div class="copy">© 2026 DREAVE<br>ALL RIGHTS RESERVED</div>
   </div>
-  <div class="footer-copy">© 2026 Dreave. All rights reserved.</div>
 </footer>
+
+<script>
+// Starfield (shared)
+(() => {
+  const c = document.getElementById('starfield');
+  if (!c) return;
+  const ctx = c.getContext('2d');
+  let stars = [];
+  function resize() {
+    c.width = innerWidth * devicePixelRatio;
+    c.height = innerHeight * devicePixelRatio;
+    c.style.width = innerWidth + 'px';
+    c.style.height = innerHeight + 'px';
+    const count = Math.floor((innerWidth * innerHeight) / 5500);
+    stars = Array.from({length: count}, () => ({
+      x: Math.random() * c.width,
+      y: Math.random() * c.height,
+      r: Math.random() * 1.2 * devicePixelRatio + 0.2 * devicePixelRatio,
+      a: Math.random() * 0.8 + 0.1,
+      tw: Math.random() * 0.02 + 0.003,
+      tp: Math.random() * Math.PI * 2,
+    }));
+  }
+  resize();
+  addEventListener('resize', resize);
+  function draw(t) {
+    ctx.clearRect(0, 0, c.width, c.height);
+    for (const s of stars) {
+      const a = s.a * (0.5 + 0.5 * Math.sin(t * s.tw + s.tp));
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(236,230,211,${a})`;
+      ctx.fill();
+    }
+    requestAnimationFrame(draw);
+  }
+  requestAnimationFrame(draw);
+})();
+
+// Reveal content blocks on scroll
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); } });
+}, { threshold: 0.15 });
+document.querySelectorAll('.content-block').forEach(el => obs.observe(el));
+</script>
 
 </body>
 </html>

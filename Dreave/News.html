@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>お知らせ — Dreave</title>
+<link rel="icon" type="image/png" href="favicon.png" />
+<link rel="apple-touch-icon" href="favicon.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@400;500;700;800&family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-0: #050714;
+    --bg-1: #0a0f24;
+    --ink: #ECE6D3;
+    --ink-dim: #9aa3c0;
+    --ink-mute: #5a6485;
+    --line: rgba(236,230,211,0.08);
+    --line-strong: rgba(236,230,211,0.18);
+    --accent: #B8A2FF;
+    --accent-2: #6B7BFF;
+    --moon: #ECE6D3;
+    --surface: rgba(255,255,255,0.025);
+
+    --serif-jp: "Shippori Mincho B1", "Hiragino Mincho ProN", serif;
+    --serif-en: "Instrument Serif", "Shippori Mincho B1", serif;
+    --sans: "DM Sans", "Hiragino Kaku Gothic ProN", system-ui, sans-serif;
+    --mono: "JetBrains Mono", ui-monospace, monospace;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: var(--bg-0); color: var(--ink); font-family: var(--sans); -webkit-font-smoothing: antialiased; }
+  body {
+    overflow-x: hidden;
+    background:
+      radial-gradient(1200px 800px at 80% -10%, rgba(184,162,255,0.10), transparent 60%),
+      radial-gradient(900px 700px at -10% 30%, rgba(107,123,255,0.08), transparent 55%),
+      var(--bg-0);
+    min-height: 100vh;
+  }
+  ::selection { background: rgba(184,162,255,0.35); color: var(--moon); }
+  a { color: inherit; text-decoration: none; }
+  button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+
+  /* Starfield */
+  .stars { position: fixed; inset: 0; pointer-events: none; z-index: 0; opacity: 0.7; }
+  .stars canvas { width: 100%; height: 100%; display: block; }
+
+  .shell { max-width: 1320px; margin: 0 auto; padding: 0 40px; position: relative; z-index: 2; }
+
+  /* Nav (shared) */
+  nav.top {
+    position: sticky; top: 0; z-index: 50;
+    backdrop-filter: blur(14px) saturate(140%);
+    -webkit-backdrop-filter: blur(14px) saturate(140%);
+    background: linear-gradient(180deg, rgba(5,7,20,0.85), rgba(5,7,20,0.35));
+    border-bottom: 1px solid var(--line);
+  }
+  nav.top .shell { display: flex; align-items: center; justify-content: space-between; height: 72px; }
+  .brand { display: flex; align-items: center; gap: 14px; }
+  .brand .mark {
+    width: 36px; height: 36px; border-radius: 9px;
+    background: url('favicon.png') center/cover no-repeat, #1a0f3a;
+    box-shadow: 0 0 20px rgba(184,162,255,0.35), 0 4px 12px rgba(0,0,0,0.5);
+  }
+  .brand .name { font-family: var(--serif-en); font-size: 24px; letter-spacing: 0.04em; font-style: italic; }
+  .brand .sub { font-family: var(--mono); font-size: 10px; letter-spacing: 0.22em; color: var(--ink-mute); text-transform: uppercase; margin-left: 6px; }
+  .nav-links { display: flex; gap: 36px; font-size: 13px; color: var(--ink-dim); }
+  .nav-links a:hover, .nav-links a.active { color: var(--moon); }
+  .nav-links a.active { position: relative; }
+  .nav-links a.active::after {
+    content: ""; position: absolute; left: 0; right: 0; bottom: -26px; height: 1px; background: var(--accent);
+  }
+  .nav-cta {
+    padding: 10px 18px; border: 1px solid var(--line-strong); border-radius: 999px;
+    font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;
+    background: rgba(236,230,211,0.04); transition: all 200ms ease;
+  }
+  .nav-cta:hover { background: var(--moon); color: var(--bg-0); border-color: var(--moon); }
+
+  /* Page header */
+  .page-head { padding: 100px 0 56px; position: relative; }
+  .breadcrumb {
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--ink-mute);
+    display: flex; align-items: center; gap: 12px;
+  }
+  .breadcrumb a { color: var(--ink-dim); }
+  .breadcrumb a:hover { color: var(--moon); }
+  .breadcrumb .sep { opacity: 0.4; }
+
+  .page-head h1 {
+    font-family: var(--serif-jp); font-weight: 500;
+    font-size: clamp(56px, 6vw, 92px); line-height: 1.05; letter-spacing: -0.01em;
+    margin-top: 36px;
+  }
+  .page-head h1 .em { font-family: var(--serif-en); font-style: italic; color: var(--accent); font-weight: 400; }
+  .page-head .lede {
+    font-family: var(--serif-jp); font-size: 18px; line-height: 1.85; color: var(--ink-dim);
+    margin-top: 28px; max-width: 580px;
+  }
+  .page-head .meta {
+    margin-top: 40px; display: flex; align-items: center; gap: 28px;
+    font-family: var(--mono); font-size: 11px; color: var(--ink-mute); letter-spacing: 0.14em; text-transform: uppercase;
+  }
+  .page-head .meta .div { width: 1px; height: 16px; background: var(--line); }
+  .page-head .meta b { color: var(--accent); font-family: var(--serif-en); font-style: italic; font-size: 22px; font-weight: 400; letter-spacing: 0; }
+
+  /* Filter */
+  .filter {
+    position: sticky; top: 72px; z-index: 40;
+    padding: 24px 0;
+    background: linear-gradient(180deg, rgba(5,7,20,0.92) 0%, rgba(5,7,20,0.75) 90%, rgba(5,7,20,0) 100%);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+  .filter .shell { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+  .filter .label {
+    font-family: var(--mono); font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--ink-mute);
+    margin-right: 12px;
+  }
+  .chip {
+    padding: 9px 16px; border: 1px solid var(--line); border-radius: 999px;
+    font-size: 12px; letter-spacing: 0.04em; color: var(--ink-dim);
+    transition: all 180ms ease;
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .chip .count { font-family: var(--mono); font-size: 10px; color: var(--ink-mute); }
+  .chip:hover { border-color: var(--line-strong); color: var(--ink); }
+  .chip.active { background: var(--moon); color: var(--bg-0); border-color: var(--moon); }
+  .chip.active .count { color: var(--bg-1); opacity: 0.7; }
+
+  /* Timeline */
+  .timeline { padding: 32px 0 100px; position: relative; }
+  .year-sep {
+    position: relative; padding: 64px 0 36px;
+    display: flex; align-items: baseline; gap: 24px;
+  }
+  .year-sep::after {
+    content: ""; flex: 1; height: 1px; background: var(--line);
+  }
+  .year-sep .y {
+    font-family: var(--serif-en); font-style: italic; font-size: 72px; line-height: 1; color: var(--moon);
+    letter-spacing: -0.01em;
+  }
+  .year-sep .tag {
+    font-family: var(--mono); font-size: 10px; letter-spacing: 0.22em; color: var(--ink-mute); text-transform: uppercase;
+  }
+  .year-sep:first-child { padding-top: 0; }
+
+  .post {
+    border-bottom: 1px solid var(--line);
+    transition: background 240ms ease;
+  }
+  .post.open { background: rgba(184,162,255,0.03); }
+  .post-head {
+    display: grid;
+    grid-template-columns: 140px 110px 1fr 32px;
+    gap: 32px; align-items: center;
+    padding: 32px 8px;
+    cursor: pointer;
+    transition: padding 200ms ease;
+  }
+  .post-head:hover { padding-left: 18px; }
+  .post-head time { display: flex; flex-direction: column; gap: 4px; }
+  .post-head time .y { font-family: var(--mono); font-size: 10px; letter-spacing: 0.22em; color: var(--ink-mute); }
+  .post-head time .md { font-family: var(--serif-en); font-style: italic; font-size: 28px; color: var(--moon); line-height: 1; letter-spacing: 0.02em; }
+  .news-tag {
+    font-family: var(--mono); font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
+    padding: 5px 10px; border-radius: 999px;
+    border: 1px solid var(--line-strong); color: var(--ink-dim);
+    text-align: center; width: max-content;
+  }
+  .news-tag.t-release { color: var(--accent); border-color: rgba(184,162,255,0.32); background: rgba(184,162,255,0.06); }
+  .news-tag.t-update  { color: #7CE3D8; border-color: rgba(124,227,216,0.32); background: rgba(124,227,216,0.06); }
+  .news-tag.t-media   { color: #FFB48A; border-color: rgba(255,180,138,0.32); background: rgba(255,180,138,0.06); }
+  .news-tag.t-event   { color: #FFD27A; border-color: rgba(255,210,122,0.32); background: rgba(255,210,122,0.06); }
+  .news-tag.t-info    { color: var(--ink-dim); }
+  .post-head h2 {
+    font-family: var(--serif-jp); font-weight: 500; font-size: 20px; line-height: 1.55; color: var(--ink); margin: 0;
+  }
+  .post-head .chev {
+    font-family: var(--serif-en); font-style: italic; font-size: 22px; color: var(--ink-mute);
+    transition: transform 280ms ease, color 200ms ease;
+    text-align: right;
+  }
+  .post.open .post-head .chev { transform: rotate(90deg); color: var(--accent); }
+
+  .post-body {
+    display: grid;
+    grid-template-columns: 140px 110px 1fr 32px;
+    gap: 32px;
+    max-height: 0; overflow: hidden;
+    transition: max-height 380ms ease, padding 320ms ease, opacity 240ms ease;
+    opacity: 0;
+  }
+  .post.open .post-body {
+    max-height: 1200px;
+    padding: 0 8px 44px;
+    opacity: 1;
+  }
+  .post-body .b-spacer { grid-column: 1 / 3; }
+  .post-body .b-content { grid-column: 3 / 4; max-width: 760px; }
+  .post-body p {
+    font-family: var(--serif-jp); font-size: 15px; line-height: 1.95; color: var(--ink-dim); margin-bottom: 16px;
+  }
+  .post-body p b { color: var(--moon); font-weight: 500; }
+  .post-body ul {
+    margin: 8px 0 20px; padding-left: 0; list-style: none;
+  }
+  .post-body li {
+    font-family: var(--serif-jp); font-size: 14px; line-height: 1.85; color: var(--ink-dim);
+    padding-left: 18px; position: relative;
+  }
+  .post-body li::before {
+    content: ""; position: absolute; left: 0; top: 0.85em;
+    width: 6px; height: 1px; background: var(--accent);
+  }
+  .post-body .b-link {
+    margin-top: 8px; display: inline-flex; align-items: center; gap: 8px;
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--accent); padding-top: 8px; border-top: 0;
+  }
+  .post-body .b-link:hover { color: var(--moon); }
+
+  /* Empty / no-results state */
+  .empty {
+    padding: 80px 0; text-align: center;
+    font-family: var(--serif-jp); font-size: 16px; color: var(--ink-mute);
+  }
+  .empty .glyph { font-family: var(--serif-en); font-style: italic; font-size: 48px; color: var(--accent); opacity: 0.6; display: block; margin-bottom: 20px; }
+
+  /* RSS / subscribe block */
+  .subscribe {
+    margin-top: 60px; padding: 56px 56px 52px;
+    border: 1px solid var(--line);
+    border-radius: 24px;
+    background:
+      radial-gradient(600px 240px at 100% 0%, rgba(184,162,255,0.10), transparent 60%),
+      rgba(255,255,255,0.02);
+    display: grid; grid-template-columns: 1.4fr 1fr; gap: 48px; align-items: center;
+  }
+  .subscribe h3 {
+    font-family: var(--serif-jp); font-weight: 500; font-size: 32px; line-height: 1.3;
+  }
+  .subscribe h3 .em { font-family: var(--serif-en); font-style: italic; color: var(--accent); font-weight: 400; }
+  .subscribe p {
+    font-family: var(--serif-jp); font-size: 15px; line-height: 1.85; color: var(--ink-dim); margin-top: 14px;
+  }
+  .subscribe form { display: flex; gap: 12px; flex-direction: column; }
+  .subscribe input {
+    padding: 16px 20px; border-radius: 999px; border: 1px solid var(--line-strong);
+    background: rgba(0,0,0,0.3); color: var(--ink); font: inherit; font-size: 14px;
+    outline: none;
+  }
+  .subscribe input:focus { border-color: var(--accent); }
+  .subscribe input::placeholder { color: var(--ink-mute); }
+  .subscribe button {
+    padding: 16px 24px; border-radius: 999px;
+    background: var(--moon); color: var(--bg-0); font-weight: 500; font-size: 14px; letter-spacing: 0.04em;
+    transition: box-shadow 200ms ease, transform 200ms ease;
+  }
+  .subscribe button:hover { transform: translateY(-1px); box-shadow: 0 0 40px rgba(236,230,211,0.25); }
+  .subscribe small { font-family: var(--mono); font-size: 10px; letter-spacing: 0.14em; color: var(--ink-mute); text-align: center; }
+
+  /* Footer */
+  footer { border-top: 1px solid var(--line); padding: 60px 0; margin-top: 80px; }
+  footer .shell { display: grid; grid-template-columns: 1.4fr 2fr 1fr; gap: 40px; align-items: start; }
+  footer .tag { font-family: var(--serif-jp); font-size: 14px; color: var(--ink-dim); }
+  footer .links { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px 24px; font-size: 13px; }
+  footer .links a { color: var(--ink-dim); }
+  footer .links a:hover { color: var(--moon); }
+  footer .copy { font-family: var(--mono); font-size: 11px; letter-spacing: 0.06em; color: var(--ink-mute); text-align: right; }
+
+  @media (max-width: 1080px) {
+    .shell { padding: 0 24px; }
+    .nav-links { display: none; }
+    .post-head, .post-body { grid-template-columns: 100px 1fr; gap: 16px; }
+    .post-head { padding: 22px 4px; }
+    .post-head .news-tag { grid-column: 2; }
+    .post-head h2 { grid-column: 1 / -1; font-size: 17px; }
+    .post-head .chev { display: none; }
+    .post.open .post-body { padding: 0 4px 32px; }
+    .post-body .b-spacer { display: none; }
+    .post-body .b-content { grid-column: 1 / -1; }
+    .subscribe { grid-template-columns: 1fr; padding: 36px 28px; }
+    .filter { top: 64px; }
+    footer .shell { grid-template-columns: 1fr; gap: 28px; }
+    footer .copy { text-align: left; }
+  }
+</style>
+</head>
+<body>
+
+<div class="stars" aria-hidden="true"><canvas id="starfield"></canvas></div>
+
+<nav class="top">
+  <div class="shell">
+    <a href="index.html" class="brand">
+      <div class="mark"></div>
+      <div>
+        <span class="name">Dreave</span>
+        <span class="sub">Lucid Dream Inducer</span>
+      </div>
+    </a>
+    <div class="nav-links">
+      <a href="index.html#features">Features</a>
+      <a href="index.html#science">About REM</a>
+      <a href="index.html#how">How it works</a>
+      <a href="News.html" class="active">News</a>
+      <a href="index.html#pricing">Pricing</a>
+    </div>
+    <a href="index.html#pricing" class="nav-cta">無料で始める</a>
+  </div>
+</nav>
+
+<header class="page-head">
+  <div class="shell">
+    <div class="breadcrumb">
+      <a href="index.html">Home</a>
+      <span class="sep">/</span>
+      <span>News</span>
+    </div>
+    <h1>新しい<br/><span class="em">夢の便</span>り。</h1>
+    <p class="lede">アップデート、メディア掲載、季節のイベント。Dreave からの最新情報をお届けします。</p>
+    <div class="meta">
+      <span>Total <b>1</b> post</span>
+      <span class="div"></span>
+      <span>2026.05 —</span>
+      <span class="div"></span>
+      <span>Updated 2026.05.28</span>
+    </div>
+  </div>
+</header>
+
+<div class="filter">
+  <div class="shell">
+    <span class="label">Filter</span>
+    <button class="chip active" data-cat="all">すべて <span class="count">1</span></button>
+    <button class="chip" data-cat="release">Release <span class="count">1</span></button>
+    <button class="chip" data-cat="update">Update <span class="count">0</span></button>
+    <button class="chip" data-cat="media">Media <span class="count">0</span></button>
+    <button class="chip" data-cat="event">Event <span class="count">0</span></button>
+    <button class="chip" data-cat="info">Info <span class="count">0</span></button>
+  </div>
+</div>
+
+<main class="timeline">
+  <div class="shell">
+    <div class="year-sep">
+      <span class="y">2026</span>
+      <span class="tag">All posts</span>
+    </div>
+
+    <article class="post open" id="2026-05-28" data-cat="release">
+      <div class="post-head">
+        <time datetime="2026-05-28"><span class="y">2026</span><span class="md">05 / 28</span></time>
+        <span class="news-tag t-release">Release</span>
+        <h2>Dreave 1.0 をリリースしました。リリース記念、全機能を無料で開放中</h2>
+        <span class="chev">→</span>
+      </div>
+      <div class="post-body">
+        <div class="b-spacer"></div>
+        <div class="b-content">
+          <p>本日 2026 年 5 月 28 日、<b>Dreave 1.0</b> を App Store にてリリースしました。長らくお待たせしましたが、ようやく多くの方の枝元へ Dreave をお届けできます。</p>
+          <p>リリースを記念して、現在 <b>リリースキャンペーン</b>を実施中です。期間中は、誰でも、すべての機能を無料でご利用いただけます。</p>
+          <ul>
+            <li>Night Mode（REM 周期推定 × 40Hz 音響刺激）</li>
+            <li>夢日記（音声入力・感情タグ・検索）</li>
+            <li>Reality Check（ランダム通知による現実確認）</li>
+            <li>Analytics（Recall Score ・ Growth Index）</li>
+          </ul>
+          <p>これから始める方にとっても、多少試してみたことがある方にとっても、今夜から踏み出せる良いタイミングです。枝元に Dreave を、ぜひ一度。</p>
+          <a class="b-link" href="https://appstoreconnect.apple.com/m/teams/69a6de82-b75d-47e3-e053-5b8c7c11a4d1/apps/6770527766/moments/new-app/ios" target="_blank" rel="noopener">App Store で見る →</a>
+        </div>
+      </div>
+    </article>
+
+    <div class="empty" id="empty" style="display: none;">
+      <span class="glyph">◯</span>
+      該当するお知らせはありません。
+    </div>
+
+    <div class="subscribe">
+      <div>
+        <h3>新しいお知らせを、<br/><span class="em">メール</span>で受け取る。</h3>
+        <p>大きなアップデートや季節イベントの告知だけ、月1回のニュースレターでお届けします。</p>
+      </div>
+      <form onsubmit="event.preventDefault(); this.querySelector('button').textContent='✦ 登録完了'; this.querySelector('button').disabled = true;">
+        <input type="email" placeholder="you@example.com" required />
+        <button type="submit">購読する</button>
+        <small>いつでも解除できます。月1回のみ配信。</small>
+      </form>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="shell">
+    <div class="col-brand">
+      <div class="brand" style="margin-bottom: 16px;">
+        <div class="mark"></div>
+        <span class="name">Dreave</span>
+      </div>
+      <div class="tag">夢の中で、目を覚ます。</div>
+    </div>
+    <div class="links">
+      <a href="index.html#features">機能詳細</a>
+      <a href="index.html#science">REM について</a>
+      <a href="index.html#pricing">料金プラン</a>
+      <a href="News.html">お知らせ</a>
+      <a href="journal-tips.html">夢日記 Tips</a>
+      <a href="privacy.html">プライバシーポリシー</a>
+      <a href="terms.html">利用規約</a>
+      <a href="contact.html">お問い合わせ</a>
+    </div>
+    <div class="copy">© 2026 DREAVE<br/>ALL RIGHTS RESERVED</div>
+  </div>
+</footer>
+
+<script>
+// Starfield (shared)
+(() => {
+  const c = document.getElementById('starfield');
+  const ctx = c.getContext('2d');
+  let stars = [];
+  function resize() {
+    c.width = innerWidth * devicePixelRatio;
+    c.height = innerHeight * devicePixelRatio;
+    c.style.width = innerWidth + 'px';
+    c.style.height = innerHeight + 'px';
+    const count = Math.floor((innerWidth * innerHeight) / 5500);
+    stars = Array.from({length: count}, () => ({
+      x: Math.random() * c.width,
+      y: Math.random() * c.height,
+      r: Math.random() * 1.2 * devicePixelRatio + 0.2 * devicePixelRatio,
+      a: Math.random() * 0.8 + 0.1,
+      tw: Math.random() * 0.02 + 0.003,
+      tp: Math.random() * Math.PI * 2,
+    }));
+  }
+  resize();
+  addEventListener('resize', resize);
+  function draw(t) {
+    ctx.clearRect(0, 0, c.width, c.height);
+    for (const s of stars) {
+      const a = s.a * (0.5 + 0.5 * Math.sin(t * s.tw + s.tp));
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(236,230,211,${a})`;
+      ctx.fill();
+    }
+    requestAnimationFrame(draw);
+  }
+  requestAnimationFrame(draw);
+})();
+
+// Post expand/collapse
+document.querySelectorAll('.post-head').forEach(head => {
+  head.addEventListener('click', () => {
+    const post = head.parentElement;
+    post.classList.toggle('open');
+  });
+});
+
+// Filter chips
+const chips = document.querySelectorAll('.chip');
+const posts = document.querySelectorAll('.post');
+const empty = document.getElementById('empty');
+chips.forEach(chip => {
+  chip.addEventListener('click', () => {
+    chips.forEach(c => c.classList.remove('active'));
+    chip.classList.add('active');
+    const cat = chip.dataset.cat;
+    let visible = 0;
+    posts.forEach(p => {
+      const show = cat === 'all' || p.dataset.cat === cat;
+      p.style.display = show ? '' : 'none';
+      if (show) visible++;
+    });
+    empty.style.display = visible === 0 ? '' : 'none';
+  });
+});
+
+// Deep-link: open post matching #hash
+if (location.hash) {
+  const target = document.querySelector(location.hash);
+  if (target && target.classList.contains('post')) {
+    target.classList.add('open');
+    setTimeout(() => target.scrollIntoView({behavior: 'smooth', block: 'start'}), 100);
+  }
+}
+</script>
+
+</body>
+</html>

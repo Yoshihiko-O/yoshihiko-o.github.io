@@ -1,362 +1,1057 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dreave - Lucid Dream Inducer — 明晰夢を、科学する。</title>
-<meta name="description" content="REM 周期推定 × 40Hz 音響刺激で、脳を夢の扉へ導く iOS アプリ。Dream Journal・Reality Check・詳細分析で、明晰夢を科学的にトレーニング。買い切り型 Lucid Pro で全機能解放。">
-<meta property="og:title" content="Dreave - Lucid Dream Inducer — 明晰夢を、科学する。">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Dreave - Lucid Dream Inducer — 夢の中で、目を覚ます。</title>
+<meta name="description" content="REM 周期推定 × 40Hz 音響刺激で、脳を夢の扉へ導く iOS アプリ。Dream Journal・Reality Check・詳細分析で、明晰夢をトレーニング。">
+<meta property="og:title" content="Dreave - Lucid Dream Inducer — 夢の中で、目を覚ます。">
 <meta property="og:description" content="REM 周期推定 × 40Hz 音響刺激で、脳を夢の扉へ導く iOS アプリ。">
 <meta property="og:image" content="og-image.png">
-<link rel="icon" type="image/png" href="favicon.png">
-<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="icon" type="image/png" href="favicon.png" />
+<link rel="apple-touch-icon" href="favicon.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@400;500;700;800&family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-:root {
-  --cyan:   #59C7FA;
-  --indigo: #5957D6;
-  --aurora: #8CF2BA;
-  --gold:   #F2BF4D;
-  --bg-top: #14142E;
-  --bg-bot: #261F4D;
-  --white:  #FFFFFF;
-  --muted:  #B0B8D8;
-  --dark:   #0D0D2B;
-}
-*{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{font-family:'Noto Sans JP','Hiragino Sans',Inter,system-ui,sans-serif;background:var(--bg-top);color:var(--white);-webkit-font-smoothing:antialiased}
+  :root {
+    --bg-0: #050714;
+    --bg-1: #0a0f24;
+    --bg-2: #0f1530;
+    --ink: #ECE6D3;
+    --ink-dim: #9aa3c0;
+    --ink-mute: #5a6485;
+    --line: rgba(236,230,211,0.08);
+    --line-strong: rgba(236,230,211,0.18);
+    --accent: #B8A2FF;
+    --accent-2: #6B7BFF;
+    --moon: #ECE6D3;
+    --warn: #E8B65E;
+    --surface: rgba(255,255,255,0.025);
+    --surface-2: rgba(255,255,255,0.045);
 
-/* NAV */
-nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:16px 24px;display:flex;align-items:center;justify-content:space-between;background:rgba(20,20,46,.85);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,.08)}
-.nav-logo{display:flex;align-items:center;gap:8px;font-size:17px;font-weight:700;color:var(--white)}
-.nav-logo-icon{font-size:20px;color:var(--cyan)}
-.nav-logo-tagline{font-size:11px;font-weight:400;color:var(--muted);margin-left:4px;opacity:.8}
-@media(max-width:480px){.nav-logo-tagline{display:none}}
-.nav-cta{background:var(--indigo);color:var(--white);border:none;padding:9px 20px;border-radius:10px;font-size:14px;font-weight:600;cursor:pointer;text-decoration:none}
-.nav-cta:hover{background:#4A48C4}
+    --serif-jp: "Shippori Mincho B1", "Hiragino Mincho ProN", serif;
+    --serif-en: "Instrument Serif", "Shippori Mincho B1", serif;
+    --sans: "DM Sans", "Hiragino Kaku Gothic ProN", system-ui, sans-serif;
+    --mono: "JetBrains Mono", ui-monospace, monospace;
+  }
 
-/* HERO */
-#hero{min-height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:100px 24px 60px;background:linear-gradient(180deg,var(--bg-top) 0%,var(--bg-bot) 100%);position:relative;overflow:hidden}
-#stars{position:absolute;inset:0;pointer-events:none}
-.star{position:absolute;border-radius:50%;background:var(--white)}
-.hero-icon{font-size:56px;color:var(--cyan);margin-bottom:20px;animation:float 4s ease-in-out infinite}
-h1{font-size:clamp(36px,7vw,64px);font-weight:700;letter-spacing:-.02em;line-height:1.15;margin-bottom:16px}
-h1 span{color:var(--cyan)}
-.hero-sub{font-size:clamp(16px,2.5vw,20px);color:var(--muted);line-height:1.7;max-width:560px;margin:0 auto 36px}
-.hero-btns{display:flex;flex-direction:column;align-items:center;gap:12px}
-.btn-primary{display:inline-flex;align-items:center;gap:10px;background:var(--indigo);color:var(--white);padding:15px 32px;border-radius:14px;font-size:16px;font-weight:600;text-decoration:none;box-shadow:0 4px 32px rgba(89,87,214,.4)}
-.btn-primary:hover{background:#4A48C4;transform:translateY(-2px)}
-.btn-sub{font-size:13px;color:var(--muted)}
-.hero-card{margin-top:48px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:20px;padding:24px 32px;max-width:320px;text-align:left;animation:floatCard 4s ease-in-out infinite}
-.hero-card-label{font-size:11px;letter-spacing:.08em;color:var(--cyan);text-transform:uppercase;margin-bottom:8px}
-.hero-card-countdown{font-size:42px;font-weight:700;font-variant-numeric:tabular-nums;color:var(--cyan);letter-spacing:-.02em;margin-bottom:4px}
-.hero-card-phase{font-size:13px;color:var(--muted)}
-.hero-card-badge{display:inline-flex;align-items:center;gap:6px;margin-top:16px;background:rgba(89,199,250,.12);border:1px solid rgba(89,199,250,.3);border-radius:20px;padding:6px 14px;font-size:12px;color:var(--cyan)}
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: var(--bg-0); color: var(--ink); font-family: var(--sans); -webkit-font-smoothing: antialiased; }
+  body {
+    overflow-x: hidden;
+    background:
+      radial-gradient(1200px 800px at 80% -10%, rgba(184,162,255,0.10), transparent 60%),
+      radial-gradient(900px 700px at -10% 30%, rgba(107,123,255,0.08), transparent 55%),
+      radial-gradient(700px 600px at 50% 110%, rgba(184,162,255,0.06), transparent 60%),
+      var(--bg-0);
+  }
+  ::selection { background: rgba(184,162,255,0.35); color: var(--moon); }
 
-/* SECTIONS */
-section{padding:80px 24px}
-.container{max-width:1100px;margin:0 auto}
-.section-label{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--cyan);margin-bottom:12px;display:block}
-.section-h2{font-size:clamp(28px,4vw,40px);font-weight:700;letter-spacing:-.01em;line-height:1.25;margin-bottom:16px}
-.section-sub{font-size:16px;color:var(--muted);line-height:1.7;max-width:560px}
+  a { color: inherit; text-decoration: none; }
+  button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
 
-/* PAIN */
-#pain{background:linear-gradient(180deg,var(--bg-bot) 0%,var(--dark) 100%)}
-.pain-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;margin-top:48px}
-.pain-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:28px 24px}
-.pain-icon{font-size:32px;margin-bottom:16px;color:var(--muted)}
-.pain-card h3{font-size:18px;font-weight:700;margin-bottom:10px}
-.pain-card p{font-size:14px;color:var(--muted);line-height:1.7}
+  /* ───── Starfield ───── */
+  .stars { position: fixed; inset: 0; pointer-events: none; z-index: 0; opacity: 0.7; }
+  .stars canvas { width: 100%; height: 100%; display: block; }
 
-/* FEATURES */
-#features{background:var(--dark)}
-.features-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;margin-top:48px}
-.feat-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:20px;padding:28px 24px;position:relative;transition:border-color .2s}
-.feat-card:hover{border-color:rgba(255,255,255,.18)}
-.feat-card.night{border-color:rgba(89,199,250,.25);grid-column:1/-1}
-.feat-icon{font-size:28px;margin-bottom:16px}
-.feat-icon.cyan{color:var(--cyan)}
-.feat-icon.indigo{color:var(--indigo)}
-.feat-icon.aurora{color:var(--aurora)}
-.feat-icon.gold{color:var(--gold)}
-.feat-card h3{font-size:20px;font-weight:700;margin-bottom:8px}
-.feat-card .tagline{font-size:13px;color:var(--cyan);margin-bottom:12px;font-weight:600}
-.feat-card p{font-size:14px;color:var(--muted);line-height:1.7}
-.pro-badge{position:absolute;top:20px;right:20px;background:linear-gradient(135deg,#F2BF4D,#D99933);color:#111;font-size:10px;font-weight:700;padding:3px 10px;border-radius:6px;letter-spacing:.06em;text-transform:uppercase}
+  /* ───── Layout helpers ───── */
+  .shell { max-width: 1320px; margin: 0 auto; padding: 0 40px; position: relative; z-index: 2; }
+  .row { display: flex; }
+  .col { display: flex; flex-direction: column; }
 
-/* HOW */
-#how{background:linear-gradient(180deg,var(--dark) 0%,#0F0F2A 100%)}
-.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:32px;margin-top:48px}
-.step{text-align:center}
-.step-num{width:48px;height:48px;border-radius:50%;background:var(--indigo);display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:700;margin:0 auto 20px}
-.step h3{font-size:18px;font-weight:700;margin-bottom:10px}
-.step p{font-size:14px;color:var(--muted);line-height:1.7}
-.step-arrow{display:none}
-@media(min-width:768px){.steps{grid-template-columns:repeat(3,1fr);align-items:start}.step-arrow{display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:24px;margin-top:24px}}
+  /* ───── Nav ───── */
+  nav.top {
+    position: sticky; top: 0; z-index: 50;
+    backdrop-filter: blur(14px) saturate(140%);
+    -webkit-backdrop-filter: blur(14px) saturate(140%);
+    background: linear-gradient(180deg, rgba(5,7,20,0.85), rgba(5,7,20,0.35));
+    border-bottom: 1px solid var(--line);
+  }
+  nav.top .shell { display: flex; align-items: center; justify-content: space-between; height: 72px; }
+  .brand { display: flex; align-items: center; gap: 14px; }
+  .brand .mark {
+    width: 36px; height: 36px; border-radius: 9px;
+    background: url('favicon.png') center/cover no-repeat, #1a0f3a;
+    box-shadow: 0 0 20px rgba(184,162,255,0.35), 0 4px 12px rgba(0,0,0,0.5);
+  }
+  .brand .name { font-family: var(--serif-en); font-size: 24px; letter-spacing: 0.04em; font-style: italic; }
+  .brand .sub { font-family: var(--mono); font-size: 10px; letter-spacing: 0.22em; color: var(--ink-mute); text-transform: uppercase; margin-left: 6px; }
+  .nav-links { display: flex; gap: 36px; font-size: 13px; color: var(--ink-dim); }
+  .nav-links a:hover { color: var(--moon); }
+  .nav-cta {
+    padding: 10px 18px; border: 1px solid var(--line-strong); border-radius: 999px;
+    font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;
+    background: rgba(236,230,211,0.04); transition: all 200ms ease;
+  }
+  .nav-cta:hover { background: var(--moon); color: var(--bg-0); border-color: var(--moon); }
 
-/* SCIENCE */
-#science{background:#0F0F2A}
-.science-inner{display:grid;grid-template-columns:1fr;gap:40px;margin-top:48px}
-@media(min-width:768px){.science-inner{grid-template-columns:3fr 2fr}}
-.science-note{font-size:12px;color:var(--muted);margin-top:24px;opacity:.7}
-.rem-chart{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:20px;height:200px;position:relative;display:flex;flex-direction:column;justify-content:space-between}
-.rem-chart-title{font-size:11px;color:var(--muted);letter-spacing:.06em;text-transform:uppercase}
-.rem-bars{display:flex;align-items:flex-end;gap:4px;height:120px;margin-top:12px}
-.rem-bar{flex:1;border-radius:4px 4px 0 0;background:var(--indigo);opacity:.5;transition:opacity .2s}
-.rem-bar.rem{background:var(--cyan);opacity:1}
-.rem-bar.highlight{background:var(--cyan);opacity:1;box-shadow:0 0 12px rgba(89,199,250,.4)}
-.rem-label{font-size:10px;color:var(--muted);text-align:center;margin-top:8px}
-.marker{font-size:11px;color:var(--cyan);text-align:center;margin-top:4px}
-.stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:24px}
-.stat{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:16px}
-.stat-num{font-size:32px;font-weight:700;color:var(--cyan)}
-.stat-label{font-size:12px;color:var(--muted);margin-top:4px}
+  /* ───── Hero ───── */
+  section.hero { position: relative; padding: 100px 0 120px; }
+  .hero-grid { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 80px; align-items: center; }
 
-/* PRICING */
-#pricing{background:var(--dark)}
-.pricing-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;margin-top:48px}
-.price-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:20px;padding:32px 24px}
-.price-card.featured{border-color:var(--indigo);background:rgba(89,87,214,.08);position:relative}
-.price-card.featured::before{content:'MOST POPULAR';position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:var(--gold);color:#111;font-size:10px;font-weight:700;padding:4px 14px;border-radius:20px;letter-spacing:.08em;white-space:nowrap}
-.price-name{font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
-.price-val{font-size:40px;font-weight:700;margin-bottom:4px}
-.price-val span{font-size:16px;font-weight:400;color:var(--muted)}
-.price-list{margin:20px 0;list-style:none}
-.price-list li{font-size:14px;color:var(--muted);padding:7px 0;border-bottom:1px solid rgba(255,255,255,.06);display:flex;align-items:center;gap:8px}
-.price-list li::before{content:'✓';color:var(--aurora);font-weight:700;flex-shrink:0}
-.btn-price{display:block;text-align:center;padding:13px;border-radius:12px;font-size:15px;font-weight:600;cursor:pointer;text-decoration:none;margin-top:20px}
-.btn-outline{background:transparent;color:var(--cyan);border:1px solid var(--cyan)}
-.btn-outline:hover{background:rgba(89,199,250,.08)}
-.btn-solid{background:var(--indigo);color:var(--white);border:none;box-shadow:0 4px 24px rgba(89,87,214,.4)}
-.btn-solid:hover{background:#4A48C4}
-.btn-gray{background:rgba(255,255,255,.08);color:var(--white);border:none}
-.btn-gray:hover{background:rgba(255,255,255,.12)}
-.life-icons{display:flex;gap:4px;margin-bottom:16px}
-.life-icon{width:20px;height:20px;border-radius:50%;background:var(--cyan);opacity:.3}
-.life-icon.full{opacity:1}
+  .eyebrow {
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.32em; text-transform: uppercase;
+    color: var(--ink-mute); display: flex; align-items: center; gap: 14px;
+  }
+  .eyebrow::before { content: ""; width: 28px; height: 1px; background: var(--accent); }
 
-/* FINAL CTA */
-#cta{background:linear-gradient(180deg,var(--dark) 0%,var(--bg-top) 100%);text-align:center;padding:100px 24px;position:relative;overflow:hidden}
-#cta-stars{position:absolute;inset:0;pointer-events:none;opacity:.5}
+  h1.display {
+    font-family: var(--serif-jp); font-weight: 500;
+    font-size: clamp(56px, 6.8vw, 108px);
+    line-height: 1.02; letter-spacing: -0.01em;
+    margin: 28px 0 12px;
+  }
+  h1.display .glyph { font-family: var(--serif-en); font-style: italic; font-weight: 400; color: var(--accent); padding: 0 0.05em; }
+  h1.display .em { font-style: italic; font-family: var(--serif-en); font-weight: 400; }
+  .lede {
+    font-family: var(--serif-jp); font-weight: 400;
+    font-size: 19px; line-height: 1.85; color: var(--ink-dim);
+    max-width: 460px; margin-top: 28px;
+  }
 
-/* FOOTER */
-footer{background:var(--dark);padding:40px 24px;border-top:1px solid rgba(255,255,255,.08)}
-.footer-inner{max-width:1100px;margin:0 auto;display:flex;flex-direction:column;gap:24px}
-@media(min-width:600px){.footer-inner{flex-direction:row;justify-content:space-between;align-items:flex-start}}
-.footer-logo{font-size:18px;font-weight:700;color:var(--white);margin-bottom:8px}
-.footer-tagline{font-size:13px;color:var(--muted)}
-.footer-links{display:flex;gap:20px;flex-wrap:wrap}
-.footer-links a{font-size:13px;color:var(--muted);text-decoration:none}
-.footer-links a:hover{color:var(--white)}
-.footer-copy{font-size:12px;color:var(--muted);opacity:.6;text-align:center;margin-top:20px;padding-top:20px;border-top:1px solid rgba(255,255,255,.06)}
+  .hero-meta {
+    margin-top: 44px; display: flex;
+    gap: 28px; align-items: center; padding-bottom: 4px;
+    flex-wrap: wrap;
+  }
+  .hero-meta .stat { display: flex; flex-direction: column; gap: 4px; }
+  .hero-meta .v { font-family: var(--serif-en); font-size: 32px; line-height: 1; color: var(--moon); font-style: italic; }
+  .hero-meta .l { font-family: var(--mono); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-mute); }
+  .hero-meta .div { width: 1px; height: 32px; background: var(--line); }
 
-/* ANIMS */
-@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
-@keyframes floatCard{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
-@keyframes twinkle{0%,100%{opacity:.2}50%{opacity:.9}}
-@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
-.fade-up{animation:fadeUp .6s ease-out both}
-.delay-1{animation-delay:.15s}
-.delay-2{animation-delay:.3s}
-.delay-3{animation-delay:.45s}
-.delay-4{animation-delay:.6s}
+  .cta-row { display: flex; gap: 16px; margin-top: 44px; align-items: center; flex-wrap: wrap; }
+  .btn-primary {
+    padding: 16px 28px; border-radius: 999px;
+    background: var(--moon); color: var(--bg-0);
+    font-size: 14px; letter-spacing: 0.04em; font-weight: 500;
+    display: inline-flex; align-items: center; gap: 10px;
+    transition: transform 200ms ease, box-shadow 200ms ease;
+    box-shadow: 0 0 40px rgba(236,230,211,0.18);
+    white-space: nowrap;
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 0 60px rgba(236,230,211,0.32); }
+  .btn-ghost {
+    padding: 16px 22px; border-radius: 999px; font-size: 14px;
+    color: var(--ink-dim); display: inline-flex; align-items: center; gap: 10px;
+    white-space: nowrap;
+  }
+  .btn-ghost:hover { color: var(--moon); }
+  .micro { font-family: var(--mono); font-size: 11px; color: var(--ink-mute); letter-spacing: 0.05em; }
 
-@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+  /* ───── Phone mock ───── */
+  .phone-stage {
+    position: relative; aspect-ratio: 1 / 1.05;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .phone-orbit {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(circle at 50% 50%, rgba(184,162,255,0.22) 0%, rgba(184,162,255,0.05) 30%, transparent 55%);
+    filter: blur(0.5px);
+  }
+  .orbit-ring {
+    position: absolute; left: 50%; top: 50%; border: 1px solid var(--line);
+    border-radius: 50%; transform: translate(-50%, -50%);
+  }
+  .orbit-ring.r1 { width: 88%; height: 88%; border-color: rgba(184,162,255,0.18); }
+  .orbit-ring.r2 { width: 70%; height: 70%; border-color: rgba(184,162,255,0.10); border-style: dashed; }
+  .orbit-ring.r3 { width: 54%; height: 54%; border-color: rgba(184,162,255,0.08); }
+  .orbit-label {
+    position: absolute; left: 50%; top: 50%;
+    font-family: var(--mono); font-size: 10px; letter-spacing: 0.22em;
+    color: var(--ink-mute); text-transform: uppercase;
+    transform: translate(-50%, -50%);
+  }
+  .orbit-label.tl { transform: translate(-50%, -50%) translate(-220px, -200px); }
+  .orbit-label.tr { transform: translate(-50%, -50%) translate(190px, -180px); color: var(--accent); }
+  .orbit-label.br { transform: translate(-50%, -50%) translate(180px, 200px); }
+
+  .phone {
+    position: relative; width: 280px; height: 580px;
+    border-radius: 44px;
+    background: linear-gradient(160deg, #1a1f3a 0%, #0a0d22 100%);
+    border: 1px solid rgba(255,255,255,0.08);
+    box-shadow:
+      0 60px 120px rgba(0,0,0,0.6),
+      0 0 0 1px rgba(184,162,255,0.10),
+      inset 0 0 0 2px rgba(0,0,0,0.6),
+      inset 0 0 60px rgba(184,162,255,0.06);
+    padding: 10px;
+    overflow: hidden;
+  }
+  .phone::before {
+    content: ""; position: absolute; top: 18px; left: 50%; transform: translateX(-50%);
+    width: 100px; height: 28px; background: #000; border-radius: 999px;
+    z-index: 5;
+  }
+  .screen {
+    width: 100%; height: 100%; border-radius: 36px;
+    background:
+      radial-gradient(circle at 50% 25%, rgba(184,162,255,0.20), transparent 60%),
+      linear-gradient(180deg, #0a0d22 0%, #060818 100%);
+    padding: 56px 22px 22px;
+    position: relative; overflow: hidden;
+    color: var(--ink);
+  }
+  .status-bar {
+    position: absolute; top: 20px; left: 22px; right: 22px;
+    display: flex; justify-content: space-between; font-family: var(--mono); font-size: 11px;
+    color: var(--moon); z-index: 4;
+  }
+  .status-bar .right { display: flex; gap: 5px; align-items: center; }
+  .status-bar .dot { width: 3px; height: 3px; border-radius: 50%; background: currentColor; }
+
+  .screen .pill {
+    display: inline-flex; align-items: center; gap: 7px;
+    padding: 5px 11px; border-radius: 999px;
+    background: rgba(184,162,255,0.12); border: 1px solid rgba(184,162,255,0.25);
+    font-family: var(--mono); font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--accent);
+  }
+  .pill .pulse { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 8px var(--accent); animation: pulse 1.6s ease-in-out infinite; }
+  @keyframes pulse { 0%, 100% { opacity: 0.5; transform: scale(0.9); } 50% { opacity: 1; transform: scale(1.2); } }
+
+  .screen .label-row { display: flex; justify-content: space-between; margin-top: 18px; font-family: var(--mono); font-size: 9px; color: var(--ink-mute); letter-spacing: 0.18em; text-transform: uppercase; }
+  .countdown {
+    font-family: var(--serif-en); font-style: italic;
+    font-size: 56px; line-height: 1; margin-top: 8px;
+    color: var(--moon);
+    letter-spacing: -0.02em;
+  }
+  .countdown-sub { font-family: var(--mono); font-size: 10px; color: var(--ink-dim); margin-top: 6px; letter-spacing: 0.12em; }
+
+  .moon-dial {
+    margin: 22px auto 14px; width: 168px; height: 168px;
+    position: relative;
+  }
+  .moon-dial svg { position: absolute; inset: 0; }
+  .moon-dial .center {
+    position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center;
+  }
+  .moon-dial .moon-emoji {
+    width: 56px; height: 56px; border-radius: 50%;
+    background: radial-gradient(circle at 38% 38%, #fff8e3, #ECE6D3 40%, #7c6ab8 80%, #2a1f4a 100%);
+    box-shadow: 0 0 30px rgba(236,230,211,0.4);
+  }
+  .moon-dial .ct { font-family: var(--mono); font-size: 9px; color: var(--ink-mute); letter-spacing: 0.18em; margin-top: 8px; }
+  .moon-dial .conf { font-family: var(--serif-en); font-style: italic; font-size: 18px; color: var(--accent); }
+
+  .wave-card {
+    margin-top: 18px; padding: 14px 14px 10px;
+    border-radius: 18px;
+    background: rgba(184,162,255,0.06);
+    border: 1px solid rgba(184,162,255,0.18);
+  }
+  .wave-card .h { display: flex; justify-content: space-between; font-family: var(--mono); font-size: 9px; color: var(--ink-dim); letter-spacing: 0.16em; text-transform: uppercase; }
+  .wave-card svg { width: 100%; height: 36px; display: block; margin-top: 8px; }
+  .wave-card .ftr { display: flex; justify-content: space-between; align-items: center; margin-top: 6px; font-family: var(--mono); font-size: 9px; color: var(--ink-mute); }
+
+  /* ───── News list ───── */
+  .news-list { list-style: none; padding: 0; margin: 0; border-top: 1px solid var(--line); }
+  .news-item { border-bottom: 1px solid var(--line); }
+  .news-item a {
+    display: grid;
+    grid-template-columns: 140px 100px 1fr 24px;
+    gap: 32px; align-items: center;
+    padding: 28px 8px;
+    transition: background 200ms ease, padding 200ms ease;
+  }
+  .news-item a:hover { background: rgba(184,162,255,0.04); padding-left: 18px; }
+  .news-item time { display: flex; flex-direction: column; gap: 4px; }
+  .news-item time .y { font-family: var(--mono); font-size: 10px; letter-spacing: 0.22em; color: var(--ink-mute); }
+  .news-item time .md { font-family: var(--serif-en); font-style: italic; font-size: 24px; color: var(--moon); line-height: 1; letter-spacing: 0.02em; }
+  .news-tag {
+    font-family: var(--mono); font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
+    padding: 5px 10px; border-radius: 999px;
+    border: 1px solid var(--line-strong); color: var(--ink-dim);
+    text-align: center; width: max-content;
+  }
+  .news-tag.t-release { color: var(--accent); border-color: rgba(184,162,255,0.32); background: rgba(184,162,255,0.06); }
+  .news-tag.t-update  { color: #7CE3D8; border-color: rgba(124,227,216,0.32); background: rgba(124,227,216,0.06); }
+  .news-tag.t-media   { color: #FFB48A; border-color: rgba(255,180,138,0.32); background: rgba(255,180,138,0.06); }
+  .news-tag.t-event   { color: #FFD27A; border-color: rgba(255,210,122,0.32); background: rgba(255,210,122,0.06); }
+  .news-tag.t-info    { color: var(--ink-dim); }
+  .news-item h4 {
+    font-family: var(--serif-jp); font-weight: 500; font-size: 18px; line-height: 1.55; color: var(--ink);
+    margin: 0;
+  }
+  .news-item .arrow {
+    font-family: var(--serif-en); font-style: italic; font-size: 20px; color: var(--ink-mute);
+    transition: color 200ms ease, transform 200ms ease;
+    text-align: right;
+  }
+  .news-item a:hover .arrow { color: var(--accent); transform: translateX(4px); }
+  .news-foot { margin-top: 40px; display: flex; justify-content: flex-end; }
+  .news-all {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 14px 22px; border-radius: 999px;
+    border: 1px solid var(--line-strong);
+    font-size: 13px; letter-spacing: 0.04em; color: var(--moon);
+    transition: all 200ms ease;
+  }
+  .news-all:hover { border-color: var(--accent); color: var(--accent); background: rgba(184,162,255,0.05); }
+
+  /* ───── Section base ───── */
+  section.bay { padding: 140px 0; position: relative; }
+  .section-head { display: grid; grid-template-columns: 1fr 1.4fr; gap: 60px; align-items: end; margin-bottom: 80px; }
+  .section-head h2 {
+    font-family: var(--serif-jp); font-weight: 500;
+    font-size: clamp(40px, 4.4vw, 64px); line-height: 1.12; letter-spacing: -0.01em;
+  }
+  .section-head h2 .em { font-family: var(--serif-en); font-style: italic; font-weight: 400; color: var(--accent); }
+  .section-head .kicker {
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.32em;
+    color: var(--ink-mute); text-transform: uppercase; margin-bottom: 24px;
+    display: flex; align-items: center; gap: 14px;
+  }
+  .section-head .kicker::before { content: ""; width: 28px; height: 1px; background: var(--accent); }
+  .section-head p {
+    font-family: var(--serif-jp); font-size: 18px; line-height: 1.85; color: var(--ink-dim);
+    max-width: 540px;
+  }
+
+  /* ───── Problems ───── */
+  .problems { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .pcard {
+    padding: 40px 32px 36px;
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    background: var(--surface);
+    position: relative; overflow: hidden;
+    transition: border-color 280ms ease, transform 280ms ease, background 280ms ease;
+  }
+  .pcard:hover { border-color: var(--line-strong); transform: translateY(-2px); background: var(--surface-2); }
+  .pcard .glyph {
+    font-family: var(--serif-en); font-size: 56px; color: var(--accent); font-style: italic;
+    opacity: 0.6; line-height: 1;
+  }
+  .pcard .num { font-family: var(--mono); font-size: 10px; letter-spacing: 0.24em; color: var(--ink-mute); margin-top: 24px; }
+  .pcard h3 {
+    font-family: var(--serif-jp); font-weight: 500; font-size: 24px;
+    margin-top: 12px; line-height: 1.4;
+  }
+  .pcard p {
+    font-size: 14px; line-height: 1.8; color: var(--ink-dim);
+    margin-top: 18px;
+  }
+
+  /* ───── Features ───── */
+  .features { display: grid; grid-template-columns: repeat(12, 1fr); gap: 24px; }
+  .fcard {
+    border: 1px solid var(--line);
+    border-radius: 24px;
+    background: var(--surface);
+    padding: 40px;
+    position: relative; overflow: hidden;
+    transition: border-color 280ms ease;
+  }
+  .fcard:hover { border-color: var(--line-strong); }
+  .fcard.wide { grid-column: span 7; }
+  .fcard.narrow { grid-column: span 5; }
+  .fcard.half { grid-column: span 6; }
+  .fcard.full { grid-column: span 12; }
+
+  .ftag {
+    font-family: var(--mono); font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--ink-mute); display: flex; align-items: center; gap: 12px;
+  }
+  .ftag .gl { font-family: var(--serif-en); font-style: italic; font-size: 20px; color: var(--accent); }
+  .fcard h3 {
+    font-family: var(--serif-jp); font-weight: 500; font-size: 28px; line-height: 1.35; margin-top: 16px;
+    max-width: 560px;
+  }
+  .fcard p {
+    font-size: 14px; line-height: 1.85; color: var(--ink-dim); margin-top: 16px;
+    max-width: 520px;
+  }
+  .fcard .note {
+    margin-top: 22px; padding: 14px 16px; border-radius: 12px;
+    background: rgba(184,162,255,0.05); border: 1px solid rgba(184,162,255,0.14);
+    font-size: 12px; line-height: 1.7; color: var(--ink-dim);
+  }
+  .fcard .note b { color: var(--accent); font-weight: 500; }
+
+  /* Feature visuals */
+  .vis-night {
+    margin-top: 32px; height: 220px;
+    border-radius: 16px;
+    background: radial-gradient(120% 80% at 50% 50%, rgba(184,162,255,0.18), transparent 70%);
+    border: 1px solid var(--line);
+    position: relative; overflow: hidden;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .vis-night svg { width: 100%; height: 100%; }
+
+  .vis-journal {
+    margin-top: 28px; padding: 18px;
+    border-radius: 14px; border: 1px solid var(--line);
+    background: rgba(255,255,255,0.02);
+    display: flex; flex-direction: column; gap: 10px;
+  }
+  .voice-bar { display: flex; align-items: center; gap: 8px; padding: 10px 12px; border-radius: 12px; background: rgba(184,162,255,0.05); height: 40px; }
+  .voice-bar .rec { width: 8px; height: 8px; border-radius: 50%; background: #ff5d8a; box-shadow: 0 0 10px #ff5d8a; flex: 0 0 8px; }
+  .voice-bar .bars { display: flex; gap: 2px; align-items: center; flex: 1; height: 24px; }
+  .voice-bar .bars span { display: block; width: 3px; background: var(--accent); border-radius: 2px; opacity: 0.7; }
+  .voice-text { font-family: var(--serif-jp); font-size: 13px; line-height: 1.7; color: var(--ink-dim); padding: 4px 4px; }
+  .voice-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 2px; }
+  .voice-tags span {
+    font-family: var(--mono); font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase;
+    padding: 4px 8px; border-radius: 999px; background: rgba(184,162,255,0.10); color: var(--accent);
+  }
+  .voice-score { display: flex; justify-content: space-between; padding: 8px 4px 0; font-family: var(--mono); font-size: 10px; color: var(--ink-mute); letter-spacing: 0.14em; }
+  .voice-score b { color: var(--moon); font-family: var(--serif-en); font-style: italic; font-size: 14px; font-weight: 400; }
+
+  .vis-rc {
+    margin-top: 28px; padding: 18px 20px; border-radius: 14px; border: 1px solid var(--line); background: rgba(255,255,255,0.02);
+  }
+  .rc-row { display: flex; gap: 12px; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--line); }
+  .rc-row:last-child { border-bottom: 0; }
+  .rc-time { font-family: var(--mono); font-size: 11px; color: var(--ink-mute); letter-spacing: 0.12em; width: 56px; }
+  .rc-q { flex: 1; font-family: var(--serif-jp); font-size: 13px; color: var(--ink); }
+  .rc-status {
+    font-family: var(--mono); font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase;
+    padding: 3px 8px; border-radius: 999px; border: 1px solid var(--line-strong); color: var(--ink-dim);
+  }
+  .rc-status.ok { color: var(--accent); border-color: rgba(184,162,255,0.3); background: rgba(184,162,255,0.06); }
+
+  .vis-analytics { margin-top: 28px; height: 220px; border-radius: 14px; border: 1px solid var(--line); padding: 18px; }
+  .vis-analytics svg { width: 100%; height: 100%; }
+
+  /* ───── Steps ───── */
+  .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; position: relative; }
+  .steps::before {
+    content: ""; position: absolute; top: 40px; left: 8%; right: 8%; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--line-strong) 20%, var(--line-strong) 80%, transparent);
+  }
+  .step { position: relative; padding: 0 12px; }
+  .step .num {
+    width: 80px; height: 80px; border-radius: 50%;
+    border: 1px solid var(--line-strong);
+    background: var(--bg-0);
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--serif-en); font-style: italic; font-size: 36px; color: var(--moon);
+    position: relative; z-index: 2;
+  }
+  .step .num::after {
+    content: ""; position: absolute; inset: -8px; border-radius: 50%;
+    border: 1px dashed rgba(184,162,255,0.20);
+  }
+  .step h4 {
+    font-family: var(--serif-jp); font-weight: 500; font-size: 22px; margin-top: 32px;
+  }
+  .step p {
+    font-size: 14px; line-height: 1.8; color: var(--ink-dim); margin-top: 14px; max-width: 320px;
+  }
+
+  /* ───── Science ───── */
+  .science-wrap {
+    padding: 80px;
+    border-radius: 32px;
+    border: 1px solid var(--line);
+    background:
+      radial-gradient(800px 400px at 80% 0%, rgba(184,162,255,0.10), transparent 60%),
+      linear-gradient(180deg, rgba(255,255,255,0.025), rgba(255,255,255,0.005));
+    position: relative; overflow: hidden;
+  }
+  .sci-top { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 80px; }
+  .sci-top h3 {
+    font-family: var(--serif-jp); font-weight: 500; font-size: clamp(36px, 3.6vw, 52px);
+    line-height: 1.18; letter-spacing: -0.005em;
+  }
+  .sci-top h3 .em { font-family: var(--serif-en); font-style: italic; color: var(--accent); font-weight: 400; }
+  .sci-top p { font-family: var(--serif-jp); font-size: 16px; line-height: 1.95; color: var(--ink-dim); margin-top: 24px; }
+  .sci-top p b { color: var(--moon); font-weight: 500; }
+
+  .sci-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; margin-top: 56px; padding-top: 48px; border-top: 1px solid var(--line); }
+  .sci-stat .v { font-family: var(--serif-en); font-style: italic; font-size: 64px; line-height: 1; color: var(--moon); letter-spacing: -0.02em; }
+  .sci-stat .l { font-family: var(--mono); font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--ink-mute); margin-top: 12px; }
+
+  .sci-graph { margin-top: 64px; padding: 32px 8px 12px; border-top: 1px solid var(--line); }
+  .sci-graph svg { width: 100%; height: 260px; display: block; }
+  .sci-graph .axis {
+    display: flex; justify-content: space-between; padding: 0 4px;
+    font-family: var(--mono); font-size: 10px; color: var(--ink-mute); letter-spacing: 0.16em; margin-top: 4px;
+  }
+  .sci-graph .axis .gold { color: var(--accent); }
+
+  .sci-foot { margin-top: 32px; font-family: var(--mono); font-size: 11px; color: var(--ink-mute); letter-spacing: 0.06em; }
+
+  /* ───── Pricing ───── */
+  .pricing { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .plan {
+    padding: 48px 44px;
+    border-radius: 24px;
+    border: 1px solid var(--line);
+    background: var(--surface);
+    display: flex; flex-direction: column;
+    position: relative; overflow: hidden;
+  }
+  .plan.pro {
+    border: 1px solid rgba(184,162,255,0.32);
+    background:
+      radial-gradient(600px 300px at 100% 0%, rgba(184,162,255,0.12), transparent 60%),
+      var(--surface);
+  }
+  .plan .tier {
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--ink-mute);
+  }
+  .plan.pro .tier { color: var(--accent); }
+  .plan .name {
+    font-family: var(--serif-en); font-style: italic; font-size: 48px; line-height: 1; color: var(--moon);
+    margin-top: 14px;
+  }
+  .plan .price {
+    margin-top: 22px; display: flex; align-items: baseline; gap: 8px;
+  }
+  .plan .price .num {
+    font-family: var(--serif-jp); font-weight: 400; font-size: 56px; line-height: 1;
+  }
+  .plan .price .sub { font-family: var(--mono); font-size: 12px; color: var(--ink-mute); letter-spacing: 0.12em; }
+  .plan .desc { font-family: var(--serif-jp); font-size: 14px; line-height: 1.8; color: var(--ink-dim); margin-top: 14px; }
+
+  .plan ul { list-style: none; margin: 36px 0 28px; padding: 28px 0 0; border-top: 1px solid var(--line); display: flex; flex-direction: column; gap: 14px; }
+  .plan li {
+    display: flex; align-items: center; gap: 12px;
+    font-size: 14px; color: var(--ink); line-height: 1.5;
+  }
+  .plan li::before {
+    content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); flex: 0 0 6px;
+    box-shadow: 0 0 8px rgba(184,162,255,0.5);
+  }
+  .plan li.soon { color: var(--ink-mute); }
+  .plan li.soon::before { background: var(--ink-mute); box-shadow: none; }
+  .plan li.soon::after {
+    content: "Coming soon"; font-family: var(--mono); font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase;
+    padding: 2px 6px; border-radius: 4px; background: rgba(255,255,255,0.04); margin-left: 8px;
+  }
+  .plan .cta { margin-top: auto; }
+  .plan .cta a {
+    display: block; text-align: center; padding: 18px 24px; border-radius: 999px;
+    font-size: 14px; letter-spacing: 0.04em; font-weight: 500;
+  }
+  .plan.free .cta a { border: 1px solid var(--line-strong); color: var(--moon); }
+  .plan.free .cta a:hover { border-color: var(--moon); background: rgba(236,230,211,0.05); }
+  .plan.pro .cta a { background: var(--moon); color: var(--bg-0); }
+  .plan.pro .cta a:hover { box-shadow: 0 0 50px rgba(236,230,211,0.3); }
+  .plan .badge {
+    position: absolute; top: 36px; right: 36px;
+    font-family: var(--mono); font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase;
+    padding: 5px 10px; border-radius: 999px; background: rgba(184,162,255,0.14); color: var(--accent); border: 1px solid rgba(184,162,255,0.3);
+  }
+
+  /* ───── Final CTA ───── */
+  section.final { padding: 200px 0 160px; text-align: center; position: relative; }
+  section.final .moon-big {
+    width: 220px; height: 220px; border-radius: 50%;
+    background: radial-gradient(circle at 38% 38%, #fff8e3 0%, #ECE6D3 30%, #7c6ab8 70%, #1a0f3a 100%);
+    box-shadow: 0 0 120px rgba(236,230,211,0.25), inset -20px -30px 60px rgba(0,0,0,0.5);
+    margin: 0 auto 48px;
+  }
+  section.final h2 {
+    font-family: var(--serif-jp); font-weight: 500;
+    font-size: clamp(48px, 5.6vw, 84px); line-height: 1.1;
+  }
+  section.final h2 .em { font-family: var(--serif-en); font-style: italic; color: var(--accent); font-weight: 400; }
+  section.final p { font-family: var(--serif-jp); font-size: 17px; color: var(--ink-dim); line-height: 1.85; margin-top: 28px; }
+
+  /* ───── Footer ───── */
+  footer { border-top: 1px solid var(--line); padding: 60px 0; }
+  footer .shell { display: grid; grid-template-columns: 1.4fr 2fr 1fr; gap: 40px; align-items: start; }
+  footer .col-brand .brand { margin-bottom: 16px; }
+  footer .tag { font-family: var(--serif-jp); font-size: 14px; color: var(--ink-dim); }
+  footer .links { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px 24px; font-size: 13px; }
+  footer .links a { color: var(--ink-dim); }
+  footer .links a:hover { color: var(--moon); }
+  footer .copy { font-family: var(--mono); font-size: 11px; letter-spacing: 0.06em; color: var(--ink-mute); text-align: right; }
+
+  /* ───── Tweaks panel container ───── */
+  #tweaks-root { z-index: 200; }
+
+  /* Animations */
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: none; } }
+  .reveal { opacity: 0; will-change: opacity, transform; }
+  .reveal.in { animation: fadeUp 1s cubic-bezier(.22,.61,.36,1) forwards; }
+
+  /* Responsive */
+  @media (max-width: 1080px) {
+    .hero-grid, .sci-top, footer .shell { grid-template-columns: 1fr; gap: 48px; }
+    .section-head { grid-template-columns: 1fr; gap: 24px; }
+    .problems, .steps, .pricing { grid-template-columns: 1fr; }
+    .features { grid-template-columns: 1fr; }
+    .fcard.wide, .fcard.narrow, .fcard.half, .fcard.full { grid-column: span 1; }
+    .sci-stats { grid-template-columns: repeat(2, 1fr); }
+    .science-wrap { padding: 40px 28px; }
+    .news-item a { grid-template-columns: 100px 1fr; gap: 16px; padding: 20px 4px; }
+    .news-item .news-tag { grid-column: 1; }
+    .news-item h4 { grid-column: 1 / -1; font-size: 16px; }
+    .news-item .arrow { display: none; }
+    .shell { padding: 0 24px; }
+    .nav-links { display: none; }
+  }
 </style>
 </head>
 <body>
 
-<!-- NAV -->
-<nav>
-  <div class="nav-logo">
-    <span class="nav-logo-icon">☽</span>
-    Dreave
-    <span class="nav-logo-tagline">- Lucid Dream Inducer</span>
+<div class="stars" aria-hidden="true"><canvas id="starfield"></canvas></div>
+
+<nav class="top">
+  <div class="shell">
+    <div class="brand">
+      <div class="mark"></div>
+      <div>
+        <span class="name">Dreave</span>
+        <span class="sub">Lucid Dream Inducer</span>
+      </div>
+    </div>
+    <div class="nav-links">
+      <a href="#features">Features</a>
+      <a href="#science">About REM</a>
+      <a href="#how">How it works</a>
+      <a href="#news">News</a>
+      <a href="#pricing">Pricing</a>
+    </div>
+    <a href="#pricing" class="nav-cta">無料で始める</a>
   </div>
-  <a href="#pricing" class="nav-cta">無料で始める</a>
 </nav>
 
-<!-- HERO -->
-<section id="hero">
-  <canvas id="stars"></canvas>
-  <div class="hero-icon fade-up">☽</div>
-  <h1 class="fade-up delay-1">明晰夢を、<span>科学する</span>。</h1>
-  <p class="hero-sub fade-up delay-2">REM 周期推定 × 40Hz 音響刺激で、<br>脳を夢の扉へ導く。</p>
-  <div class="hero-btns fade-up delay-3">
-    <a href="https://apps.apple.com" class="btn-primary">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
-      App Store からダウンロード
-    </a>
-    <span class="btn-sub">無料で始められます · 初回 7 日間は Night Mode 無制限トライアル</span>
-  </div>
-  <div class="hero-card fade-up delay-4">
-    <div class="hero-card-label">Night Mode アクティブ</div>
-    <div class="hero-card-countdown" id="countdown">04:28:36</div>
-    <div class="hero-card-phase">第3REM周期まで · 信頼度 70%</div>
-    <div class="hero-card-badge">
-      <span style="width:8px;height:8px;border-radius:50%;background:var(--cyan);display:inline-block"></span>
-      40Hz パルス 配信待機中
+<!-- ═════ HERO ═════ -->
+<section class="hero" data-screen-label="01 Hero">
+  <div class="shell">
+    <div class="hero-grid">
+      <div>
+        <div class="eyebrow">REM × 40Hz Acoustic Stimulation</div>
+        <h1 class="display">
+          夢の中で、<br/>
+          <span class="em">目を覚ます</span>。
+        </h1>
+        <p class="lede">
+          REM 周期推定 × 40Hz 音響刺激で、<br/>
+          脳を夢の扉へ導く iOS アプリ。
+        </p>
+
+        <div class="hero-meta">
+          <div class="stat">
+            <span class="v">90<span style="font-size: 18px; letter-spacing: 0.1em;">min</span></span>
+            <span class="l">睡眠周期</span>
+          </div>
+          <div class="div"></div>
+          <div class="stat">
+            <span class="v">40<span style="font-size: 18px; letter-spacing: 0.1em;">Hz</span></span>
+            <span class="l">音響刺激</span>
+          </div>
+          <div class="div"></div>
+          <div class="stat">
+            <span class="v">7<span style="font-size: 18px; letter-spacing: 0.1em;">days</span></span>
+            <span class="l">無制限トライアル</span>
+          </div>
+        </div>
+
+        <div class="cta-row">
+          <a href="https://appstoreconnect.apple.com/m/teams/69a6de82-b75d-47e3-e053-5b8c7c11a4d1/apps/6770527766/moments/new-app/ios" target="_blank" rel="noopener" class="btn-primary">
+            App Store からダウンロード
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M7 3l4 4-4 4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <a href="#science" class="btn-ghost">
+            How it works
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 3v8M3 7l4 4 4-4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+        <div class="micro" style="margin-top: 18px;">無料で始められます · 初回 7 日間は Night Mode 無制限トライアル</div>
+      </div>
+
+      <div class="phone-stage">
+        <div class="phone-orbit"></div>
+        <div class="orbit-ring r1"></div>
+        <div class="orbit-ring r2"></div>
+        <div class="orbit-ring r3"></div>
+        <div class="orbit-label tl">REM cycle</div>
+        <div class="orbit-label tr">● Night Mode</div>
+        <div class="orbit-label br">40Hz sine + pink noise</div>
+
+        <div class="phone">
+          <div class="screen">
+            <div class="status-bar">
+              <span>23:42</span>
+              <span class="right">
+                <span style="opacity:0.7;">●●●●</span>
+                <span style="margin-left:4px;">100%</span>
+              </span>
+            </div>
+
+            <div class="pill"><span class="pulse"></span>Night Mode アクティブ</div>
+
+            <div class="label-row" style="margin-top: 16px;">
+              <span>第 3 REM 周期まで</span>
+              <span style="color: var(--accent);">信頼度 70%</span>
+            </div>
+            <div class="countdown">04:28:36</div>
+            <div class="countdown-sub">EST · 04:11 AM TARGET</div>
+
+            <div class="moon-dial">
+              <svg viewBox="0 0 168 168">
+                <circle cx="84" cy="84" r="76" fill="none" stroke="rgba(236,230,211,0.08)" stroke-width="1"/>
+                <circle cx="84" cy="84" r="68" fill="none" stroke="rgba(184,162,255,0.18)" stroke-width="1" stroke-dasharray="2 6"/>
+                <!-- progress arc 70% -->
+                <circle cx="84" cy="84" r="76" fill="none" stroke="var(--accent)" stroke-width="1.5"
+                        stroke-dasharray="334 478" stroke-linecap="round"
+                        transform="rotate(-90 84 84)" style="filter: drop-shadow(0 0 6px var(--accent));"/>
+                <!-- tick marks every 30deg -->
+                <g stroke="rgba(236,230,211,0.18)" stroke-width="1">
+                  <line x1="84" y1="6" x2="84" y2="12"/>
+                  <line x1="84" y1="156" x2="84" y2="162"/>
+                  <line x1="6" y1="84" x2="12" y2="84"/>
+                  <line x1="156" y1="84" x2="162" y2="84"/>
+                </g>
+              </svg>
+              <div class="center">
+                <div class="moon-emoji"></div>
+                <div class="conf">第3周期</div>
+                <div class="ct">4.5 H AFTER ONSET</div>
+              </div>
+            </div>
+
+            <div class="wave-card">
+              <div class="h"><span>40Hz Pulse</span><span style="color: var(--accent);">配信待機中</span></div>
+              <svg viewBox="0 0 240 36" preserveAspectRatio="none">
+                <path id="livewave" d="" fill="none" stroke="var(--accent)" stroke-width="1.4" stroke-linecap="round" style="filter: drop-shadow(0 0 3px var(--accent));"/>
+              </svg>
+              <div class="ftr">
+                <span>SINE 40Hz</span>
+                <span>+ PINK NOISE</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- PAIN -->
-<section id="pain">
-  <div class="container">
-    <span class="section-label">共感</span>
-    <h2 class="section-h2">あなたにも、<br>こんな経験ありませんか？</h2>
-    <div class="pain-grid">
-      <div class="pain-card">
-        <div class="pain-icon">◎</div>
-        <h3>目が覚めたら、夢が消えていた</h3>
+<!-- ═════ PROBLEMS ═════ -->
+<section class="bay" id="problems" data-screen-label="02 Problems">
+  <div class="shell">
+    <div class="section-head">
+      <div>
+        <div class="kicker">共感 · Empathy</div>
+        <h2>あなたにも、<br/><span class="em">こんな経験</span>ありませんか？</h2>
+      </div>
+      <p>明晰夢を試したことがある人の多くは、続かなさと、根拠の不確かさで挫折します。Dreave は、その両方を解きほぐすために設計されています。</p>
+    </div>
+
+    <div class="problems">
+      <div class="pcard">
+        <div class="glyph">◎</div>
+        <div class="num">01 / RECALL</div>
+        <h3>目が覚めたら、<br/>夢が消えていた</h3>
         <p>せっかく見た夢も、起きた瞬間に霧散する。それが毎朝続いている。記録したくても、もう何も思い出せない。</p>
       </div>
-      <div class="pain-card">
-        <div class="pain-icon">◇</div>
-        <h3>明晰夢の方法を試したが続かなかった</h3>
+      <div class="pcard">
+        <div class="glyph">◇</div>
+        <div class="num">02 / HABIT</div>
+        <h3>方法を試したが、<br/>続かなかった</h3>
         <p>リアリティチェックや夢日記を試したが、効果が出る前に挫折してしまう。正しいやり方がわからない。</p>
       </div>
-      <div class="pain-card">
-        <div class="pain-icon">△</div>
-        <h3>科学的に正しいアプローチがわからない</h3>
-        <p>ネットの情報はバラバラで、何を信じれば効果があるのか不明なまま。根拠のある方法を探していた。</p>
+      <div class="pcard">
+        <div class="glyph">△</div>
+        <div class="num">03 / METHOD</div>
+        <h3>何を信じればよいのか、<br/>わからない</h3>
+        <p>ネットの情報はバラバラで、長く続けられるやり方が見つからない。自分に合う進め方の目安が欲しかった。</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- FEATURES -->
-<section id="features">
-  <div class="container">
-    <span class="section-label">機能</span>
-    <h2 class="section-h2">Dreave のできること</h2>
-    <p class="section-sub">4 つのアプローチで、明晰夢体質をつくる。</p>
-    <div class="features-grid">
-      <div class="feat-card night">
-        <div class="feat-icon cyan">◐</div>
-        <h3>Night Mode</h3>
-        <div class="tagline">第 3 REM 周期に、40Hz の音響刺激を。</div>
-        <p>就寝時刻を設定するだけで、REM 周期を自動推定。最も明晰夢が起きやすい第 3 周期（約 4.5 時間後）に、ピンクノイズと 40Hz サイン波を静かに届けます。バックグラウンドで動作するため、充電しながら枕元に置くだけ。<br><br><strong style="color:var(--cyan)">Dream Pass</strong> により、無料プランでも週 3 回まで利用可能。初回インストールから 7 日間は無制限トライアル。</p>
+<!-- ═════ FEATURES ═════ -->
+<section class="bay" id="features" data-screen-label="03 Features">
+  <div class="shell">
+    <div class="section-head">
+      <div>
+        <div class="kicker">機能 · Capabilities</div>
+        <h2>Dreave の<br/><span class="em">できる</span>こと。</h2>
       </div>
-      <div class="feat-card">
-        <div class="feat-icon indigo">≡</div>
-        <h3>Dream Journal</h3>
-        <div class="tagline">起きたらすぐ、音声で記録。</div>
+      <p>4 つのアプローチで、明晰夢体質をつくる。一夜限りの体験ではなく、毎晩積み上がる仕組み。</p>
+    </div>
+
+    <div class="features">
+      <!-- Night Mode -->
+      <div class="fcard wide">
+        <div class="ftag"><span class="gl">◐</span><span>01 / NIGHT MODE</span></div>
+        <h3>第 3 REM 周期に、<br/>40Hz の音響刺激を。</h3>
+        <p>就寝時刻を設定するだけで、REM 周期を自動推定。最も明晰夢が起きやすい第 3 周期（約 4.5 時間後）に、ピンクノイズと 40Hz サイン波を静かに届けます。バックグラウンド動作なので、充電しながら枕元に置くだけ。</p>
+        <div class="note"><b>Dream Pass</b> により、無料プランでも週 3 回まで利用可能。初回インストールから 7 日間は無制限トライアル。</div>
+
+        <div class="vis-night">
+          <svg viewBox="0 0 600 220" preserveAspectRatio="none">
+            <defs>
+              <linearGradient id="remgrad" x1="0" x2="1" y1="0" y2="0">
+                <stop offset="0%" stop-color="#6B7BFF" stop-opacity="0.05"/>
+                <stop offset="50%" stop-color="#B8A2FF" stop-opacity="0.35"/>
+                <stop offset="100%" stop-color="#6B7BFF" stop-opacity="0.05"/>
+              </linearGradient>
+            </defs>
+            <!-- night sky lines (sleep depth) -->
+            <g stroke="rgba(236,230,211,0.06)" stroke-width="1">
+              <line x1="0" y1="40" x2="600" y2="40"/>
+              <line x1="0" y1="80" x2="600" y2="80"/>
+              <line x1="0" y1="120" x2="600" y2="120"/>
+              <line x1="0" y1="160" x2="600" y2="160"/>
+            </g>
+            <!-- sleep stage curve (hypnogram-like) -->
+            <path d="M0,120 L40,160 L60,180 L100,160 L120,90 L160,90 L180,170 L220,170 L240,80 L280,80 L300,180 L340,180 L360,60 L400,60 L420,150 L460,150 L480,40 L520,40 L540,130 L600,130"
+                  fill="none" stroke="rgba(236,230,211,0.32)" stroke-width="1.4" stroke-linejoin="round"/>
+            <!-- REM peak highlight -->
+            <rect x="360" y="20" width="40" height="180" fill="url(#remgrad)"/>
+            <line x1="380" y1="20" x2="380" y2="200" stroke="var(--accent)" stroke-width="1" stroke-dasharray="2 4"/>
+            <!-- moon at peak -->
+            <circle cx="380" cy="60" r="6" fill="#ECE6D3" style="filter: drop-shadow(0 0 8px #ECE6D3);"/>
+            <!-- labels -->
+            <text x="10" y="210" fill="#5a6485" font-family="JetBrains Mono" font-size="9" letter-spacing="2">0H</text>
+            <text x="200" y="210" fill="#5a6485" font-family="JetBrains Mono" font-size="9" letter-spacing="2">3H</text>
+            <text x="350" y="210" fill="#B8A2FF" font-family="JetBrains Mono" font-size="9" letter-spacing="2">☽ 4.5H</text>
+            <text x="565" y="210" fill="#5a6485" font-family="JetBrains Mono" font-size="9" letter-spacing="2">8H</text>
+          </svg>
+        </div>
+      </div>
+
+      <!-- Journal -->
+      <div class="fcard narrow">
+        <div class="ftag"><span class="gl">≡</span><span>02 / DREAM JOURNAL</span></div>
+        <h3>起きたらすぐ、<br/>音声で記録。</h3>
         <p>寝ぼけていても OK。声でそのまま話すと自動でテキスト化。Recall Score と感情タグが自動付与されます。</p>
+
+        <div class="vis-journal">
+          <div class="voice-bar">
+            <span class="rec"></span>
+            <span style="font-family: var(--mono); font-size: 10px; color: var(--ink-dim); letter-spacing: 0.12em;">REC 00:42</span>
+            <div class="bars" id="voicebars"></div>
+          </div>
+          <div class="voice-text">「青い廊下を歩いていて、振り向くと猫が……」</div>
+          <div class="voice-tags">
+            <span>#flying</span><span>#curious</span><span>#water</span>
+          </div>
+          <div class="voice-score">
+            <span>RECALL SCORE</span><b>84 / 100</b>
+          </div>
+        </div>
       </div>
-      <div class="feat-card">
-        <div class="feat-icon aurora">◉</div>
-        <h3>Reality Check</h3>
-        <div class="tagline">日中の通知が、夢の中の気づきを育てる。</div>
+
+      <!-- Reality check -->
+      <div class="fcard half">
+        <div class="ftag"><span class="gl">◉</span><span>03 / REALITY CHECK</span></div>
+        <h3>日中の通知が、<br/>夢の中の気づきを育てる。</h3>
         <p>ランダムな通知に答えるだけ。現実確認の習慣が夢の中でも「これは夢だ」という気づきを増やします。</p>
+
+        <div class="vis-rc">
+          <div class="rc-row"><span class="rc-time">14:02</span><span class="rc-q">これは夢ですか？</span><span class="rc-status ok">CHECKED</span></div>
+          <div class="rc-row"><span class="rc-time">17:28</span><span class="rc-q">指は何本ありますか？</span><span class="rc-status ok">CHECKED</span></div>
+          <div class="rc-row"><span class="rc-time">20:11</span><span class="rc-q">時計を二度見してください</span><span class="rc-status">PENDING</span></div>
+        </div>
       </div>
-      <div class="feat-card">
-        <div class="feat-icon gold">≋</div>
-        <h3>Analytics</h3>
-        <div class="tagline">30 日で、明晰夢体質になる。</div>
-        <p>Recall Score・Growth Index・明晰夢発生率をグラフで可視化。基本分析は全員無料。AI による個別分析はリワード広告視聴または Dreave Pro で利用できます。</p>
+
+      <!-- Analytics -->
+      <div class="fcard half">
+        <div class="ftag"><span class="gl">≋</span><span>04 / ANALYTICS</span></div>
+        <h3>30 日で、<br/>明晰夢体質になる。</h3>
+        <p>Recall Score・Growth Index・明晰夢発生率をグラフで可視化。基本分析は全員無料。AI による個別分析は Dreave Pro。</p>
+
+        <div class="vis-analytics">
+          <svg viewBox="0 0 540 200" preserveAspectRatio="none">
+            <defs>
+              <linearGradient id="agrad" x1="0" x2="0" y1="0" y2="1">
+                <stop offset="0%" stop-color="#B8A2FF" stop-opacity="0.4"/>
+                <stop offset="100%" stop-color="#B8A2FF" stop-opacity="0"/>
+              </linearGradient>
+            </defs>
+            <g stroke="rgba(236,230,211,0.05)" stroke-width="1">
+              <line x1="0" y1="40" x2="540" y2="40"/>
+              <line x1="0" y1="100" x2="540" y2="100"/>
+              <line x1="0" y1="160" x2="540" y2="160"/>
+            </g>
+            <path d="M0,150 C60,140 80,130 120,110 S200,80 240,75 S320,55 360,40 S460,30 540,25 L540,200 L0,200 Z"
+                  fill="url(#agrad)"/>
+            <path d="M0,150 C60,140 80,130 120,110 S200,80 240,75 S320,55 360,40 S460,30 540,25"
+                  fill="none" stroke="#B8A2FF" stroke-width="1.6" style="filter: drop-shadow(0 0 4px #B8A2FF);"/>
+            <!-- markers -->
+            <g fill="#ECE6D3">
+              <circle cx="60" cy="143" r="3"/>
+              <circle cx="180" cy="92" r="3"/>
+              <circle cx="300" cy="65" r="3"/>
+              <circle cx="450" cy="32" r="3.5" stroke="#B8A2FF" stroke-width="1.4" fill="#0a0d22"/>
+            </g>
+            <text x="440" y="20" fill="#B8A2FF" font-family="Instrument Serif" font-style="italic" font-size="14">Lucid ✦</text>
+            <!-- axis -->
+            <text x="0" y="195" fill="#5a6485" font-family="JetBrains Mono" font-size="9" letter-spacing="1.5">DAY 1</text>
+            <text x="135" y="195" fill="#5a6485" font-family="JetBrains Mono" font-size="9" letter-spacing="1.5">DAY 8</text>
+            <text x="265" y="195" fill="#5a6485" font-family="JetBrains Mono" font-size="9" letter-spacing="1.5">DAY 15</text>
+            <text x="395" y="195" fill="#5a6485" font-family="JetBrains Mono" font-size="9" letter-spacing="1.5">DAY 22</text>
+            <text x="498" y="195" fill="#5a6485" font-family="JetBrains Mono" font-size="9" letter-spacing="1.5">DAY 30</text>
+          </svg>
+        </div>
       </div>
-      <div class="feat-card">
-        <div class="feat-icon aurora">✦</div>
-        <h3>コーチング & マイルストーン</h3>
-        <div class="tagline">習慣化を、アプリがサポートする。</div>
-        <p>記録日数や明晰夢達成状況に合わせて、Dashboard にパーソナルコーチングメッセージを表示。初めての明晰夢・7日連続記録など 8 種類のマイルストーンが習慣化をプッシュします。</p>
+
+      <!-- Coaching -->
+      <div class="fcard full" style="display: grid; grid-template-columns: 1fr 1.4fr; gap: 60px; align-items: center;">
+        <div>
+          <div class="ftag"><span class="gl">✦</span><span>05 / COACHING</span></div>
+          <h3>習慣化を、<br/>アプリがサポートする。</h3>
+          <p>記録日数や明晰夢達成状況に合わせて、Dashboard にパーソナルコーチングメッセージを表示。<br/>初めての明晰夢・7日連続記録など 8 種類のマイルストーンが習慣化をプッシュします。</p>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px;">
+          <div class="ms-badge" style="aspect-ratio:1; border:1px solid var(--line-strong); border-radius:14px; display:flex;flex-direction:column;align-items:center;justify-content:center;background:rgba(184,162,255,0.06);">
+            <div style="font-family:var(--serif-en);font-style:italic;color:var(--accent);font-size:32px;">✦</div>
+            <div style="font-family:var(--mono);font-size:9px;letter-spacing:0.18em;color:var(--ink-mute);margin-top:6px;">FIRST</div>
+            <div style="font-family:var(--serif-jp);font-size:11px;color:var(--ink);margin-top:2px;">初の明晰夢</div>
+          </div>
+          <div style="aspect-ratio:1; border:1px solid var(--line); border-radius:14px; display:flex;flex-direction:column;align-items:center;justify-content:center;">
+            <div style="font-family:var(--serif-en);font-style:italic;color:var(--moon);font-size:32px;">7</div>
+            <div style="font-family:var(--mono);font-size:9px;letter-spacing:0.18em;color:var(--ink-mute);margin-top:6px;">DAYS</div>
+            <div style="font-family:var(--serif-jp);font-size:11px;color:var(--ink-dim);margin-top:2px;">連続記録</div>
+          </div>
+          <div style="aspect-ratio:1; border:1px solid var(--line); border-radius:14px; display:flex;flex-direction:column;align-items:center;justify-content:center;">
+            <div style="font-family:var(--serif-en);font-style:italic;color:var(--moon);font-size:32px;">30</div>
+            <div style="font-family:var(--mono);font-size:9px;letter-spacing:0.18em;color:var(--ink-mute);margin-top:6px;">DAYS</div>
+            <div style="font-family:var(--serif-jp);font-size:11px;color:var(--ink-dim);margin-top:2px;">月間達成</div>
+          </div>
+          <div style="aspect-ratio:1; border:1px solid var(--line); border-radius:14px; display:flex;flex-direction:column;align-items:center;justify-content:center;opacity:0.55;">
+            <div style="font-family:var(--serif-en);font-style:italic;color:var(--ink-dim);font-size:32px;">◇</div>
+            <div style="font-family:var(--mono);font-size:9px;letter-spacing:0.18em;color:var(--ink-mute);margin-top:6px;">+5</div>
+            <div style="font-family:var(--serif-jp);font-size:11px;color:var(--ink-mute);margin-top:2px;">獲得待ち</div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- HOW IT WORKS -->
-<section id="how">
-  <div class="container">
-    <span class="section-label">使い方</span>
-    <h2 class="section-h2">たった 3 ステップ</h2>
-    <p class="section-sub">今夜から始められる。難しい設定は一切なし。</p>
+<!-- ═════ HOW IT WORKS ═════ -->
+<section class="bay" id="how" data-screen-label="04 How it works">
+  <div class="shell">
+    <div class="section-head">
+      <div>
+        <div class="kicker">使い方 · How it works</div>
+        <h2 style="white-space: nowrap;">たった <span class="em">3</span> ステップ。</h2>
+      </div>
+      <p>今夜から始められる。難しい設定は一切なし。アプリを開いて、就寝時刻を入れて、枕元に置くだけ。</p>
+    </div>
+
     <div class="steps">
       <div class="step">
-        <div class="step-num">1</div>
-        <h3>就寝前に設定する</h3>
+        <div class="num">i</div>
+        <h4>就寝前に設定する</h4>
         <p>就寝時刻を入力して Night Mode をオン。アプリを充電しながら枕元に置くだけ。</p>
       </div>
       <div class="step">
-        <div class="step-num" style="background:var(--cyan);color:var(--dark)">2</div>
-        <h3>眠っている間に刺激が届く</h3>
+        <div class="num">ii</div>
+        <h4>眠っている間に刺激が届く</h4>
         <p>REM 周期を推定し、最適なタイミングで 40Hz パルスが静かに再生されます。</p>
       </div>
       <div class="step">
-        <div class="step-num" style="background:var(--aurora);color:var(--dark)">3</div>
-        <h3>起きたら夢を記録する</h3>
+        <div class="num">iii</div>
+        <h4>起きたら夢を記録する</h4>
         <p>目が覚めたらすぐに声で録音。Recall Score が毎日積み上がっていきます。</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- SCIENCE -->
-<section id="science">
-  <div class="container">
-    <span class="section-label">Behind the Science</span>
-    <h2 class="section-h2">なぜ 4.5 時間後なのか</h2>
-    <div class="science-inner">
-      <div>
-        <p style="font-size:16px;line-height:1.8;color:var(--muted)">睡眠は 90 分周期で繰り返されます。第 3 周期（入眠から約 4.5 時間後）の REM 睡眠が、最も長く・最も鮮明な夢が見やすい時間帯です。</p>
-        <p style="font-size:16px;line-height:1.8;color:var(--muted);margin-top:16px">Dreave は、この<strong style="color:var(--cyan)">"黄金の窓"</strong>を自動で推定し、40Hz の音響刺激を届けます。40Hz 刺激はガンマ波活動との関連が研究されており、覚醒中の脳活動に近い状態を誘発する可能性が示唆されています。</p>
-        <div class="stat-grid">
-          <div class="stat"><div class="stat-num">90<span style="font-size:16px">分</span></div><div class="stat-label">睡眠周期の長さ</div></div>
-          <div class="stat"><div class="stat-num">70<span style="font-size:16px">%</span></div><div class="stat-label">第3周期の推定信頼度</div></div>
-          <div class="stat"><div class="stat-num">40<span style="font-size:16px">Hz</span></div><div class="stat-label">音響刺激周波数</div></div>
-          <div class="stat"><div class="stat-num">6<span style="font-size:16px">周期</span></div><div class="stat-label">最大推定周期数</div></div>
-        </div>
-        <p class="science-note">※ 効果には個人差があります。本アプリは医療機器ではありません。</p>
-      </div>
-      <div>
-        <div class="rem-chart">
-          <div class="rem-chart-title">REM 周期推定モデル</div>
-          <div class="rem-bars">
-            <div class="rem-bar" style="height:30%"></div>
-            <div class="rem-bar" style="height:70%"></div>
-            <div class="rem-bar" style="height:90%"></div>
-            <div class="rem-bar rem" style="height:40%"></div>
-            <div class="rem-bar" style="height:80%"></div>
-            <div class="rem-bar" style="height:95%"></div>
-            <div class="rem-bar rem" style="height:30%"></div>
-            <div class="rem-bar" style="height:60%"></div>
-            <div class="rem-bar" style="height:85%"></div>
-            <div class="rem-bar highlight" style="height:25%"></div>
-            <div class="rem-bar" style="height:50%"></div>
-            <div class="rem-bar" style="height:75%"></div>
-            <div class="rem-bar rem" style="height:20%"></div>
+<!-- ═════ SCIENCE ═════ -->
+<section class="bay" id="science" data-screen-label="05 REM">
+  <div class="shell">
+    <div class="science-wrap">
+      <div class="sci-top">
+        <div>
+          <div class="kicker" style="font-family:var(--mono);font-size:11px;letter-spacing:0.32em;text-transform:uppercase;color:var(--ink-mute);margin-bottom:24px;display:flex;align-items:center;gap:14px;">
+            <span style="width:28px;height:1px;background:var(--accent);display:inline-block;"></span>About REM Cycle
           </div>
-          <div style="display:flex;justify-content:space-between">
-            <div class="rem-label">0h</div>
-            <div class="rem-label">3h</div>
-            <div style="text-align:center"><div class="marker">☽ 4.5h</div></div>
-            <div class="rem-label">8h</div>
-          </div>
+          <h3>なぜ <span class="em">4.5 時間後</span>なのか。</h3>
         </div>
-        <div style="margin-top:12px;display:flex;gap:12px;font-size:12px;color:var(--muted)">
-          <span style="display:flex;align-items:center;gap:4px"><span style="width:12px;height:12px;border-radius:2px;background:var(--indigo);opacity:.5;display:inline-block"></span>深い睡眠</span>
-          <span style="display:flex;align-items:center;gap:4px"><span style="width:12px;height:12px;border-radius:2px;background:var(--cyan);display:inline-block"></span>REM</span>
-          <span style="display:flex;align-items:center;gap:4px"><span style="width:12px;height:12px;border-radius:2px;background:var(--cyan);box-shadow:0 0 8px rgba(89,199,250,.6);display:inline-block"></span>刺激タイミング</span>
+        <div>
+          <p>睡眠は <b>90 分周期</b>で繰り返されます。第 3 周期（入眠から約 4.5 時間後）の REM 睡眠が、最も長く・最も鮮明な夢が見やすい時間帯です。</p>
+          <p>Dreave は、この <b>"黄金の窓"</b> を自動で推定し、40Hz の音響刺激を届けます。40Hz 刺激はガンマ波活動との関連が研究されており、覚醒中の脳活動に近い状態を誘発する可能性が示唆されています。</p>
         </div>
       </div>
+
+      <div class="sci-stats">
+        <div class="sci-stat"><div class="v">90<span style="font-size:24px;letter-spacing:0.08em;">min</span></div><div class="l">睡眠周期の長さ</div></div>
+        <div class="sci-stat"><div class="v">70<span style="font-size:24px;letter-spacing:0.08em;">%</span></div><div class="l">第3周期の推定信頼度</div></div>
+        <div class="sci-stat"><div class="v">40<span style="font-size:24px;letter-spacing:0.08em;">Hz</span></div><div class="l">音響刺激周波数</div></div>
+        <div class="sci-stat"><div class="v">6<span style="font-size:24px;letter-spacing:0.08em;">cyc</span></div><div class="l">最大推定周期数</div></div>
+      </div>
+
+      <div class="sci-graph">
+        <svg viewBox="0 0 1100 260" preserveAspectRatio="none">
+          <defs>
+            <linearGradient id="remfill" x1="0" x2="0" y1="0" y2="1">
+              <stop offset="0%" stop-color="#B8A2FF" stop-opacity="0.35"/>
+              <stop offset="100%" stop-color="#B8A2FF" stop-opacity="0"/>
+            </linearGradient>
+            <linearGradient id="deepfill" x1="0" x2="0" y1="0" y2="1">
+              <stop offset="0%" stop-color="#6B7BFF" stop-opacity="0.0"/>
+              <stop offset="100%" stop-color="#6B7BFF" stop-opacity="0.15"/>
+            </linearGradient>
+          </defs>
+          <!-- grid -->
+          <g stroke="rgba(236,230,211,0.06)" stroke-width="1">
+            <line x1="0" y1="50" x2="1100" y2="50"/>
+            <line x1="0" y1="100" x2="1100" y2="100"/>
+            <line x1="0" y1="150" x2="1100" y2="150"/>
+            <line x1="0" y1="200" x2="1100" y2="200"/>
+          </g>
+          <!-- y labels -->
+          <g font-family="JetBrains Mono" font-size="9" fill="#5a6485" letter-spacing="2">
+            <text x="6" y="54">REM</text>
+            <text x="6" y="104">N1</text>
+            <text x="6" y="154">N2</text>
+            <text x="6" y="204">N3</text>
+          </g>
+          <!-- hypnogram path (stepped) -->
+          <path d="M50,180 L130,180 L130,210 L210,210 L210,140 L260,140 L260,200 L340,200 L340,90 L390,90 L390,180 L470,180 L470,60 L520,60 L520,170 L600,170 L600,40 L660,40 L660,160 L740,160 L740,30 L810,30 L810,150 L880,150 L880,50 L940,50 L940,140 L1020,140"
+                fill="none" stroke="rgba(236,230,211,0.6)" stroke-width="1.6" stroke-linejoin="miter"/>
+          <!-- gold window highlight on cycle 3 -->
+          <rect x="600" y="20" width="120" height="220" fill="url(#remfill)"/>
+          <line x1="660" y1="20" x2="660" y2="240" stroke="var(--accent)" stroke-width="1" stroke-dasharray="2 4"/>
+          <!-- moon marker -->
+          <g transform="translate(660 30)">
+            <circle r="9" fill="#ECE6D3" style="filter: drop-shadow(0 0 12px #ECE6D3);"/>
+            <circle r="9" cx="3" cy="-2" fill="#0f0a25" opacity="0.4"/>
+          </g>
+          <!-- cycle markers -->
+          <g font-family="JetBrains Mono" font-size="9" fill="#5a6485" letter-spacing="2" text-anchor="middle">
+            <text x="130" y="252">1</text>
+            <text x="300" y="252">2</text>
+            <text x="500" y="252">3</text>
+            <text x="660" y="252" fill="#B8A2FF">☽ 黄金の窓</text>
+            <text x="820" y="252">4</text>
+            <text x="980" y="252">5</text>
+          </g>
+        </svg>
+        <div class="axis"><span>0h</span><span>2h</span><span>3h</span><span class="gold">☽ 4.5h</span><span>6h</span><span>8h</span></div>
+      </div>
+
+      <div class="sci-foot">※ 効果には個人差があります。本アプリは医療機器ではありません。</div>
     </div>
   </div>
 </section>
 
-<!-- PRICING -->
-<section id="pricing">
-  <div class="container">
-    <span class="section-label">料金プラン</span>
-    <h2 class="section-h2">あなたのペースで。</h2>
-    <p class="section-sub">コア機能はすべて無料。Dream Pass で週 3 回の Night Mode、Dreave Pro で全機能を解放。</p>
-    <div class="pricing-grid" style="grid-template-columns:repeat(auto-fit,minmax(280px,1fr));max-width:720px;margin-left:auto;margin-right:auto">
-      <!-- Free -->
-      <div class="price-card">
-        <div class="price-name">Free</div>
-        <div class="price-val">¥0</div>
-        <div style="font-size:13px;color:var(--muted);margin-bottom:16px">初回 7 日間は Night Mode 無制限トライアル</div>
-        <ul class="price-list">
+<!-- ═════ PRICING ═════ -->
+<section class="bay" id="pricing" data-screen-label="06 Pricing">
+  <div class="shell">
+    <div class="section-head">
+      <div>
+        <div class="kicker">料金 · Pricing</div>
+        <h2>あなたの<br/><span class="em">ペース</span>で。</h2>
+      </div>
+      <p>コア機能はすべて無料。Dream Pass で週 3 回の Night Mode、Dreave Pro で全機能を解放。</p>
+    </div>
+
+    <div class="pricing">
+      <div class="plan free">
+        <div class="tier">FREE PLAN</div>
+        <div class="name">Free</div>
+        <div class="price"><span class="num">¥0</span><span class="sub">/ forever</span></div>
+        <div class="desc">初回 7 日間は Night Mode 無制限トライアル。以降は Dream Pass で週 3 回まで。</div>
+        <ul>
           <li>夢日記（無制限）</li>
           <li>Reality Check（無制限）</li>
           <li>Night Mode 週 3 回（Dream Pass）</li>
@@ -364,110 +1059,197 @@ footer{background:var(--dark);padding:40px 24px;border-top:1px solid rgba(255,25
           <li>AI 分析（リワード広告）</li>
           <li>コーチング & マイルストーン</li>
         </ul>
-        <a href="https://apps.apple.com" class="btn-price btn-outline">無料で始める</a>
+        <div class="cta"><a href="https://appstoreconnect.apple.com/m/teams/69a6de82-b75d-47e3-e053-5b8c7c11a4d1/apps/6770527766/moments/new-app/ios" target="_blank" rel="noopener">無料で始める</a></div>
       </div>
-      <!-- Dreave Pro -->
-      <div class="price-card featured">
-        <div class="price-name">Dreave Pro</div>
-        <div class="price-val" style="font-size:28px">買い切り <span style="font-size:14px">価格未定</span></div>
-        <div style="font-size:13px;color:var(--muted);margin-bottom:16px">一度の購入で永続利用</div>
-        <ul class="price-list">
-          <li>Night Mode 無制限</li>
+
+      <div class="plan pro">
+        <div class="badge">Lucid Pro</div>
+        <div class="tier">BUY ONCE · OWN FOREVER</div>
+        <div class="name">Dreave <em style="font-style: italic; color: var(--accent);">Pro</em></div>
+        <div class="price"><span class="num">買い切り</span><span class="sub">価格未定</span></div>
+        <div class="desc">一度の購入で永続利用。広告なしで、すべての機能を解放。</div>
+        <ul>
+          <li>Night Mode <b style="color:var(--accent); font-weight: 500;">無制限</b></li>
           <li>夢日記（無制限）</li>
           <li>Reality Check（無制限）</li>
           <li>Analytics 基本分析</li>
           <li>AI 分析（広告なし）</li>
           <li>CSV エクスポート</li>
-          <li>コーチング & マイルストーン</li>
+          <li class="soon">コーチング & マイルストーン</li>
         </ul>
-        <span class="btn-price btn-gray" style="display:block;text-align:center;padding:13px;border-radius:12px;font-size:15px;font-weight:600;opacity:.6;cursor:default">近日公開予定</span>
+        <div class="cta"><a href="https://appstoreconnect.apple.com/m/teams/69a6de82-b75d-47e3-e053-5b8c7c11a4d1/apps/6770527766/moments/new-app/ios" target="_blank" rel="noopener">App Store で見る</a></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- FINAL CTA -->
-<section id="cta">
-  <canvas id="cta-stars"></canvas>
-  <div class="container" style="position:relative;z-index:1">
-    <h2 style="font-size:clamp(32px,5vw,52px);font-weight:700;letter-spacing:-.02em;margin-bottom:16px">今夜、初めての<br>明晰夢を。</h2>
-    <p style="font-size:16px;color:var(--muted);margin-bottom:36px;line-height:1.7">Dreave は無料でダウンロードできます。<br>週 3 回の Dream Pass で、今夜から始めましょう。</p>
-    <a href="https://apps.apple.com" class="btn-primary" style="display:inline-flex">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
-      App Store からダウンロード
-    </a>
+<!-- ═════ NEWS ═════ -->
+<section class="bay" id="news" data-screen-label="07 News">
+  <div class="shell">
+    <div class="section-head">
+      <div>
+        <div class="kicker">お知らせ · News</div>
+        <h2>新しい<br/><span class="em">夢の便</span>り。</h2>
+      </div>
+      <p>アップデート、メディア掲載、イベントなど、Dreave からの最新情報をお届けします。</p>
+    </div>
+
+    <ul class="news-list">
+      <li class="news-item">
+        <a href="News.html#2026-05-28">
+          <time datetime="2026-05-28">
+            <span class="y">2026</span><span class="md">05 / 28</span>
+          </time>
+          <span class="news-tag t-release">Release</span>
+          <h4>Dreave 1.0 をリリースしました。リリース記念、全機能を無料で開放中</h4>
+          <span class="arrow">→</span>
+        </a>
+      </li>
+    </ul>
+
+    <div class="news-foot">
+      <a href="News.html" class="news-all">すべてのお知らせを見る
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M7 3l4 4-4 4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
   </div>
 </section>
 
-<!-- FOOTER -->
-<footer>
-  <div class="footer-inner">
-    <div>
-      <a href="index.html" class="footer-logo">☽ Dreave</a>
-      <div class="footer-tagline">明晰夢を、科学する。</div>
+<!-- ═════ FINAL CTA ═════ -->
+<section class="final" data-screen-label="07 Final">
+  <div class="shell">
+    <div class="moon-big"></div>
+    <h2>今夜、<br/>初めての <span class="em">明晰夢</span>を。</h2>
+    <p>Dreave は無料でダウンロードできます。<br/>週 3 回の Dream Pass で、今夜から始めましょう。</p>
+    <div class="cta-row" style="justify-content: center;">
+      <a href="https://appstoreconnect.apple.com/m/teams/69a6de82-b75d-47e3-e053-5b8c7c11a4d1/apps/6770527766/moments/new-app/ios" target="_blank" rel="noopener" class="btn-primary">
+        App Store からダウンロード
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M7 3l4 4-4 4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
     </div>
-    <div class="footer-links">
-      <a href="features.html">機能詳細</a>
-      <a href="science.html">科学的根拠</a>
-      <a href="pricing.html">料金プラン</a>
+  </div>
+</section>
+
+<!-- ═════ FOOTER ═════ -->
+<footer>
+  <div class="shell">
+    <div class="col-brand">
+      <div class="brand">
+        <div class="mark"></div>
+        <span class="name">Dreave</span>
+      </div>
+      <div class="tag">夢の中で、目を覚ます。</div>
+    </div>
+    <div class="links">
+      <a href="#features">機能詳細</a>
+      <a href="#science">REM について</a>
+      <a href="#pricing">料金プラン</a>
+      <a href="News.html">お知らせ</a>
       <a href="journal-tips.html">夢日記 Tips</a>
       <a href="privacy.html">プライバシーポリシー</a>
       <a href="terms.html">利用規約</a>
       <a href="contact.html">お問い合わせ</a>
     </div>
+    <div class="copy">© 2026 DREAVE<br/>ALL RIGHTS RESERVED</div>
   </div>
-  <div class="footer-copy">© 2026 Dreave. All rights reserved.</div>
 </footer>
 
+<!-- ───── React + Tweaks Panel ───── -->
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script type="text/babel" src="tweaks-panel.jsx"></script>
+<div id="tweaks-root"></div>
+<script type="text/babel" src="tweaks.jsx"></script>
+
 <script>
-function makeStars(canvasId, count){
-  const c=document.getElementById(canvasId);
-  if(!c)return;
-  const ctx=c.getContext('2d');
-  function resize(){c.width=c.offsetWidth;c.height=c.offsetHeight}
+// ───── Starfield ─────
+(() => {
+  const c = document.getElementById('starfield');
+  const ctx = c.getContext('2d');
+  let stars = [];
+  function resize() {
+    c.width = innerWidth * devicePixelRatio;
+    c.height = innerHeight * devicePixelRatio;
+    c.style.width = innerWidth + 'px';
+    c.style.height = innerHeight + 'px';
+    const count = Math.floor((innerWidth * innerHeight) / 5500);
+    stars = Array.from({length: count}, () => ({
+      x: Math.random() * c.width,
+      y: Math.random() * c.height,
+      r: Math.random() * 1.2 * devicePixelRatio + 0.2 * devicePixelRatio,
+      a: Math.random() * 0.8 + 0.1,
+      tw: Math.random() * 0.02 + 0.003,
+      tp: Math.random() * Math.PI * 2,
+    }));
+  }
   resize();
-  window.addEventListener('resize',resize);
-  const stars=Array.from({length:count},()=>({
-    x:Math.random(),y:Math.random(),
-    r:Math.random()*1.5+.5,
-    t:Math.random()*Math.PI*2,
-    speed:Math.random()*.003+.001
-  }));
-  function draw(){
-    ctx.clearRect(0,0,c.width,c.height);
-    stars.forEach(s=>{
-      s.t+=s.speed;
-      const a=.2+.7*(.5+.5*Math.sin(s.t));
+  addEventListener('resize', resize);
+  function draw(t) {
+    ctx.clearRect(0, 0, c.width, c.height);
+    for (const s of stars) {
+      const a = s.a * (0.5 + 0.5 * Math.sin(t * s.tw + s.tp));
       ctx.beginPath();
-      ctx.arc(s.x*c.width,s.y*c.height,s.r,0,Math.PI*2);
-      ctx.fillStyle=`rgba(255,255,255,${a})`;
+      ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(236,230,211,${a})`;
       ctx.fill();
-    });
+    }
     requestAnimationFrame(draw);
   }
-  draw();
-}
-makeStars('stars',80);
-makeStars('cta-stars',40);
+  requestAnimationFrame(draw);
+})();
 
-let s=4*3600+28*60+36;
-setInterval(()=>{
-  s=Math.max(0,s-1);
-  const h=String(Math.floor(s/3600)).padStart(2,'0');
-  const m=String(Math.floor(s%3600/60)).padStart(2,'0');
-  const sec=String(s%60).padStart(2,'0');
-  const el=document.getElementById('countdown');
-  if(el)el.textContent=`${h}:${m}:${sec}`;
-},1000);
+// ───── Live 40Hz waveform in phone ─────
+(() => {
+  const path = document.getElementById('livewave');
+  if (!path) return;
+  const W = 240, H = 36, mid = H / 2;
+  function frame(t) {
+    const points = [];
+    for (let x = 0; x <= W; x += 3) {
+      const env = Math.sin((x / W) * Math.PI); // taper at edges
+      const y = mid + Math.sin((x * 0.18) + t * 0.006) * 12 * env
+                    + Math.sin((x * 0.05) + t * 0.003) * 4 * env;
+      points.push(`${x},${y.toFixed(2)}`);
+    }
+    path.setAttribute('d', 'M' + points.join(' L'));
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+})();
 
-const obs=new IntersectionObserver(entries=>{
-  entries.forEach(e=>{if(e.isIntersecting){e.target.style.opacity=1;e.target.style.transform='none'}});
-},{threshold:.15});
-document.querySelectorAll('.pain-card,.feat-card,.step,.price-card').forEach(el=>{
-  el.style.opacity=0;el.style.transform='translateY(28px)';
-  el.style.transition='opacity .5s ease-out,transform .5s ease-out';
-  obs.observe(el);
-});
+// ───── Voice bars (journal feature) ─────
+(() => {
+  const root = document.getElementById('voicebars');
+  if (!root) return;
+  const N = 40;
+  const bars = [];
+  for (let i = 0; i < N; i++) {
+    const s = document.createElement('span');
+    s.style.height = '4px';
+    root.appendChild(s);
+    bars.push(s);
+  }
+  function frame(t) {
+    for (let i = 0; i < N; i++) {
+      const v = (Math.sin(i * 0.6 + t * 0.005) + Math.sin(i * 0.2 + t * 0.012)) * 0.5 + 0.5;
+      bars[i].style.height = (3 + v * 18) + 'px';
+      bars[i].style.opacity = 0.4 + v * 0.5;
+    }
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+})();
+
+// ───── Reveal on scroll ─────
+(() => {
+  const els = document.querySelectorAll('.reveal:not(.in)');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.1 });
+  els.forEach(e => io.observe(e));
+})();
 </script>
+
 </body>
 </html>
