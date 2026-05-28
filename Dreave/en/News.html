@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="en">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>お知らせ — Dreave</title>
-<link rel="icon" type="image/png" href="favicon.png" />
-<link rel="apple-touch-icon" href="favicon.png" />
+<title>News — Dreave</title>
+<link rel="icon" type="image/png" href="../favicon.png" />
+<link rel="apple-touch-icon" href="../favicon.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@400;500;700;800&family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
@@ -61,7 +61,7 @@
   .brand { display: flex; align-items: center; gap: 14px; }
   .brand .mark {
     width: 36px; height: 36px; border-radius: 9px;
-    background: url('apple-touch-icon.png') center/cover no-repeat, #1a0840;
+    background: url('../apple-touch-icon.png') center/cover no-repeat, #1a0840;
     box-shadow: 0 0 20px rgba(120,60,240,0.45), 0 4px 12px rgba(0,0,0,0.5);
   }
   .brand .name { font-family: var(--serif-en); font-size: 24px; letter-spacing: 0.04em; font-style: italic; }
@@ -94,13 +94,13 @@
   .breadcrumb .sep { opacity: 0.4; }
 
   .page-head h1 {
-    font-family: var(--serif-jp); font-weight: 500;
+    font-family: var(--serif-en); font-weight: 400;
     font-size: clamp(56px, 6vw, 92px); line-height: 1.05; letter-spacing: -0.01em;
     margin-top: 36px;
   }
   .page-head h1 .em { font-family: var(--serif-en); font-style: italic; color: var(--accent); font-weight: 400; }
   .page-head .lede {
-    font-family: var(--serif-jp); font-size: 18px; line-height: 1.85; color: var(--ink-dim);
+    font-family: var(--sans); font-size: 18px; line-height: 1.85; color: var(--ink-dim);
     margin-top: 28px; max-width: 580px;
   }
   .page-head .meta {
@@ -181,7 +181,7 @@
   .news-tag.t-event   { color: #FFD27A; border-color: rgba(255,210,122,0.32); background: rgba(255,210,122,0.06); }
   .news-tag.t-info    { color: var(--ink-dim); }
   .post-head h2 {
-    font-family: var(--serif-jp); font-weight: 500; font-size: 20px; line-height: 1.55; color: var(--ink); margin: 0;
+    font-family: var(--serif-en); font-weight: 400; font-size: 20px; line-height: 1.55; color: var(--ink); margin: 0;
   }
   .post-head .chev {
     font-family: var(--serif-en); font-style: italic; font-size: 22px; color: var(--ink-mute);
@@ -206,14 +206,14 @@
   .post-body .b-spacer { grid-column: 1 / 3; }
   .post-body .b-content { grid-column: 3 / 4; max-width: 760px; }
   .post-body p {
-    font-family: var(--serif-jp); font-size: 15px; line-height: 1.95; color: var(--ink-dim); margin-bottom: 16px;
+    font-family: var(--sans); font-size: 15px; line-height: 1.95; color: var(--ink-dim); margin-bottom: 16px;
   }
   .post-body p b { color: var(--moon); font-weight: 500; }
   .post-body ul {
     margin: 8px 0 20px; padding-left: 0; list-style: none;
   }
   .post-body li {
-    font-family: var(--serif-jp); font-size: 14px; line-height: 1.85; color: var(--ink-dim);
+    font-family: var(--sans); font-size: 14px; line-height: 1.85; color: var(--ink-dim);
     padding-left: 18px; position: relative;
   }
   .post-body li::before {
@@ -230,7 +230,7 @@
   /* Empty / no-results state */
   .empty {
     padding: 80px 0; text-align: center;
-    font-family: var(--serif-jp); font-size: 16px; color: var(--ink-mute);
+    font-family: var(--sans); font-size: 16px; color: var(--ink-mute);
   }
   .empty .glyph { font-family: var(--serif-en); font-style: italic; font-size: 48px; color: var(--accent); opacity: 0.6; display: block; margin-bottom: 20px; }
 
@@ -245,11 +245,11 @@
     display: grid; grid-template-columns: 1.4fr 1fr; gap: 48px; align-items: center;
   }
   .subscribe h3 {
-    font-family: var(--serif-jp); font-weight: 500; font-size: 32px; line-height: 1.3;
+    font-family: var(--serif-en); font-weight: 400; font-size: 32px; line-height: 1.3;
   }
   .subscribe h3 .em { font-family: var(--serif-en); font-style: italic; color: var(--accent); font-weight: 400; }
   .subscribe p {
-    font-family: var(--serif-jp); font-size: 15px; line-height: 1.85; color: var(--ink-dim); margin-top: 14px;
+    font-family: var(--sans); font-size: 15px; line-height: 1.85; color: var(--ink-dim); margin-top: 14px;
   }
   .subscribe form { display: flex; gap: 12px; flex-direction: column; }
   .subscribe input {
@@ -270,7 +270,7 @@
   /* Footer */
   footer { border-top: 1px solid var(--line); padding: 60px 0; margin-top: 80px; }
   footer .shell { display: grid; grid-template-columns: 1.4fr 2fr 1fr; gap: 40px; align-items: start; }
-  footer .tag { font-family: var(--serif-jp); font-size: 14px; color: var(--ink-dim); }
+  footer .tag { font-family: var(--sans); font-size: 14px; color: var(--ink-dim); }
   footer .links { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px 24px; font-size: 13px; }
   footer .links a { color: var(--ink-dim); }
   footer .links a:hover { color: var(--moon); }
@@ -315,11 +315,11 @@
       <a href="index.html#pricing">Pricing</a>
     </div>
     <div class="lang-switcher">
-      <a href="News.html" class="active">JA</a>
-      <a href="en/News.html">EN</a>
-      <a href="ko/News.html">KO</a>
+      <a href="../News.html">JA</a>
+      <a href="News.html" class="active">EN</a>
+      <a href="../ko/News.html">KO</a>
     </div>
-    <a href="index.html#pricing" class="nav-cta">無料で始める</a>
+    <a href="index.html#pricing" class="nav-cta">Start for Free</a>
   </div>
 </nav>
 
@@ -330,8 +330,8 @@
       <span class="sep">/</span>
       <span>News</span>
     </div>
-    <h1>新しい<br/><span class="em">夢の便</span>り。</h1>
-    <p class="lede">アップデート、メディア掲載、季節のイベント。Dreave からの最新情報をお届けします。</p>
+    <h1>Latest <span class="em">News</span>.</h1>
+    <p class="lede">Updates, press coverage, and seasonal events — all the latest from Dreave.</p>
     <div class="meta">
       <span>Total <b>1</b> post</span>
       <span class="div"></span>
@@ -345,7 +345,7 @@
 <div class="filter">
   <div class="shell">
     <span class="label">Filter</span>
-    <button class="chip active" data-cat="all">すべて <span class="count">1</span></button>
+    <button class="chip active" data-cat="all">All <span class="count">1</span></button>
     <button class="chip" data-cat="release">Release <span class="count">1</span></button>
     <button class="chip" data-cat="update">Update <span class="count">0</span></button>
     <button class="chip" data-cat="media">Media <span class="count">0</span></button>
@@ -365,40 +365,40 @@
       <div class="post-head">
         <time datetime="2026-05-28"><span class="y">2026</span><span class="md">05 / 28</span></time>
         <span class="news-tag t-release">Release</span>
-        <h2>Dreave 1.0 をリリースしました。リリース記念、全機能を無料で開放中</h2>
+        <h2>Dreave 1.0 Released — All features free to celebrate launch</h2>
         <span class="chev">→</span>
       </div>
       <div class="post-body">
         <div class="b-spacer"></div>
         <div class="b-content">
-          <p>本日 2026 年 5 月 28 日、<b>Dreave 1.0</b> を App Store にてリリースしました。長らくお待たせしましたが、ようやく多くの方の枝元へ Dreave をお届けできます。</p>
-          <p>リリースを記念して、現在 <b>リリースキャンペーン</b>を実施中です。期間中は、誰でも、すべての機能を無料でご利用いただけます。</p>
+          <p>Today, May 28, 2026, <b>Dreave 1.0</b> is officially available on the App Store. We've been looking forward to putting Dreave in your hands, and that day is finally here.</p>
+          <p>To celebrate the launch, we're running a <b>launch campaign</b> — during the campaign period, everyone can use all features completely free.</p>
           <ul>
-            <li>Night Mode（REM 周期推定 × 40Hz 音響刺激）</li>
-            <li>夢日記（音声入力・感情タグ・検索）</li>
-            <li>Reality Check（ランダム通知による現実確認）</li>
-            <li>Analytics（Recall Score ・ Growth Index）</li>
+            <li>Night Mode (REM cycle estimation × 40Hz acoustic stimulation)</li>
+            <li>Dream Journal (voice input, emotion tags, search)</li>
+            <li>Reality Check (random notifications for reality awareness)</li>
+            <li>Analytics (Recall Score, Growth Index)</li>
           </ul>
-          <p>これから始める方にとっても、多少試してみたことがある方にとっても、今夜から踏み出せる良いタイミングです。枝元に Dreave を、ぜひ一度。</p>
-          <a class="b-link" href="https://apps.apple.com/us/app/dreave-%E6%98%8E%E6%99%B0%E5%A4%A2%E3%83%88%E3%83%AC%E3%83%BC%E3%83%8A%E3%83%BC/id6770527766" target="_blank" rel="noopener">App Store で見る →</a>
+          <p>Whether you're completely new to lucid dreaming or have tried before and given up — tonight is a great time to start. Give Dreave a place on your nightstand.</p>
+          <a class="b-link" href="https://apps.apple.com/us/app/dreave-%E6%98%8E%E6%99%B0%E5%A4%A2%E3%83%88%E3%83%AC%E3%83%BC%E3%83%8A%E3%83%BC/id6770527766" target="_blank" rel="noopener">View on App Store →</a>
         </div>
       </div>
     </article>
 
     <div class="empty" id="empty" style="display: none;">
       <span class="glyph">◯</span>
-      該当するお知らせはありません。
+      No posts match this filter.
     </div>
 
     <div class="subscribe">
       <div>
-        <h3>新しいお知らせを、<br/><span class="em">メール</span>で受け取る。</h3>
-        <p>大きなアップデートや季節イベントの告知だけ、月1回のニュースレターでお届けします。</p>
+        <h3>Get updates<br/>by <span class="em">email</span>.</h3>
+        <p>Major updates and event announcements only — delivered once a month at most.</p>
       </div>
-      <form onsubmit="event.preventDefault(); this.querySelector('button').textContent='✦ 登録完了'; this.querySelector('button').disabled = true;">
+      <form onsubmit="event.preventDefault(); this.querySelector('button').textContent='✦ Subscribed'; this.querySelector('button').disabled = true;">
         <input type="email" placeholder="you@example.com" required />
-        <button type="submit">購読する</button>
-        <small>いつでも解除できます。月1回のみ配信。</small>
+        <button type="submit">Subscribe</button>
+        <small>Unsubscribe anytime. Monthly at most.</small>
       </form>
     </div>
   </div>
@@ -407,21 +407,21 @@
 <footer>
   <div class="shell">
     <div class="col-brand">
-      <div class="brand" style="margin-bottom: 16px;">
+      <a href="index.html" class="brand">
         <div class="mark"></div>
         <span class="name">Dreave</span>
-      </div>
-      <div class="tag">夢の中で、目を覚ます。</div>
+      </a>
+      <div class="tag" style="margin-top:16px;">Wake up inside your dreams.</div>
     </div>
     <div class="links">
-      <a href="index.html#features">機能詳細</a>
-      <a href="index.html#science">REM について</a>
-      <a href="index.html#pricing">料金プラン</a>
-      <a href="News.html">お知らせ</a>
-      <a href="journal-tips.html">夢日記 Tips</a>
-      <a href="privacy.html">プライバシーポリシー</a>
-      <a href="terms.html">利用規約</a>
-      <a href="contact.html">お問い合わせ</a>
+      <a href="index.html#features">Features</a>
+      <a href="index.html#science">About REM</a>
+      <a href="index.html#pricing">Pricing</a>
+      <a href="News.html">News</a>
+      <a href="journal-tips.html">Journal Tips</a>
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="terms.html">Terms of Service</a>
+      <a href="contact.html">Contact</a>
     </div>
     <div class="copy">© 2026 DREAVE<br/>ALL RIGHTS RESERVED</div>
   </div>

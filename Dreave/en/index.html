@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="en">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Dreave - Lucid Dream Inducer — 夢の中で、目を覚ます。</title>
-<meta name="description" content="REM 周期推定 × 40Hz 音響刺激で、脳を夢の扉へ導く iOS アプリ。Dream Journal・Reality Check・詳細分析で、明晰夢をトレーニング。">
-<meta property="og:title" content="Dreave - Lucid Dream Inducer — 夢の中で、目を覚ます。">
-<meta property="og:description" content="REM 周期推定 × 40Hz 音響刺激で、脳を夢の扉へ導く iOS アプリ。">
-<meta property="og:image" content="og-image.png">
-<link rel="icon" type="image/png" href="favicon.png" />
-<link rel="apple-touch-icon" href="favicon.png" />
+<title>Dreave - Lucid Dream Inducer — Wake up inside your dreams.</title>
+<meta name="description" content="An iOS app that guides your mind to the dream door with REM cycle estimation × 40Hz acoustic stimulation. Dream Journal, Reality Check, and detailed analytics to train your lucid dreaming.">
+<meta property="og:title" content="Dreave - Lucid Dream Inducer — Wake up inside your dreams.">
+<meta property="og:description" content="An iOS app that guides your mind to the dream door with REM cycle estimation × 40Hz acoustic stimulation.">
+<meta property="og:image" content="../og-image.png">
+<link rel="icon" type="image/png" href="../favicon.png" />
+<link rel="apple-touch-icon" href="../apple-touch-icon.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@400;500;700;800&family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
@@ -72,7 +72,7 @@
   .brand { display: flex; align-items: center; gap: 14px; }
   .brand .mark {
     width: 36px; height: 36px; border-radius: 9px;
-    background: url('apple-touch-icon.png') center/cover no-repeat, #1a0840;
+    background: url('../apple-touch-icon.png') center/cover no-repeat, #1a0840;
     box-shadow: 0 0 20px rgba(120,60,240,0.45), 0 4px 12px rgba(0,0,0,0.5);
   }
   .brand .name { font-family: var(--serif-en); font-size: 24px; letter-spacing: 0.04em; font-style: italic; }
@@ -101,7 +101,7 @@
   .eyebrow::before { content: ""; width: 28px; height: 1px; background: var(--accent); }
 
   h1.display {
-    font-family: var(--serif-jp); font-weight: 500;
+    font-family: var(--serif-en); font-weight: 400;
     font-size: clamp(56px, 6.8vw, 108px);
     line-height: 1.02; letter-spacing: -0.01em;
     margin: 28px 0 12px;
@@ -109,7 +109,7 @@
   h1.display .glyph { font-family: var(--serif-en); font-style: italic; font-weight: 400; color: var(--accent); padding: 0 0.05em; }
   h1.display .em { font-style: italic; font-family: var(--serif-en); font-weight: 400; }
   .lede {
-    font-family: var(--serif-jp); font-weight: 400;
+    font-family: var(--sans); font-weight: 400;
     font-size: 19px; line-height: 1.85; color: var(--ink-dim);
     max-width: 460px; margin-top: 28px;
   }
@@ -183,7 +183,7 @@
     padding: 0;
     overflow: hidden;
   }
-  .phone::before { display: none; } /* notch removed — real screenshot includes it */
+  .phone::before { display: none; }
   .screen {
     width: 100%; height: 100%; border-radius: 36px;
     background:
@@ -272,7 +272,7 @@
   .news-tag.t-event   { color: #FFD27A; border-color: rgba(255,210,122,0.32); background: rgba(255,210,122,0.06); }
   .news-tag.t-info    { color: var(--ink-dim); }
   .news-item h4 {
-    font-family: var(--serif-jp); font-weight: 500; font-size: 18px; line-height: 1.55; color: var(--ink);
+    font-family: var(--serif-en); font-weight: 400; font-size: 18px; line-height: 1.55; color: var(--ink);
     margin: 0;
   }
   .news-item .arrow {
@@ -295,7 +295,7 @@
   section.bay { padding: 140px 0; position: relative; }
   .section-head { display: grid; grid-template-columns: 1fr 1.4fr; gap: 60px; align-items: end; margin-bottom: 80px; }
   .section-head h2 {
-    font-family: var(--serif-jp); font-weight: 500;
+    font-family: var(--serif-en); font-weight: 400;
     font-size: clamp(40px, 4.4vw, 64px); line-height: 1.12; letter-spacing: -0.01em;
   }
   .section-head h2 .em { font-family: var(--serif-en); font-style: italic; font-weight: 400; color: var(--accent); }
@@ -306,7 +306,7 @@
   }
   .section-head .kicker::before { content: ""; width: 28px; height: 1px; background: var(--accent); }
   .section-head p {
-    font-family: var(--serif-jp); font-size: 18px; line-height: 1.85; color: var(--ink-dim);
+    font-family: var(--sans); font-size: 18px; line-height: 1.85; color: var(--ink-dim);
     max-width: 540px;
   }
 
@@ -327,7 +327,7 @@
   }
   .pcard .num { font-family: var(--mono); font-size: 10px; letter-spacing: 0.24em; color: var(--ink-mute); margin-top: 24px; }
   .pcard h3 {
-    font-family: var(--serif-jp); font-weight: 500; font-size: 24px;
+    font-family: var(--serif-en); font-weight: 400; font-size: 24px;
     margin-top: 12px; line-height: 1.4;
   }
   .pcard p {
@@ -357,7 +357,7 @@
   }
   .ftag .gl { font-family: var(--serif-en); font-style: italic; font-size: 20px; color: var(--accent); }
   .fcard h3 {
-    font-family: var(--serif-jp); font-weight: 500; font-size: 28px; line-height: 1.35; margin-top: 16px;
+    font-family: var(--serif-en); font-weight: 400; font-size: 28px; line-height: 1.35; margin-top: 16px;
     max-width: 560px;
   }
   .fcard p {
@@ -392,7 +392,7 @@
   .voice-bar .rec { width: 8px; height: 8px; border-radius: 50%; background: #ff5d8a; box-shadow: 0 0 10px #ff5d8a; flex: 0 0 8px; }
   .voice-bar .bars { display: flex; gap: 2px; align-items: center; flex: 1; height: 24px; }
   .voice-bar .bars span { display: block; width: 3px; background: var(--accent); border-radius: 2px; opacity: 0.7; }
-  .voice-text { font-family: var(--serif-jp); font-size: 13px; line-height: 1.7; color: var(--ink-dim); padding: 4px 4px; }
+  .voice-text { font-family: var(--sans); font-size: 13px; line-height: 1.7; color: var(--ink-dim); padding: 4px 4px; }
   .voice-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 2px; }
   .voice-tags span {
     font-family: var(--mono); font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase;
@@ -407,7 +407,7 @@
   .rc-row { display: flex; gap: 12px; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--line); }
   .rc-row:last-child { border-bottom: 0; }
   .rc-time { font-family: var(--mono); font-size: 11px; color: var(--ink-mute); letter-spacing: 0.12em; width: 56px; }
-  .rc-q { flex: 1; font-family: var(--serif-jp); font-size: 13px; color: var(--ink); }
+  .rc-q { flex: 1; font-family: var(--sans); font-size: 13px; color: var(--ink); }
   .rc-status {
     font-family: var(--mono); font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase;
     padding: 3px 8px; border-radius: 999px; border: 1px solid var(--line-strong); color: var(--ink-dim);
@@ -473,7 +473,7 @@
     border: 1px dashed rgba(120,60,240,0.20);
   }
   .step h4 {
-    font-family: var(--serif-jp); font-weight: 500; font-size: 22px; margin-top: 32px;
+    font-family: var(--serif-en); font-weight: 400; font-size: 22px; margin-top: 32px;
   }
   .step p {
     font-size: 14px; line-height: 1.8; color: var(--ink-dim); margin-top: 14px; max-width: 320px;
@@ -491,11 +491,11 @@
   }
   .sci-top { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 80px; }
   .sci-top h3 {
-    font-family: var(--serif-jp); font-weight: 500; font-size: clamp(36px, 3.6vw, 52px);
+    font-family: var(--serif-en); font-weight: 400; font-size: clamp(36px, 3.6vw, 52px);
     line-height: 1.18; letter-spacing: -0.005em;
   }
   .sci-top h3 .em { font-family: var(--serif-en); font-style: italic; color: var(--accent); font-weight: 400; }
-  .sci-top p { font-family: var(--serif-jp); font-size: 16px; line-height: 1.95; color: var(--ink-dim); margin-top: 24px; }
+  .sci-top p { font-family: var(--sans); font-size: 16px; line-height: 1.95; color: var(--ink-dim); margin-top: 24px; }
   .sci-top p b { color: var(--moon); font-weight: 500; }
 
   .sci-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; margin-top: 56px; padding-top: 48px; border-top: 1px solid var(--line); }
@@ -540,10 +540,10 @@
     margin-top: 22px; display: flex; align-items: baseline; gap: 8px;
   }
   .plan .price .num {
-    font-family: var(--serif-jp); font-weight: 400; font-size: 56px; line-height: 1;
+    font-family: var(--serif-en); font-weight: 400; font-size: 56px; line-height: 1;
   }
   .plan .price .sub { font-family: var(--mono); font-size: 12px; color: var(--ink-mute); letter-spacing: 0.12em; }
-  .plan .desc { font-family: var(--serif-jp); font-size: 14px; line-height: 1.8; color: var(--ink-dim); margin-top: 14px; }
+  .plan .desc { font-family: var(--sans); font-size: 14px; line-height: 1.8; color: var(--ink-dim); margin-top: 14px; }
 
   .plan ul { list-style: none; margin: 36px 0 28px; padding: 28px 0 0; border-top: 1px solid var(--line); display: flex; flex-direction: column; gap: 14px; }
   .plan li {
@@ -584,17 +584,17 @@
     margin: 0 auto 48px;
   }
   section.final h2 {
-    font-family: var(--serif-jp); font-weight: 500;
+    font-family: var(--serif-en); font-weight: 400;
     font-size: clamp(48px, 5.6vw, 84px); line-height: 1.1;
   }
   section.final h2 .em { font-family: var(--serif-en); font-style: italic; color: var(--accent); font-weight: 400; }
-  section.final p { font-family: var(--serif-jp); font-size: 17px; color: var(--ink-dim); line-height: 1.85; margin-top: 28px; }
+  section.final p { font-family: var(--sans); font-size: 17px; color: var(--ink-dim); line-height: 1.85; margin-top: 28px; }
 
   /* ───── Footer ───── */
   footer { border-top: 1px solid var(--line); padding: 60px 0; }
   footer .shell { display: grid; grid-template-columns: 1.4fr 2fr 1fr; gap: 40px; align-items: start; }
   footer .col-brand .brand { margin-bottom: 16px; }
-  footer .tag { font-family: var(--serif-jp); font-size: 14px; color: var(--ink-dim); }
+  footer .tag { font-family: var(--sans); font-size: 14px; color: var(--ink-dim); }
   footer .links { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px 24px; font-size: 13px; }
   footer .links a { color: var(--ink-dim); }
   footer .links a:hover { color: var(--moon); }
@@ -644,11 +644,11 @@
       <a href="#pricing">Pricing</a>
     </div>
     <div class="lang-switcher">
-      <a href="index.html" class="active">JA</a>
-      <a href="en/index.html">EN</a>
-      <a href="ko/index.html">KO</a>
+      <a href="../index.html">JA</a>
+      <a href="index.html" class="active">EN</a>
+      <a href="../ko/index.html">KO</a>
     </div>
-    <a href="#pricing" class="nav-cta">無料で始める</a>
+    <a href="#pricing" class="nav-cta">Start for Free</a>
   </div>
 </nav>
 
@@ -659,34 +659,33 @@
       <div>
         <div class="eyebrow">REM × 40Hz Acoustic Stimulation</div>
         <h1 class="display">
-          夢の中で、<br/>
-          <span class="em">目を覚ます</span>。
+          Wake up<br/>
+          <span class="em">inside</span> your dreams.
         </h1>
         <p class="lede">
-          REM 周期推定 × 40Hz 音響刺激で、<br/>
-          脳を夢の扉へ導く iOS アプリ。
+          An iOS app that guides your mind to the dream door with REM cycle estimation × 40Hz acoustic stimulation.
         </p>
 
         <div class="hero-meta">
           <div class="stat">
             <span class="v">90<span style="font-size: 18px; letter-spacing: 0.1em;">min</span></span>
-            <span class="l">睡眠周期</span>
+            <span class="l">Sleep Cycle</span>
           </div>
           <div class="div"></div>
           <div class="stat">
             <span class="v">40<span style="font-size: 18px; letter-spacing: 0.1em;">Hz</span></span>
-            <span class="l">音響刺激</span>
+            <span class="l">Acoustic Stimulation</span>
           </div>
           <div class="div"></div>
           <div class="stat">
             <span class="v">7<span style="font-size: 18px; letter-spacing: 0.1em;">days</span></span>
-            <span class="l">無制限トライアル</span>
+            <span class="l">Free Trial</span>
           </div>
         </div>
 
         <div class="cta-row">
           <a href="https://apps.apple.com/us/app/dreave-%E6%98%8E%E6%99%B0%E5%A4%A2%E3%83%88%E3%83%AC%E3%83%BC%E3%83%8A%E3%83%BC/id6770527766" target="_blank" rel="noopener" class="btn-primary">
-            App Store からダウンロード
+            Download on the App Store
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M7 3l4 4-4 4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </a>
           <a href="#science" class="btn-ghost">
@@ -694,7 +693,7 @@
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 3v8M3 7l4 4 4-4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </a>
         </div>
-        <div class="micro" style="margin-top: 18px;">無料で始められます · 初回 7 日間は Night Mode 無制限トライアル</div>
+        <div class="micro" style="margin-top: 18px;">Free to download · 7-day unlimited Night Mode trial from first install</div>
       </div>
 
       <div class="phone-stage">
@@ -707,8 +706,8 @@
         <div class="orbit-label br">40Hz sine + pink noise</div>
 
         <div class="phone">
-          <img src="assets/AppStoreAssets/iphone_65/01_attention_home.png"
-               alt="Dreave ホーム画面"
+          <img src="../assets/AppStoreAssets/iphone_65_en/01_attention_home.png"
+               alt="Dreave Home Screen"
                style="width:100%;height:100%;object-fit:cover;display:block;border-radius:44px;">
         </div>
       </div>
@@ -721,18 +720,18 @@
   <div class="shell">
     <div class="section-head">
       <div>
-        <div class="kicker">App Screens · アプリ画面</div>
-        <h2>すべての機能が、<br/><span class="em">ひとつの</span>アプリに。</h2>
+        <div class="kicker">App Screens</div>
+        <h2>Everything you need,<br/><span class="em">in one</span> app.</h2>
       </div>
-      <p>夢の記録から明晰夢トレーニング、REM 分析まで。眠りを科学するすべての機能をシームレスに体験できます。</p>
+      <p>From dream recording to lucid dream training and REM analytics — experience every feature to scientifically understand your sleep, all seamlessly in one place.</p>
     </div>
     <div class="gallery-strip">
-      <div class="gphone"><img src="assets/AppStoreAssets/iphone_65/01_attention_home.png" alt="ホーム" loading="lazy"></div>
-      <div class="gphone"><img src="assets/AppStoreAssets/iphone_65/02_interest_record.png" alt="夢の記録" loading="lazy"></div>
-      <div class="gphone"><img src="assets/AppStoreAssets/iphone_65/03_desire_reality_check.png" alt="Reality Check" loading="lazy"></div>
-      <div class="gphone"><img src="assets/AppStoreAssets/iphone_65/04_memory_journal.png" alt="夢日記" loading="lazy"></div>
-      <div class="gphone"><img src="assets/AppStoreAssets/iphone_65/05_action_night_mode.png" alt="Night Mode" loading="lazy"></div>
-      <div class="gphone"><img src="assets/AppStoreAssets/iphone_65/06_memory_analytics.png" alt="分析" loading="lazy"></div>
+      <div class="gphone"><img src="../assets/AppStoreAssets/iphone_65_en/01_attention_home.png" alt="Home" loading="lazy"></div>
+      <div class="gphone"><img src="../assets/AppStoreAssets/iphone_65_en/02_interest_record.png" alt="Dream Record" loading="lazy"></div>
+      <div class="gphone"><img src="../assets/AppStoreAssets/iphone_65_en/03_desire_reality_check.png" alt="Reality Check" loading="lazy"></div>
+      <div class="gphone"><img src="../assets/AppStoreAssets/iphone_65_en/04_memory_journal.png" alt="Dream Journal" loading="lazy"></div>
+      <div class="gphone"><img src="../assets/AppStoreAssets/iphone_65_en/05_action_night_mode.png" alt="Night Mode" loading="lazy"></div>
+      <div class="gphone"><img src="../assets/AppStoreAssets/iphone_65_en/06_memory_analytics.png" alt="Analytics" loading="lazy"></div>
     </div>
   </div>
 </section>
@@ -742,30 +741,30 @@
   <div class="shell">
     <div class="section-head">
       <div>
-        <div class="kicker">共感 · Empathy</div>
-        <h2>あなたにも、<br/><span class="em">こんな経験</span>ありませんか？</h2>
+        <div class="kicker">Empathy</div>
+        <h2>Does any of this<br/><span class="em">sound familiar</span>?</h2>
       </div>
-      <p>明晰夢を試したことがある人の多くは、続かなさと、根拠の不確かさで挫折します。Dreave は、その両方を解きほぐすために設計されています。</p>
+      <p>Most people who try lucid dreaming give up due to inconsistency and uncertainty about what actually works. Dreave is designed to untangle both.</p>
     </div>
 
     <div class="problems">
       <div class="pcard">
         <div class="glyph">◎</div>
         <div class="num">01 / RECALL</div>
-        <h3>目が覚めたら、<br/>夢が消えていた</h3>
-        <p>せっかく見た夢も、起きた瞬間に霧散する。それが毎朝続いている。記録したくても、もう何も思い出せない。</p>
+        <h3>You wake up and the<br/>dream is already gone</h3>
+        <p>That vivid dream vanishes the moment you open your eyes. It happens every morning. You want to record it, but there's nothing left to remember.</p>
       </div>
       <div class="pcard">
         <div class="glyph">◇</div>
         <div class="num">02 / HABIT</div>
-        <h3>方法を試したが、<br/>続かなかった</h3>
-        <p>リアリティチェックや夢日記を試したが、効果が出る前に挫折してしまう。正しいやり方がわからない。</p>
+        <h3>You tried, but<br/>couldn't keep it up</h3>
+        <p>You tried reality checks and dream journaling, but gave up before seeing results. You're not sure what the right approach even is.</p>
       </div>
       <div class="pcard">
         <div class="glyph">△</div>
         <div class="num">03 / METHOD</div>
-        <h3>何を信じればよいのか、<br/>わからない</h3>
-        <p>ネットの情報はバラバラで、長く続けられるやり方が見つからない。自分に合う進め方の目安が欲しかった。</p>
+        <h3>You don't know<br/>what to believe</h3>
+        <p>The internet is full of conflicting advice, and nothing seems to stick. You just want a reliable method that fits your life.</p>
       </div>
     </div>
   </div>
@@ -776,10 +775,10 @@
   <div class="shell">
     <div class="section-head">
       <div>
-        <div class="kicker">機能 · Capabilities</div>
-        <h2>Dreave の<br/><span class="em">できる</span>こと。</h2>
+        <div class="kicker">Capabilities</div>
+        <h2>What Dreave<br/><span class="em">can do</span>.</h2>
       </div>
-      <p>4 つのアプローチで、明晰夢体質をつくる。一夜限りの体験ではなく、毎晩積み上がる仕組み。</p>
+      <p>Four approaches to build your lucid dreaming habit. Not a one-night experience — a system that compounds every night.</p>
     </div>
 
     <div class="features">
@@ -787,45 +786,45 @@
       <div class="fcard wide" style="display:grid;grid-template-columns:1fr auto;gap:36px;align-items:start;">
         <div>
           <div class="ftag"><span class="gl">◐</span><span>01 / NIGHT MODE</span></div>
-          <h3>第 3 REM 周期に、<br/>40Hz の音響刺激を。</h3>
-          <p>就寝時刻を設定するだけで、REM 周期を自動推定。最も明晰夢が起きやすい第 3 周期（約 4.5 時間後）に、ピンクノイズと 40Hz サイン波を静かに届けます。バックグラウンド動作なので、充電しながら枕元に置くだけ。</p>
-          <div class="note"><b>Dream Pass</b> により、無料プランでも週 3 回まで利用可能。初回インストールから 7 日間は無制限トライアル。</div>
+          <h3>40Hz acoustic stimulation<br/>at your 3rd REM cycle.</h3>
+          <p>Just set your bedtime and Dreave automatically estimates your REM cycles. At the most lucid-dream-prone moment — the 3rd cycle, roughly 4.5 hours in — it quietly delivers pink noise and a 40Hz sine wave. Runs in the background while you charge your phone on your nightstand.</p>
+          <div class="note"><b>Dream Pass</b> lets free users enjoy Night Mode up to 3 times per week. Unlimited for the first 7 days from install.</div>
         </div>
         <div class="fcard-phone" style="width:200px;flex-shrink:0;">
-          <img src="assets/AppStoreAssets/iphone_65/05_action_night_mode.png" alt="Night Mode 画面" loading="lazy">
+          <img src="../assets/AppStoreAssets/iphone_65_en/05_action_night_mode.png" alt="Night Mode Screen" loading="lazy">
         </div>
       </div>
 
       <!-- Journal -->
       <div class="fcard narrow">
         <div class="ftag"><span class="gl">≡</span><span>02 / DREAM JOURNAL</span></div>
-        <h3>起きたらすぐ、<br/>音声で記録。</h3>
-        <p>寝ぼけていても OK。声でそのまま話すと自動でテキスト化。Recall Score と感情タグが自動付与されます。</p>
+        <h3>Record by voice<br/>the moment you wake.</h3>
+        <p>Still half-asleep? That's fine. Just talk — your voice is automatically transcribed. Recall Score and emotion tags are added automatically.</p>
 
         <div class="fcard-phone">
-          <img src="assets/AppStoreAssets/iphone_65/02_interest_record.png" alt="夢の記録画面" loading="lazy">
+          <img src="../assets/AppStoreAssets/iphone_65_en/02_interest_record.png" alt="Dream Record Screen" loading="lazy">
         </div>
       </div>
 
       <!-- Reality check -->
       <div class="fcard half">
         <div class="ftag"><span class="gl">◉</span><span>03 / REALITY CHECK</span></div>
-        <h3>日中の通知が、<br/>夢の中の気づきを育てる。</h3>
-        <p>ランダムな通知に答えるだけ。現実確認の習慣が夢の中でも「これは夢だ」という気づきを増やします。</p>
+        <h3>Daytime nudges that<br/>grow dream awareness.</h3>
+        <p>Just answer random notifications. The habit of checking reality during the day increases the chance of that same "Am I dreaming?" moment in your dreams.</p>
 
         <div class="fcard-phone">
-          <img src="assets/AppStoreAssets/iphone_65/03_desire_reality_check.png" alt="Reality Check 画面" loading="lazy">
+          <img src="../assets/AppStoreAssets/iphone_65_en/03_desire_reality_check.png" alt="Reality Check Screen" loading="lazy">
         </div>
       </div>
 
       <!-- Analytics -->
       <div class="fcard half">
         <div class="ftag"><span class="gl">≋</span><span>04 / ANALYTICS</span></div>
-        <h3>30 日で、<br/>明晰夢体質になる。</h3>
-        <p>Recall Score・Growth Index・明晰夢発生率をグラフで可視化。基本分析は全員無料。AI による個別分析は Dreave Pro。</p>
+        <h3>Become a lucid<br/>dreamer in 30 days.</h3>
+        <p>Recall Score, Growth Index, and lucid dream frequency visualized in charts. Basic analytics free for everyone. AI-powered personal analysis with Dreave Pro.</p>
 
         <div class="fcard-phone">
-          <img src="assets/AppStoreAssets/iphone_65/06_memory_analytics.png" alt="分析画面" loading="lazy">
+          <img src="../assets/AppStoreAssets/iphone_65_en/06_memory_analytics.png" alt="Analytics Screen" loading="lazy">
         </div>
       </div>
 
@@ -833,33 +832,33 @@
       <div class="fcard full" style="display: grid; grid-template-columns: 1fr 1.2fr auto; gap: 48px; align-items: center;">
         <div>
           <div class="ftag"><span class="gl">✦</span><span>05 / COACHING</span></div>
-          <h3>習慣化を、<br/>アプリがサポートする。</h3>
-          <p>記録日数や明晰夢達成状況に合わせて、Dashboard にパーソナルコーチングメッセージを表示。<br/>初めての明晰夢・7日連続記録など 8 種類のマイルストーンが習慣化をプッシュします。</p>
+          <h3>The app keeps<br/>your habit alive.</h3>
+          <p>Personal coaching messages appear on your Dashboard based on your recording streak and lucid dream progress.<br/>8 milestones — first lucid dream, 7-day streak, and more — push you toward consistency.</p>
         </div>
         <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px;">
           <div class="ms-badge" style="aspect-ratio:1; border:1px solid var(--line-strong); border-radius:14px; display:flex;flex-direction:column;align-items:center;justify-content:center;background:rgba(120,60,240,0.06);">
             <div style="font-family:var(--serif-en);font-style:italic;color:var(--accent);font-size:32px;">✦</div>
             <div style="font-family:var(--mono);font-size:9px;letter-spacing:0.18em;color:var(--ink-mute);margin-top:6px;">FIRST</div>
-            <div style="font-family:var(--serif-jp);font-size:11px;color:var(--ink);margin-top:2px;">初の明晰夢</div>
+            <div style="font-family:var(--sans);font-size:11px;color:var(--ink);margin-top:2px;">Lucid Dream</div>
           </div>
           <div style="aspect-ratio:1; border:1px solid var(--line); border-radius:14px; display:flex;flex-direction:column;align-items:center;justify-content:center;">
             <div style="font-family:var(--serif-en);font-style:italic;color:var(--moon);font-size:32px;">7</div>
             <div style="font-family:var(--mono);font-size:9px;letter-spacing:0.18em;color:var(--ink-mute);margin-top:6px;">DAYS</div>
-            <div style="font-family:var(--serif-jp);font-size:11px;color:var(--ink-dim);margin-top:2px;">連続記録</div>
+            <div style="font-family:var(--sans);font-size:11px;color:var(--ink-dim);margin-top:2px;">Streak</div>
           </div>
           <div style="aspect-ratio:1; border:1px solid var(--line); border-radius:14px; display:flex;flex-direction:column;align-items:center;justify-content:center;">
             <div style="font-family:var(--serif-en);font-style:italic;color:var(--moon);font-size:32px;">30</div>
             <div style="font-family:var(--mono);font-size:9px;letter-spacing:0.18em;color:var(--ink-mute);margin-top:6px;">DAYS</div>
-            <div style="font-family:var(--serif-jp);font-size:11px;color:var(--ink-dim);margin-top:2px;">月間達成</div>
+            <div style="font-family:var(--sans);font-size:11px;color:var(--ink-dim);margin-top:2px;">Monthly</div>
           </div>
           <div style="aspect-ratio:1; border:1px solid var(--line); border-radius:14px; display:flex;flex-direction:column;align-items:center;justify-content:center;opacity:0.55;">
             <div style="font-family:var(--serif-en);font-style:italic;color:var(--ink-dim);font-size:32px;">◇</div>
             <div style="font-family:var(--mono);font-size:9px;letter-spacing:0.18em;color:var(--ink-mute);margin-top:6px;">+5</div>
-            <div style="font-family:var(--serif-jp);font-size:11px;color:var(--ink-mute);margin-top:2px;">獲得待ち</div>
+            <div style="font-family:var(--sans);font-size:11px;color:var(--ink-mute);margin-top:2px;">Locked</div>
           </div>
         </div>
         <div class="fcard-phone" style="width:180px;flex-shrink:0;">
-          <img src="assets/AppStoreAssets/iphone_65/04_memory_journal.png" alt="夢日記画面" loading="lazy">
+          <img src="../assets/AppStoreAssets/iphone_65_en/04_memory_journal.png" alt="Dream Journal Screen" loading="lazy">
         </div>
       </div>
     </div>
@@ -871,27 +870,27 @@
   <div class="shell">
     <div class="section-head">
       <div>
-        <div class="kicker">使い方 · How it works</div>
-        <h2 style="white-space: nowrap;">たった <span class="em">3</span> ステップ。</h2>
+        <div class="kicker">How it works</div>
+        <h2 style="white-space: nowrap;">Just <span class="em">3</span> steps.</h2>
       </div>
-      <p>今夜から始められる。難しい設定は一切なし。アプリを開いて、就寝時刻を入れて、枕元に置くだけ。</p>
+      <p>Start tonight. No complicated setup. Open the app, enter your bedtime, and place it by your pillow.</p>
     </div>
 
     <div class="steps">
       <div class="step">
         <div class="num">i</div>
-        <h4>就寝前に設定する</h4>
-        <p>就寝時刻を入力して Night Mode をオン。アプリを充電しながら枕元に置くだけ。</p>
+        <h4>Set up before bed</h4>
+        <p>Enter your bedtime and turn on Night Mode. Plug in your phone and place it on your nightstand.</p>
       </div>
       <div class="step">
         <div class="num">ii</div>
-        <h4>眠っている間に刺激が届く</h4>
-        <p>REM 周期を推定し、最適なタイミングで 40Hz パルスが静かに再生されます。</p>
+        <h4>Stimulation arrives while you sleep</h4>
+        <p>Dreave estimates your REM cycles and quietly plays 40Hz pulses at the optimal moment.</p>
       </div>
       <div class="step">
         <div class="num">iii</div>
-        <h4>起きたら夢を記録する</h4>
-        <p>目が覚めたらすぐに声で録音。Recall Score が毎日積み上がっていきます。</p>
+        <h4>Record your dream when you wake</h4>
+        <p>As soon as you open your eyes, speak your dream aloud. Your Recall Score builds up day by day.</p>
       </div>
     </div>
   </div>
@@ -906,19 +905,19 @@
           <div class="kicker" style="font-family:var(--mono);font-size:11px;letter-spacing:0.32em;text-transform:uppercase;color:var(--ink-mute);margin-bottom:24px;display:flex;align-items:center;gap:14px;">
             <span style="width:28px;height:1px;background:var(--accent);display:inline-block;"></span>About REM Cycle
           </div>
-          <h3>なぜ <span class="em">4.5 時間後</span>なのか。</h3>
+          <h3>Why <span class="em">4.5 hours</span>?</h3>
         </div>
         <div>
-          <p>睡眠は <b>90 分周期</b>で繰り返されます。第 3 周期（入眠から約 4.5 時間後）の REM 睡眠が、最も長く・最も鮮明な夢が見やすい時間帯です。</p>
-          <p>Dreave は、この <b>"黄金の窓"</b> を自動で推定し、40Hz の音響刺激を届けます。40Hz 刺激はガンマ波活動との関連が研究されており、覚醒中の脳活動に近い状態を誘発する可能性が示唆されています。</p>
+          <p>Sleep repeats in <b>90-minute cycles</b>. The REM period of the 3rd cycle — about 4.5 hours after falling asleep — is the longest and most vivid dreaming phase.</p>
+          <p>Dreave automatically estimates this <b>"golden window"</b> and delivers 40Hz acoustic stimulation. Research suggests 40Hz stimulation is associated with gamma wave activity, potentially inducing brain states similar to waking consciousness.</p>
         </div>
       </div>
 
       <div class="sci-stats">
-        <div class="sci-stat"><div class="v">90<span style="font-size:24px;letter-spacing:0.08em;">min</span></div><div class="l">睡眠周期の長さ</div></div>
-        <div class="sci-stat"><div class="v">70<span style="font-size:24px;letter-spacing:0.08em;">%</span></div><div class="l">第3周期の推定信頼度</div></div>
-        <div class="sci-stat"><div class="v">40<span style="font-size:24px;letter-spacing:0.08em;">Hz</span></div><div class="l">音響刺激周波数</div></div>
-        <div class="sci-stat"><div class="v">6<span style="font-size:24px;letter-spacing:0.08em;">cyc</span></div><div class="l">最大推定周期数</div></div>
+        <div class="sci-stat"><div class="v">90<span style="font-size:24px;letter-spacing:0.08em;">min</span></div><div class="l">Sleep Cycle Length</div></div>
+        <div class="sci-stat"><div class="v">70<span style="font-size:24px;letter-spacing:0.08em;">%</span></div><div class="l">3rd Cycle Confidence</div></div>
+        <div class="sci-stat"><div class="v">40<span style="font-size:24px;letter-spacing:0.08em;">Hz</span></div><div class="l">Stimulus Frequency</div></div>
+        <div class="sci-stat"><div class="v">6<span style="font-size:24px;letter-spacing:0.08em;">cyc</span></div><div class="l">Max Estimated Cycles</div></div>
       </div>
 
       <div class="sci-graph">
@@ -963,7 +962,7 @@
             <text x="130" y="252">1</text>
             <text x="300" y="252">2</text>
             <text x="500" y="252">3</text>
-            <text x="660" y="252" fill="#9B6FF0">☽ 黄金の窓</text>
+            <text x="660" y="252" fill="#9B6FF0">☽ Golden Window</text>
             <text x="820" y="252">4</text>
             <text x="980" y="252">5</text>
           </g>
@@ -971,7 +970,7 @@
         <div class="axis"><span>0h</span><span>2h</span><span>3h</span><span class="gold">☽ 4.5h</span><span>6h</span><span>8h</span></div>
       </div>
 
-      <div class="sci-foot">※ 効果には個人差があります。本アプリは医療機器ではありません。</div>
+      <div class="sci-foot">* Individual results may vary. This app is not a medical device.</div>
     </div>
   </div>
 </section>
@@ -981,45 +980,45 @@
   <div class="shell">
     <div class="section-head">
       <div>
-        <div class="kicker">料金 · Pricing</div>
-        <h2>あなたの<br/><span class="em">ペース</span>で。</h2>
+        <div class="kicker">Pricing</div>
+        <h2>At your<br/><span class="em">own pace</span>.</h2>
       </div>
-      <p>コア機能はすべて無料。Dream Pass で週 3 回の Night Mode、Dreave Pro で全機能を解放。</p>
+      <p>Core features are completely free. Dream Pass for 3x Night Mode per week, Dreave Pro to unlock everything.</p>
     </div>
 
     <div class="pricing">
       <div class="plan free">
         <div class="tier">FREE PLAN</div>
         <div class="name">Free</div>
-        <div class="price"><span class="num">¥0</span><span class="sub">/ forever</span></div>
-        <div class="desc">初回 7 日間は Night Mode 無制限トライアル。以降は Dream Pass で週 3 回まで。</div>
+        <div class="price"><span class="num">$0</span><span class="sub">/ forever</span></div>
+        <div class="desc">7-day unlimited Night Mode trial from first install. After that, Dream Pass lets you use it up to 3 times per week.</div>
         <ul>
-          <li>夢日記（無制限）</li>
-          <li>Reality Check（無制限）</li>
-          <li>Night Mode 週 3 回（Dream Pass）</li>
-          <li>Analytics 基本分析</li>
-          <li>AI 分析（リワード広告）</li>
-          <li>コーチング & マイルストーン</li>
+          <li>Dream Journal (unlimited)</li>
+          <li>Reality Check (unlimited)</li>
+          <li>Night Mode 3x/week (Dream Pass)</li>
+          <li>Basic Analytics</li>
+          <li>AI Analysis (rewarded ad)</li>
+          <li>Coaching &amp; Milestones</li>
         </ul>
-        <div class="cta"><a href="https://apps.apple.com/us/app/dreave-%E6%98%8E%E6%99%B0%E5%A4%A2%E3%83%88%E3%83%AC%E3%83%BC%E3%83%8A%E3%83%BC/id6770527766" target="_blank" rel="noopener">無料で始める</a></div>
+        <div class="cta"><a href="https://apps.apple.com/us/app/dreave-%E6%98%8E%E6%99%B0%E5%A4%A2%E3%83%88%E3%83%AC%E3%83%BC%E3%83%8A%E3%83%BC/id6770527766" target="_blank" rel="noopener">Start for Free</a></div>
       </div>
 
       <div class="plan pro">
         <div class="badge">Lucid Pro</div>
         <div class="tier">BUY ONCE · OWN FOREVER</div>
         <div class="name">Dreave <em style="font-style: italic; color: var(--accent);">Pro</em></div>
-        <div class="price"><span class="num">買い切り</span><span class="sub">価格未定</span></div>
-        <div class="desc">一度の購入で永続利用。広告なしで、すべての機能を解放。</div>
+        <div class="price"><span class="num">One-time</span><span class="sub">price TBD</span></div>
+        <div class="desc">Pay once, own forever. No ads. All features unlocked.</div>
         <ul>
-          <li>Night Mode <b style="color:var(--accent); font-weight: 500;">無制限</b></li>
-          <li>夢日記（無制限）</li>
-          <li>Reality Check（無制限）</li>
-          <li>Analytics 基本分析</li>
-          <li>AI 分析（広告なし）</li>
-          <li>CSV エクスポート</li>
-          <li class="soon">コーチング & マイルストーン</li>
+          <li>Night Mode <b style="color:var(--accent); font-weight: 500;">Unlimited</b></li>
+          <li>Dream Journal (unlimited)</li>
+          <li>Reality Check (unlimited)</li>
+          <li>Basic Analytics</li>
+          <li>AI Analysis (no ads)</li>
+          <li>CSV Export</li>
+          <li class="soon">Coaching &amp; Milestones</li>
         </ul>
-        <div class="cta"><a href="https://apps.apple.com/us/app/dreave-%E6%98%8E%E6%99%B0%E5%A4%A2%E3%83%88%E3%83%AC%E3%83%BC%E3%83%8A%E3%83%BC/id6770527766" target="_blank" rel="noopener">App Store で見る</a></div>
+        <div class="cta"><a href="https://apps.apple.com/us/app/dreave-%E6%98%8E%E6%99%B0%E5%A4%A2%E3%83%88%E3%83%AC%E3%83%BC%E3%83%8A%E3%83%BC/id6770527766" target="_blank" rel="noopener">View on App Store</a></div>
       </div>
     </div>
   </div>
@@ -1030,10 +1029,10 @@
   <div class="shell">
     <div class="section-head">
       <div>
-        <div class="kicker">お知らせ · News</div>
-        <h2>新しい<br/><span class="em">夢の便</span>り。</h2>
+        <div class="kicker">News</div>
+        <h2>The latest from<br/><span class="em">Dreave</span>.</h2>
       </div>
-      <p>アップデート、メディア掲載、イベントなど、Dreave からの最新情報をお届けします。</p>
+      <p>Updates, press coverage, events, and announcements — all the latest from Dreave.</p>
     </div>
 
     <ul class="news-list">
@@ -1043,14 +1042,14 @@
             <span class="y">2026</span><span class="md">05 / 28</span>
           </time>
           <span class="news-tag t-release">Release</span>
-          <h4>Dreave 1.0 をリリースしました。リリース記念、全機能を無料で開放中</h4>
+          <h4>Dreave 1.0 Released — All features free to celebrate launch</h4>
           <span class="arrow">→</span>
         </a>
       </li>
     </ul>
 
     <div class="news-foot">
-      <a href="News.html" class="news-all">すべてのお知らせを見る
+      <a href="News.html" class="news-all">View all news
         <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M7 3l4 4-4 4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </a>
     </div>
@@ -1061,11 +1060,11 @@
 <section class="final" data-screen-label="07 Final">
   <div class="shell">
     <div class="moon-big"></div>
-    <h2>今夜、<br/>初めての <span class="em">明晰夢</span>を。</h2>
-    <p>Dreave は無料でダウンロードできます。<br/>週 3 回の Dream Pass で、今夜から始めましょう。</p>
+    <h2>Tonight,<br/>your first <span class="em">lucid dream</span>.</h2>
+    <p>Dreave is free to download.<br/>Start tonight with Dream Pass — 3 nights a week, no cost.</p>
     <div class="cta-row" style="justify-content: center;">
       <a href="https://apps.apple.com/us/app/dreave-%E6%98%8E%E6%99%B0%E5%A4%A2%E3%83%88%E3%83%AC%E3%83%BC%E3%83%8A%E3%83%BC/id6770527766" target="_blank" rel="noopener" class="btn-primary">
-        App Store からダウンロード
+        Download on the App Store
         <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M7 3l4 4-4 4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </a>
     </div>
@@ -1076,23 +1075,23 @@
 <footer>
   <div class="shell">
     <div class="col-brand">
-      <div class="brand">
+      <a href="index.html" class="brand">
         <div class="mark"></div>
         <span class="name">Dreave</span>
-      </div>
-      <div class="tag">夢の中で、目を覚ます。</div>
+      </a>
+      <div class="tag" style="margin-top:16px;">Wake up inside your dreams.</div>
     </div>
     <div class="links">
-      <a href="#features">機能詳細</a>
-      <a href="#science">REM について</a>
-      <a href="#pricing">料金プラン</a>
-      <a href="News.html">お知らせ</a>
-      <a href="journal-tips.html">夢日記 Tips</a>
-      <a href="privacy.html">プライバシーポリシー</a>
-      <a href="terms.html">利用規約</a>
-      <a href="contact.html">お問い合わせ</a>
+      <a href="index.html#features">Features</a>
+      <a href="index.html#science">About REM</a>
+      <a href="index.html#pricing">Pricing</a>
+      <a href="News.html">News</a>
+      <a href="journal-tips.html">Journal Tips</a>
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="terms.html">Terms of Service</a>
+      <a href="contact.html">Contact</a>
     </div>
-    <div class="copy">© 2026 DREAVE<br/>ALL RIGHTS RESERVED</div>
+    <div class="copy">© 2026 DREAVE<br>ALL RIGHTS RESERVED</div>
   </div>
 </footer>
 
@@ -1142,7 +1141,7 @@
   function frame(t) {
     const points = [];
     for (let x = 0; x <= W; x += 3) {
-      const env = Math.sin((x / W) * Math.PI); // taper at edges
+      const env = Math.sin((x / W) * Math.PI);
       const y = mid + Math.sin((x * 0.18) + t * 0.006) * 12 * env
                     + Math.sin((x * 0.05) + t * 0.003) * 4 * env;
       points.push(`${x},${y.toFixed(2)}`);

@@ -83,6 +83,10 @@ nav.top .shell {
   background: rgba(120,80,240,0.06); transition: all 200ms ease;
 }
 .nav-cta:hover { background: var(--moon); color: var(--bg-0); border-color: var(--moon); }
+.lang-switcher { display: flex; gap: 10px; align-items: center; font-family: var(--mono); font-size: 11px; letter-spacing: 0.18em; }
+.lang-switcher a { color: var(--ink-mute); padding: 4px 6px; border-radius: 4px; transition: color 200ms; }
+.lang-switcher a:hover { color: var(--moon); }
+.lang-switcher a.active { color: var(--moon); background: rgba(120,60,240,0.12); }
 
 /* ───── Page header ───── */
 .page-head { padding: 100px 0 64px; position: relative; }
