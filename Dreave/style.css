@@ -5,17 +5,17 @@
    ═══════════════════════════════════════════════ */
 
 :root {
-  --bg-0: #050714;
-  --bg-1: #0a0f24;
-  --ink: #ECE6D3;
-  --ink-dim: #9aa3c0;
-  --ink-mute: #5a6485;
-  --line: rgba(236,230,211,0.08);
-  --line-strong: rgba(236,230,211,0.18);
-  --accent: #B8A2FF;
-  --accent-2: #6B7BFF;
-  --moon: #ECE6D3;
-  --surface: rgba(255,255,255,0.025);
+  --bg-0: #0B0521;
+  --bg-1: #150B32;
+  --ink: #EDE9FE;
+  --ink-dim: #A5A0D0;
+  --ink-mute: #6A608A;
+  --line: rgba(167,139,250,0.10);
+  --line-strong: rgba(167,139,250,0.22);
+  --accent: #9B6FF0;
+  --accent-2: #6366F1;
+  --moon: #F3F0FF;
+  --surface: rgba(120,80,240,0.06);
 
   --serif-jp: "Shippori Mincho B1", "Hiragino Mincho ProN", serif;
   --serif-en: "Instrument Serif", "Shippori Mincho B1", serif;
@@ -34,12 +34,12 @@ html, body {
 body {
   overflow-x: hidden;
   background:
-    radial-gradient(1200px 800px at 80% -10%, rgba(184,162,255,0.10), transparent 60%),
-    radial-gradient(900px 700px at -10% 30%, rgba(107,123,255,0.08), transparent 55%),
+    radial-gradient(1100px 900px at 65% -5%, rgba(130,60,255,0.22), transparent 55%),
+    radial-gradient(900px 700px at -5% 35%, rgba(90,60,210,0.16), transparent 55%),
     var(--bg-0);
   min-height: 100vh;
 }
-::selection { background: rgba(184,162,255,0.35); color: var(--moon); }
+::selection { background: rgba(130,60,255,0.40); color: var(--moon); }
 a { color: inherit; text-decoration: none; }
 button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
 
@@ -56,7 +56,7 @@ nav.top {
   position: sticky; top: 0; z-index: 50;
   backdrop-filter: blur(14px) saturate(140%);
   -webkit-backdrop-filter: blur(14px) saturate(140%);
-  background: linear-gradient(180deg, rgba(5,7,20,0.85), rgba(5,7,20,0.35));
+  background: linear-gradient(180deg, rgba(11,5,33,0.90), rgba(11,5,33,0.40));
   border-bottom: 1px solid var(--line);
 }
 nav.top .shell {
@@ -65,8 +65,8 @@ nav.top .shell {
 .brand { display: flex; align-items: center; gap: 14px; }
 .brand .mark {
   width: 36px; height: 36px; border-radius: 9px;
-  background: url('favicon.png') center/cover no-repeat, #1a0f3a;
-  box-shadow: 0 0 20px rgba(184,162,255,0.35), 0 4px 12px rgba(0,0,0,0.5);
+  background: url('apple-touch-icon.png') center/cover no-repeat, #1a0840;
+  box-shadow: 0 0 20px rgba(120,60,240,0.45), 0 4px 12px rgba(0,0,0,0.5);
 }
 .brand .name { font-family: var(--serif-en); font-size: 24px; letter-spacing: 0.04em; font-style: italic; }
 .brand .sub { font-family: var(--mono); font-size: 10px; letter-spacing: 0.22em; color: var(--ink-mute); text-transform: uppercase; margin-left: 6px; white-space: nowrap; }
@@ -80,7 +80,7 @@ nav.top .shell {
 .nav-cta {
   padding: 10px 18px; border: 1px solid var(--line-strong); border-radius: 999px;
   font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;
-  background: rgba(236,230,211,0.04); transition: all 200ms ease;
+  background: rgba(120,80,240,0.06); transition: all 200ms ease;
 }
 .nav-cta:hover { background: var(--moon); color: var(--bg-0); border-color: var(--moon); }
 
@@ -166,7 +166,7 @@ nav.top .shell {
 .content-block b { color: var(--moon); font-weight: 500; }
 .content-block a {
   color: var(--accent);
-  border-bottom: 1px solid rgba(184,162,255,0.3);
+  border-bottom: 1px solid rgba(120,60,240,0.3);
   transition: border-color 200ms ease;
 }
 .content-block a:hover { border-bottom-color: var(--accent); }
@@ -184,7 +184,7 @@ nav.top .shell {
   border: 1px solid var(--line);
   border-radius: 24px;
   background:
-    radial-gradient(600px 240px at 100% 0%, rgba(184,162,255,0.10), transparent 60%),
+    radial-gradient(600px 240px at 100% 0%, rgba(120,60,240,0.10), transparent 60%),
     rgba(255,255,255,0.02);
   text-align: center;
 }
@@ -202,10 +202,10 @@ nav.top .shell {
   font-size: 14px; letter-spacing: 0.04em; font-weight: 500;
   margin-top: 28px;
   transition: transform 200ms ease, box-shadow 200ms ease;
-  box-shadow: 0 0 40px rgba(236,230,211,0.18);
+  box-shadow: 0 0 40px rgba(167,139,250,0.18);
   border-bottom: 0 !important;
 }
-.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 0 60px rgba(236,230,211,0.32); }
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 0 60px rgba(167,139,250,0.32); }
 .note {
   margin-top: 28px; font-family: var(--mono); font-size: 11px;
   color: var(--ink-mute); letter-spacing: 0.12em;
