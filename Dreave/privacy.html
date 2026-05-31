@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>プライバシーポリシー — Dreave</title>
-<meta name="description" content="Dreave のプライバシーポリシー。録音音声・夢日記データは端末内に保存され、外部送信は行いません。">
+<meta name="description" content="Dreave のプライバシーポリシー。取得情報、利用目的、第三者サービスへの送信、保存期間、削除方法を記載しています。">
 <meta property="og:title" content="プライバシーポリシー — Dreave">
-<meta property="og:description" content="Dreave のプライバシーポリシー。録音音声・夢日記データは端末内に保存され、外部送信は行いません。">
+<meta property="og:description" content="Dreave のプライバシーポリシー。取得情報、利用目的、第三者サービスへの送信、保存期間、削除方法を記載しています。">
 <meta property="og:image" content="og-image.png">
 <link rel="icon" type="image/png" href="favicon.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -53,11 +53,11 @@
     </div>
     <div class="section-label" style="margin-top:32px;">Privacy Policy</div>
     <h1>プライバシー<br><span class="em">ポリシー</span>。</h1>
-    <p class="lede">Dreave は、お客様のプライバシーを最優先に考え、個人情報の保護に努めます。録音音声と夢日記は端末内にとどまり、外部に送信されることはありません。</p>
+    <p class="lede">Dreave は、お客様のプライバシーを重視し、取得する情報、利用目的、第三者サービスへの送信、保存期間、削除方法を明確にします。</p>
     <div class="meta">
-      <span>Effective <b style="color:var(--accent); font-family:var(--mono); font-size:11px; letter-spacing:0.14em;">2026.05.03</b></span>
+      <span>Effective <b style="color:var(--accent); font-family:var(--mono); font-size:11px; letter-spacing:0.14em;">2026.05.31</b></span>
       <span class="div"></span>
-      <span>Last updated 2026.05.28</span>
+      <span>Last updated 2026.05.31</span>
     </div>
   </div>
 </header>
@@ -66,61 +66,103 @@
   <div class="content-shell">
 
     <div class="content-block">
-      <h3>収集する情報</h3>
-      <p>本アプリは、以下の情報を収集・利用する場合があります。</p>
-      <ul>
-        <li>夢日記のテキストデータ（AI分析機能のご利用時に外部APIへ送信されます。詳細は第3項をご参照ください）</li>
-        <li>マイク音声（夢日記の音声録音に使用。音声処理はApple Speech Frameworkにより行われ、音声ファイル自体を当社サーバーに保存・送信することはありません）</li>
-        <li>睡眠設定データ（就寝時刻、通知設定など。端末内にのみ保存）</li>
-        <li>アプリ操作ログ・クラッシュ情報（Firebase Analytics および Firebase Crashlytics により収集。個人を特定しない統計データとして機能改善に使用します）</li>
-        <li>広告インタラクションデータ（AI分析のリワード広告利用時にAdMob SDKにより収集。詳細は第3項をご参照ください）</li>
-      </ul>
+      <h3>基本方針</h3>
+      <p>Dreave はローカルファーストの設計です。夢日記、睡眠設定、アプリ内の記録は原則としてお客様の端末内に保存されます。ただし、AI分析、音声文字起こし、クラッシュ解析、利用状況解析、広告、Webサイト計測など一部機能では、以下に記載する第三者サービスに必要な情報が送信される場合があります。</p>
     </div>
 
     <div class="content-block">
-      <h3>データの保存と処理</h3>
-      <p>夢日記のテキストデータおよびすべての記録データは、原則としてお客様の端末内（<b>SwiftData</b>）に保存されます。当社がお客様の音声ファイルを外部サーバーに送信することはありません。アプリの操作ログ・クラッシュ情報はFirebase（Google LLC）のサーバーに送信されますが、お客様を個人として特定するデータは含まれません。</p>
-    </div>
-
-    <div class="content-block">
-      <h3>第三者サービスへのデータ送信</h3>
-      <p>本アプリは、以下のサードパーティサービスを利用しています。</p>
+      <h3>取得・利用する情報</h3>
       <ul style="line-height:1.9;">
-        <li style="margin-bottom:16px;">
-          <b>Google Gemini API（Google LLC）</b><br>
-          AI分析機能をご利用の際、夢の記録テキストをGoogle Gemini APIに送信し、分析結果の生成に使用します。送信データに氏名・端末ID等の個人識別情報は含まれません。<br>
-          <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Googleプライバシーポリシー</a>
-        </li>
-        <li style="margin-bottom:16px;">
-          <b>Firebase Analytics / Crashlytics（Google LLC）</b><br>
-          アプリの利用状況把握・クラッシュ解析に使用します。収集データはユーザーに紐付けられず、個人を特定しない統計情報として処理されます。<br>
-          <a href="https://firebase.google.com/support/privacy" target="_blank" rel="noopener">Firebaseプライバシーポリシー</a>
-        </li>
-        <li style="margin-bottom:16px;">
-          <b>Google AdMob（Google LLC）</b><br>
-          AI分析機能のリワード広告（無料プラン）に使用します。広告配信のため、AdMob SDKがデバイス情報・広告インタラクションデータを収集する場合があります。ATT（App Tracking Transparency）の同意状況により、収集範囲が異なります。<br>
-          <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Googleプライバシーポリシー</a>
-        </li>
-        <li>
-          <b>Apple Speech Framework（Apple Inc.）</b><br>
-          音声文字起こし機能に使用します。処理はAppleのフレームワークにより行われます。<br>
-          <a href="https://www.apple.com/jp/legal/privacy/" target="_blank" rel="noopener">Appleプライバシーポリシー</a>
-        </li>
+        <li><b>端末内に保存される情報：</b>夢日記の本文、夢のタグ、感情・明晰夢に関する記録、睡眠設定、通知設定、アプリ設定。</li>
+        <li><b>音声情報：</b>夢日記の録音および文字起こしに利用します。音声ファイル自体を運営者のサーバーに保存することはありません。</li>
+        <li><b>AI分析に利用する情報：</b>お客様がAI分析を実行した場合、分析対象の夢日記テキストが外部AIサービスに送信されます。氏名、メールアドレス等を本文に入力した場合、それらも送信対象に含まれる可能性があります。</li>
+        <li><b>利用状況・診断情報：</b>アプリの起動、画面表示、機能利用、クラッシュログ、端末種別、OSバージョン、アプリバージョン、匿名または擬似匿名の識別子等。</li>
+        <li><b>広告関連情報：</b>リワード広告等を表示する場合、広告識別子、端末情報、広告表示・クリック・報酬付与イベント等。</li>
+        <li><b>購入関連情報：</b>App Store が処理する購入・サブスクリプション状態、レシート情報、購入履歴に関する情報。運営者はクレジットカード番号等の決済情報を取得しません。</li>
+        <li><b>Webサイト利用情報：</b>本サイトでは Google Analytics により、ページ閲覧、参照元、ブラウザ、端末情報等が収集される場合があります。</li>
       </ul>
     </div>
 
     <div class="content-block">
-      <h3>第三者への個人情報の提供</h3>
-      <p>上記サードパーティサービスへの送信を除き、法令に基づく場合を除いてお客様の同意なく個人情報を第三者に提供することはありません。</p>
+      <h3>利用目的</h3>
+      <ul style="line-height:1.9;">
+        <li>夢日記、検索、分析、通知、Night Mode、Reality Check 等の機能提供</li>
+        <li>AIによる夢分析・コメント生成・傾向把握</li>
+        <li>音声入力の文字起こし</li>
+        <li>アプリの安定性改善、クラッシュ解析、不具合修正、機能改善</li>
+        <li>広告表示、広告効果測定、リワード付与</li>
+        <li>購入状態の確認、サブスクリプション管理、返金・問い合わせ対応</li>
+        <li>不正利用防止、利用規約違反への対応、法令上必要な対応</li>
+      </ul>
+    </div>
+
+    <div class="content-block">
+      <h3>第三者サービスと国外送信</h3>
+      <p>本アプリおよび本サイトは、以下の第三者サービスを利用します。提供先は主に米国に所在する事業者です。外国にある第三者への個人データ提供について法令上本人同意が必要な場合、運営者はアプリ上の確認画面、OSの許可画面、またはその他合理的な方法により、必要な情報を提供したうえで同意を取得します。各サービスでの取扱いは、各社のプライバシーポリシー等に従います。</p>
+      <ul style="line-height:1.9;">
+        <li style="margin-bottom:16px;"><b>Google Gemini API（Google LLC / 主な所在国：米国）</b><br>AI分析機能の提供のため、分析対象の夢日記テキストを送信します。AI分析の実行前に、送信対象となる情報と国外送信について確認できるようにします。<br><a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Googleプライバシーポリシー</a></li>
+        <li style="margin-bottom:16px;"><b>Firebase Analytics / Crashlytics（Google LLC / 主な所在国：米国）</b><br>利用状況解析、クラッシュ解析、不具合修正、品質改善のため、利用イベント、診断情報、端末情報、匿名または擬似匿名の識別子等を送信する場合があります。<br><a href="https://firebase.google.com/support/privacy" target="_blank" rel="noopener">Firebaseのプライバシーとセキュリティ</a></li>
+        <li style="margin-bottom:16px;"><b>Google AdMob（Google LLC / 主な所在国：米国）</b><br>広告表示およびリワード広告の提供のため、広告識別子、端末情報、広告インタラクションデータ等を送信する場合があります。ATTの同意状況により、取得・利用範囲が異なります。<br><a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Googleプライバシーポリシー</a></li>
+        <li style="margin-bottom:16px;"><b>Apple Speech Framework / App Store（Apple Inc. / 主な所在国：米国）</b><br>音声文字起こし、アプリ配信、購入処理、返金、サブスクリプション管理のために利用します。<br><a href="https://www.apple.com/jp/legal/privacy/" target="_blank" rel="noopener">Appleプライバシーポリシー</a></li>
+        <li><b>Google Analytics（Google LLC / 主な所在国：米国）</b><br>本サイトの閲覧状況を把握し、ページ改善を行うために利用します。<br><a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Googleプライバシーポリシー</a></li>
+      </ul>
+    </div>
+
+    <div class="content-block">
+      <h3>第三者提供</h3>
+      <p>運営者は、本ポリシーに記載した第三者サービスへの送信、App Store等による決済処理、法令に基づく場合、人の生命・身体・財産の保護に必要な場合、またはお客様の同意がある場合を除き、個人情報を第三者に提供しません。</p>
+    </div>
+
+    <div class="content-block">
+      <h3>保存期間と削除</h3>
+      <ul style="line-height:1.9;">
+        <li>端末内の夢日記・設定データは、お客様がアプリ内で削除するか、アプリを削除するまで端末内に保存されます。</li>
+        <li>AI分析のために送信されたテキストは、分析結果の生成に必要な範囲で処理されます。運営者はAI分析用テキストを独自サーバーに永続保存しません。第三者サービス側での保存期間は各社のポリシーに従います。</li>
+        <li>Firebase Crashlytics のクラッシュ関連データは、Googleの標準保持期間に従い、通常90日間保持された後、削除処理が開始されます。</li>
+        <li>Firebase Analytics、Google Analytics、AdMob の利用状況データ、広告関連データ、Web解析データは、各サービスの保持設定および標準保持期間に従って保存されます。</li>
+        <li>購入・サブスクリプション関連情報は、会計、税務、返金、不正防止、問い合わせ対応のため、法令上必要な期間保存される場合があります。</li>
+      </ul>
+    </div>
+
+    <div class="content-block">
+      <h3>お客様の選択と権利</h3>
+      <ul style="line-height:1.9;">
+        <li>端末内データは、アプリ内の削除機能またはアプリのアンインストールにより削除できます。</li>
+        <li>通知、音声認識、トラッキング、広告識別子等の権限は、iOSの設定から変更できます。</li>
+        <li>サブスクリプションの確認・解約は App Store のアカウント設定から行えます。</li>
+        <li>運営者が保有する保有個人データについて、開示、訂正、追加、削除、利用停止、消去、第三者提供停止、同意撤回等を希望される場合は、下記メールアドレスまでご連絡ください。本人確認のため必要な情報を確認する場合があります。法令上応じる義務がある場合、合理的な期間内に対応します。</li>
+      </ul>
+    </div>
+
+    <div class="content-block">
+      <h3>事業者情報</h3>
+      <p>運営者：Yoshihiko Apps 運営者（個人事業主）</p>
+      <p style="margin-top:10px;">連絡先：<a href="mailto:kimuraenator@gmail.com">kimuraenator@gmail.com</a></p>
+      <p style="margin-top:10px;">運営者の氏名および住所については、防犯・プライバシー保護の観点から本ページ上には常時掲載していません。個人情報保護法、特定商取引法その他法令に基づき開示が必要な場合は、本人確認のうえ、遅滞なく提供します。</p>
+    </div>
+
+    <div class="content-block">
+      <h3>未成年者のプライバシー</h3>
+      <p>本アプリは13歳未満の方を対象としていません。13歳以上18歳未満の方は、保護者の同意を得たうえで利用してください。13歳未満の方の情報を運営者が取得した可能性がある場合は、速やかに下記連絡先までご連絡ください。</p>
+    </div>
+
+    <div class="content-block">
+      <h3>セキュリティ</h3>
+      <p>運営者は、取得する情報の性質に応じて、アクセス制限、暗号化通信、データ最小化等の合理的な安全管理措置を講じます。ただし、インターネット通信および端末上の保存について、完全な安全性を保証するものではありません。</p>
+    </div>
+
+    <div class="content-block">
+      <h3>ポリシーの変更</h3>
+      <p>運営者は、法令、サービス内容、利用する第三者サービスの変更に応じて、本ポリシーを改定することがあります。重要な変更がある場合は、アプリ内または本サイト上で合理的な方法により通知します。</p>
     </div>
 
     <div class="content-block">
       <h3>お問い合わせ</h3>
-      <p>プライバシーに関するお問い合わせは、以下のメールアドレスまでご連絡ください。</p>
+      <p>プライバシーに関するお問い合わせ、データ削除、同意撤回等のご依頼は、以下のメールアドレスまでご連絡ください。</p>
       <p>Email: <a href="mailto:kimuraenator@gmail.com">kimuraenator@gmail.com</a></p>
     </div>
 
-    <div class="content-foot">最終更新日 · 2026 年 5 月 24 日</div>
+    <div class="content-foot">最終更新日 · 2026 年 5 月 31 日</div>
 
   </div>
 </main>
@@ -141,8 +183,9 @@
       <a href="index.html#pricing">料金プラン</a>
       <a href="News.html">お知らせ</a>
       <a href="journal-tips.html">夢日記 Tips</a>
-      <a href="privacy.html">プライバシーポリシー</a>
-      <a href="terms.html">利用規約</a>
+      <a href="../legal/privacy.html#dreave">プライバシーポリシー</a>
+      <a href="../legal/terms.html#dreave">利用規約</a>
+      <a href="../legal/tokushoho.html#dreave">特商法表記</a>
       <a href="contact.html">お問い合わせ</a>
     </div>
     <div class="copy">© 2026 DREAVE<br>ALL RIGHTS RESERVED</div>

@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Privacy Policy — Dreave</title>
-<meta name="description" content="Dreave's Privacy Policy. Voice recordings and dream journal data are stored on-device and never transmitted externally.">
+<meta name="description" content="Dreave's Privacy Policy. Covers collected data, purposes of use, third-party services, retention, deletion, and user choices.">
 <meta property="og:title" content="Privacy Policy — Dreave">
-<meta property="og:description" content="Dreave's Privacy Policy. Voice recordings and dream journal data are stored on-device and never transmitted externally.">
+<meta property="og:description" content="Dreave's Privacy Policy. Covers collected data, purposes of use, third-party services, retention, deletion, and user choices.">
 <meta property="og:image" content="../og-image.png">
 <link rel="icon" type="image/png" href="../favicon.png">
 <link rel="apple-touch-icon" href="../apple-touch-icon.png">
@@ -53,11 +53,11 @@
     </div>
     <div class="section-label" style="margin-top:32px;">Privacy Policy</div>
     <h1>Privacy<br><span class="em">Policy</span>.</h1>
-    <p class="lede">Dreave puts your privacy first. Voice recordings and dream journal data stay on your device and are never sent externally.</p>
+    <p class="lede">Dreave respects your privacy and explains what data is collected, why it is used, when it is sent to third-party services, how long it is retained, and how you can request deletion.</p>
     <div class="meta">
-      <span>Effective <b style="color:var(--accent); font-family:var(--mono); font-size:11px; letter-spacing:0.14em;">2026.05.03</b></span>
+      <span>Effective <b style="color:var(--accent); font-family:var(--mono); font-size:11px; letter-spacing:0.14em;">2026.05.31</b></span>
       <span class="div"></span>
-      <span>Last updated 2026.05.28</span>
+      <span>Last updated 2026.05.31</span>
     </div>
   </div>
 </header>
@@ -66,61 +66,103 @@
   <div class="content-shell">
 
     <div class="content-block">
-      <h3>Information We Collect</h3>
-      <p>This app may collect and use the following information.</p>
-      <ul>
-        <li>Dream journal text data (sent to an external API when you use the AI analysis feature — see Section 3 for details)</li>
-        <li>Microphone audio (used for voice recording in the Dream Journal; audio processing is handled by Apple Speech Framework, and we never store or transmit the audio file itself to our servers)</li>
-        <li>Sleep settings data (bedtime, notification settings, etc.; stored on-device only)</li>
-        <li>App usage logs and crash reports (collected via Firebase Analytics and Firebase Crashlytics; processed as non-personally-identifiable statistics for feature improvement)</li>
-        <li>Ad interaction data (collected by AdMob SDK when viewing rewarded ads in the free plan — see Section 3 for details)</li>
-      </ul>
+      <h3>Overview</h3>
+      <p>Dreave is designed to be local-first. Dream journals, sleep settings, and in-app records are generally stored on your device. However, certain features, including AI analysis, speech transcription, crash diagnostics, analytics, advertising, website analytics, and purchase management, may send necessary data to the third-party services described below.</p>
     </div>
 
     <div class="content-block">
-      <h3>Data Storage and Processing</h3>
-      <p>Dream journal text data and all recorded data are stored locally on your device (<b>SwiftData</b>) as a general rule. We never transmit your audio files to external servers. App usage logs and crash reports are sent to Firebase (Google LLC) servers but do not include data that personally identifies you.</p>
-    </div>
-
-    <div class="content-block">
-      <h3>Data Sent to Third-Party Services</h3>
-      <p>This app uses the following third-party services.</p>
+      <h3>Information We Collect or Use</h3>
       <ul style="line-height:1.9;">
-        <li style="margin-bottom:16px;">
-          <b>Google Gemini API (Google LLC)</b><br>
-          When you use the AI analysis feature, your dream record text is sent to the Google Gemini API. Data transmitted does not include personally identifiable information such as your name or device ID.<br>
-          <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google Privacy Policy</a>
-        </li>
-        <li style="margin-bottom:16px;">
-          <b>Firebase Analytics / Crashlytics (Google LLC)</b><br>
-          Used for app usage analysis and crash diagnostics. Collected data is not linked to individual users and is processed as anonymous statistical information.<br>
-          <a href="https://firebase.google.com/support/privacy" target="_blank" rel="noopener">Firebase Privacy Policy</a>
-        </li>
-        <li style="margin-bottom:16px;">
-          <b>Google AdMob (Google LLC)</b><br>
-          Used for rewarded ads in the free plan. The AdMob SDK may collect device information and ad interaction data for ad delivery. The scope of collection varies based on your ATT (App Tracking Transparency) consent status.<br>
-          <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google Privacy Policy</a>
-        </li>
-        <li>
-          <b>Apple Speech Framework (Apple Inc.)</b><br>
-          Used for voice-to-text transcription. Processing is handled by Apple's framework.<br>
-          <a href="https://www.apple.com/legal/privacy/" target="_blank" rel="noopener">Apple Privacy Policy</a>
-        </li>
+        <li><b>On-device data:</b> dream journal text, tags, emotion and lucid-dream records, sleep settings, notification settings, and app preferences.</li>
+        <li><b>Voice data:</b> used for dream journal recording and transcription. We do not store voice files on our own servers.</li>
+        <li><b>AI analysis data:</b> when you run AI analysis, the selected dream journal text is sent to an external AI service. If you include names, email addresses, or other identifying information in the text, that information may also be included.</li>
+        <li><b>Usage and diagnostic data:</b> app launches, screen views, feature usage, crash logs, device type, OS version, app version, and anonymous or pseudonymous identifiers.</li>
+        <li><b>Advertising data:</b> advertising identifiers, device information, ad impressions, clicks, reward events, and related interactions when ads are displayed.</li>
+        <li><b>Purchase data:</b> App Store purchase and subscription status, receipt information, and purchase history. We do not collect credit card numbers or other payment card details.</li>
+        <li><b>Website analytics data:</b> page views, referrers, browser and device information collected through Google Analytics on this website.</li>
       </ul>
     </div>
 
     <div class="content-block">
-      <h3>Sharing Personal Information with Third Parties</h3>
-      <p>Except for the data transmission to third-party services described above, we will not share your personal information with third parties without your consent, except as required by law.</p>
+      <h3>Purposes of Use</h3>
+      <ul style="line-height:1.9;">
+        <li>Providing dream journal, search, analysis, notification, Night Mode, and Reality Check features</li>
+        <li>Generating AI-based dream analysis, comments, and trend summaries</li>
+        <li>Transcribing voice input</li>
+        <li>Improving stability, diagnosing crashes, fixing bugs, and improving features</li>
+        <li>Displaying ads, measuring ad performance, and granting rewards</li>
+        <li>Verifying purchases, managing subscriptions, and responding to refunds and support requests</li>
+        <li>Preventing abuse, enforcing the Terms of Service, and complying with legal obligations</li>
+      </ul>
+    </div>
+
+    <div class="content-block">
+      <h3>Third-Party Services and International Transfers</h3>
+      <p>The App and website use the following third-party services. These providers are primarily located in the United States. Where applicable law requires consent for transferring personal data to a third party located outside Japan or your country or region, we will provide the necessary information and obtain consent through an in-app confirmation screen, OS permission prompt, or another reasonable method. Their processing is governed by their own privacy policies and terms.</p>
+      <ul style="line-height:1.9;">
+        <li style="margin-bottom:16px;"><b>Google Gemini API (Google LLC / primary country: United States)</b><br>Used to provide AI analysis by sending the selected dream journal text. Before AI analysis is executed, the App will make the information to be sent and the international transfer understandable to the user.<br><a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google Privacy Policy</a></li>
+        <li style="margin-bottom:16px;"><b>Firebase Analytics / Crashlytics (Google LLC / primary country: United States)</b><br>Used for usage analytics, crash diagnostics, bug fixing, and quality improvement. Usage events, diagnostic information, device information, and anonymous or pseudonymous identifiers may be sent.<br><a href="https://firebase.google.com/support/privacy" target="_blank" rel="noopener">Firebase Privacy and Security</a></li>
+        <li style="margin-bottom:16px;"><b>Google AdMob (Google LLC / primary country: United States)</b><br>Used for ads and rewarded ads. Advertising identifiers, device information, and ad interaction data may be sent. The scope of collection depends on your App Tracking Transparency consent status.<br><a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google Privacy Policy</a></li>
+        <li style="margin-bottom:16px;"><b>Apple Speech Framework / App Store (Apple Inc. / primary country: United States)</b><br>Used for voice transcription, app distribution, purchases, refunds, and subscription management.<br><a href="https://www.apple.com/legal/privacy/" target="_blank" rel="noopener">Apple Privacy Policy</a></li>
+        <li><b>Google Analytics (Google LLC / primary country: United States)</b><br>Used to understand website usage and improve pages.<br><a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google Privacy Policy</a></li>
+      </ul>
+    </div>
+
+    <div class="content-block">
+      <h3>Sharing Personal Information</h3>
+      <p>We do not share personal information with third parties except as described in this policy, as required for App Store payment processing, with your consent, as required by law, or where necessary to protect life, body, or property.</p>
+    </div>
+
+    <div class="content-block">
+      <h3>Retention and Deletion</h3>
+      <ul style="line-height:1.9;">
+        <li>On-device dream journals and settings remain on your device until you delete them in the app or uninstall the app.</li>
+        <li>Text sent for AI analysis is processed as necessary to generate analysis results. We do not permanently store AI analysis text on our own servers. Retention by third-party services is governed by their own policies.</li>
+        <li>Firebase Crashlytics crash-related data is retained according to Google's standard retention period, typically 90 days before removal from live and backup systems begins.</li>
+        <li>Firebase Analytics, Google Analytics, and AdMob usage data, advertising data, and website analytics data are retained according to each service's retention settings and standard retention periods.</li>
+        <li>Purchase and subscription records may be retained for accounting, tax, refund, fraud prevention, and support purposes for the period required by law or legitimate operational needs.</li>
+      </ul>
+    </div>
+
+    <div class="content-block">
+      <h3>Your Choices and Rights</h3>
+      <ul style="line-height:1.9;">
+        <li>You can delete on-device data through the app's delete functions or by uninstalling the app.</li>
+        <li>You can manage notification, speech recognition, tracking, and advertising identifier permissions in iOS Settings.</li>
+        <li>You can manage or cancel subscriptions through your App Store account settings.</li>
+        <li>To request disclosure, correction, addition, deletion, suspension of use, erasure, suspension of third-party provision, or withdrawal of consent for personal data we control, contact us at the email address below. We may need to verify your identity before processing the request. Where required by law, we will respond within a reasonable period.</li>
+      </ul>
+    </div>
+
+    <div class="content-block">
+      <h3>Operator Information</h3>
+      <p>Operator: Yoshihiko Apps operator (sole proprietor)</p>
+      <p style="margin-top:10px;">Contact: <a href="mailto:kimuraenator@gmail.com">kimuraenator@gmail.com</a></p>
+      <p style="margin-top:10px;">For security and privacy reasons, the operator's legal name and address are not continuously displayed on this page. Where disclosure is required under the Act on the Protection of Personal Information, the Specified Commercial Transactions Act, or other applicable laws, we will provide such information without delay after verifying the requester.</p>
+    </div>
+
+    <div class="content-block">
+      <h3>Children's Privacy</h3>
+      <p>The App is not intended for children under 13. Users aged 13 to 17 should use the App only with parental or guardian consent. If you believe we may have collected information from a child under 13, please contact us promptly.</p>
+    </div>
+
+    <div class="content-block">
+      <h3>Security</h3>
+      <p>We use reasonable safeguards appropriate to the nature of the information, including access controls, encrypted communications, and data minimization. However, no internet transmission or device storage method can be guaranteed to be completely secure.</p>
+    </div>
+
+    <div class="content-block">
+      <h3>Changes to This Policy</h3>
+      <p>We may update this policy to reflect changes in law, service features, or third-party services. If we make material changes, we will notify you by a reasonable method, such as in the app or on this website.</p>
     </div>
 
     <div class="content-block">
       <h3>Contact</h3>
-      <p>For privacy-related inquiries, please contact us at the email address below.</p>
+      <p>For privacy inquiries, deletion requests, or withdrawal of consent, please contact us at:</p>
       <p>Email: <a href="mailto:kimuraenator@gmail.com">kimuraenator@gmail.com</a></p>
     </div>
 
-    <div class="content-foot">Last updated · May 24, 2026</div>
+    <div class="content-foot">Last updated · May 31, 2026</div>
 
   </div>
 </main>
@@ -141,8 +183,9 @@
       <a href="index.html#pricing">Pricing</a>
       <a href="News.html">News</a>
       <a href="journal-tips.html">Journal Tips</a>
-      <a href="privacy.html">Privacy Policy</a>
-      <a href="terms.html">Terms of Service</a>
+      <a href="../../legal/privacy.html#dreave">Privacy Policy</a>
+      <a href="../../legal/terms.html#dreave">Terms of Service</a>
+      <a href="../../legal/tokushoho.html#dreave">Legal Disclosure</a>
       <a href="contact.html">Contact</a>
     </div>
     <div class="copy">© 2026 DREAVE<br>ALL RIGHTS RESERVED</div>

@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>개인정보 처리방침 — Dreave</title>
-<meta name="description" content="Dreave 개인정보 처리방침. 녹음 음성·꿈 일기 데이터는 기기 내에 저장되며 외부로 전송되지 않습니다.">
+<meta name="description" content="Dreave 개인정보 처리방침. 수집 정보, 이용 목적, 제3자 서비스 전송, 보관 기간, 삭제 방법을 안내합니다.">
 <meta property="og:title" content="개인정보 처리방침 — Dreave">
-<meta property="og:description" content="Dreave 개인정보 처리방침. 녹음 음성·꿈 일기 데이터는 기기 내에 저장되며 외부로 전송되지 않습니다.">
+<meta property="og:description" content="Dreave 개인정보 처리방침. 수집 정보, 이용 목적, 제3자 서비스 전송, 보관 기간, 삭제 방법을 안내합니다.">
 <meta property="og:image" content="../og-image.png">
 <link rel="icon" type="image/png" href="../favicon.png">
 <link rel="apple-touch-icon" href="../apple-touch-icon.png">
@@ -53,11 +53,11 @@
     </div>
     <div class="section-label" style="margin-top:32px;">Privacy Policy</div>
     <h1>개인정보<br><span class="em">처리방침</span>.</h1>
-    <p class="lede">Dreave는 이용자의 개인정보 보호를 최우선으로 생각하며, 개인정보 보호를 위해 노력합니다. 녹음 음성과 꿈 일기는 기기 내에 저장되며 외부로 전송되지 않습니다.</p>
+    <p class="lede">Dreave는 이용자의 개인정보를 중요하게 생각하며, 수집하는 정보, 이용 목적, 제3자 서비스 전송, 보관 기간, 삭제 방법을 명확히 안내합니다.</p>
     <div class="meta">
-      <span>Effective <b style="color:var(--accent); font-family:var(--mono); font-size:11px; letter-spacing:0.14em;">2026.05.03</b></span>
+      <span>Effective <b style="color:var(--accent); font-family:var(--mono); font-size:11px; letter-spacing:0.14em;">2026.05.31</b></span>
       <span class="div"></span>
-      <span>Last updated 2026.05.28</span>
+      <span>Last updated 2026.05.31</span>
     </div>
   </div>
 </header>
@@ -66,61 +66,103 @@
   <div class="content-shell">
 
     <div class="content-block">
-      <h3>수집하는 정보</h3>
-      <p>본 앱은 다음 정보를 수집·이용하는 경우가 있습니다.</p>
-      <ul>
-        <li>꿈 일기의 텍스트 데이터 (AI 분석 기능 이용 시 외부 API로 전송됩니다. 자세한 내용은 제3항을 참조하십시오)</li>
-        <li>마이크 음성 (꿈 일기 음성 녹음에 사용. 음성 처리는 Apple Speech Framework에 의해 이루어지며, 음성 파일 자체를 당사 서버에 저장·전송하지 않습니다)</li>
-        <li>수면 설정 데이터 (취침 시각, 알림 설정 등. 기기 내에만 저장)</li>
-        <li>앱 조작 로그·충돌 정보 (Firebase Analytics 및 Firebase Crashlytics에 의해 수집. 개인을 특정하지 않는 통계 데이터로 기능 개선에 사용)</li>
-        <li>광고 인터랙션 데이터 (무료 플랜에서 리워드 광고 이용 시 AdMob SDK에 의해 수집. 자세한 내용은 제3항을 참조하십시오)</li>
-      </ul>
+      <h3>기본 방침</h3>
+      <p>Dreave는 로컬 우선 설계입니다. 꿈 일기, 수면 설정, 앱 내 기록은 원칙적으로 이용자의 기기 내에 저장됩니다. 다만 AI 분석, 음성 텍스트 변환, 충돌 분석, 이용 현황 분석, 광고, 웹사이트 분석, 구매 관리 등 일부 기능에서는 아래에 기재된 제3자 서비스로 필요한 정보가 전송될 수 있습니다.</p>
     </div>
 
     <div class="content-block">
-      <h3>데이터 저장 및 처리</h3>
-      <p>꿈 일기의 텍스트 데이터 및 모든 기록 데이터는 원칙적으로 이용자의 기기 내(<b>SwiftData</b>)에 저장됩니다. 당사가 이용자의 음성 파일을 외부 서버에 전송하는 일은 없습니다. 앱 조작 로그·충돌 정보는 Firebase(Google LLC) 서버로 전송되지만, 이용자를 개인으로 특정하는 데이터는 포함되지 않습니다.</p>
-    </div>
-
-    <div class="content-block">
-      <h3>제3자 서비스로의 데이터 전송</h3>
-      <p>본 앱은 다음 서드파티 서비스를 이용하고 있습니다.</p>
+      <h3>수집 또는 이용하는 정보</h3>
       <ul style="line-height:1.9;">
-        <li style="margin-bottom:16px;">
-          <b>Google Gemini API (Google LLC)</b><br>
-          AI 분석 기능 이용 시, 꿈 기록 텍스트를 Google Gemini API에 전송합니다. 전송 데이터에 개인 식별 정보는 포함되지 않습니다.<br>
-          <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google 개인정보 처리방침</a>
-        </li>
-        <li style="margin-bottom:16px;">
-          <b>Firebase Analytics / Crashlytics (Google LLC)</b><br>
-          앱 이용 현황 파악 및 충돌 분석에 사용합니다. 수집 데이터는 개인과 연결되지 않으며, 익명 통계 정보로 처리됩니다.<br>
-          <a href="https://firebase.google.com/support/privacy" target="_blank" rel="noopener">Firebase 개인정보 처리방침</a>
-        </li>
-        <li style="margin-bottom:16px;">
-          <b>Google AdMob (Google LLC)</b><br>
-          무료 플랜의 리워드 광고에 사용합니다. AdMob SDK는 광고 게재를 위해 기기 정보 및 광고 인터랙션 데이터를 수집할 수 있습니다. ATT(앱 추적 투명성) 동의 여부에 따라 수집 범위가 달라집니다.<br>
-          <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google 개인정보 처리방침</a>
-        </li>
-        <li>
-          <b>Apple Speech Framework (Apple Inc.)</b><br>
-          음성 텍스트 변환 기능에 사용합니다. 처리는 Apple의 프레임워크에 의해 이루어집니다.<br>
-          <a href="https://www.apple.com/legal/privacy/" target="_blank" rel="noopener">Apple 개인정보 처리방침</a>
-        </li>
+        <li><b>기기 내 데이터:</b> 꿈 일기 본문, 태그, 감정 및 자각몽 기록, 수면 설정, 알림 설정, 앱 설정.</li>
+        <li><b>음성 정보:</b> 꿈 일기 녹음 및 텍스트 변환에 사용됩니다. 음성 파일 자체를 운영자 서버에 저장하지 않습니다.</li>
+        <li><b>AI 분석 데이터:</b> 이용자가 AI 분석을 실행한 경우, 선택한 꿈 일기 텍스트가 외부 AI 서비스로 전송됩니다. 텍스트에 이름, 이메일 주소 등 식별 가능한 정보를 입력한 경우 해당 정보도 포함될 수 있습니다.</li>
+        <li><b>이용 및 진단 정보:</b> 앱 실행, 화면 표시, 기능 이용, 충돌 로그, 기기 종류, OS 버전, 앱 버전, 익명 또는 가명 식별자 등.</li>
+        <li><b>광고 관련 정보:</b> 광고 식별자, 기기 정보, 광고 노출, 클릭, 리워드 이벤트 및 관련 상호작용.</li>
+        <li><b>구매 관련 정보:</b> App Store가 처리하는 구매 및 구독 상태, 영수증 정보, 구매 이력. 운영자는 신용카드 번호 등 결제 카드 정보를 수집하지 않습니다.</li>
+        <li><b>웹사이트 이용 정보:</b> 본 사이트에서는 Google Analytics를 통해 페이지 조회, 유입 경로, 브라우저, 기기 정보 등이 수집될 수 있습니다.</li>
       </ul>
     </div>
 
     <div class="content-block">
-      <h3>제3자에 대한 개인정보 제공</h3>
-      <p>위의 서드파티 서비스로의 전송을 제외하고, 법령에 의거한 경우를 제외하여 이용자의 동의 없이 개인정보를 제3자에게 제공하지 않습니다.</p>
+      <h3>이용 목적</h3>
+      <ul style="line-height:1.9;">
+        <li>꿈 일기, 검색, 분석, 알림, Night Mode, Reality Check 기능 제공</li>
+        <li>AI 기반 꿈 분석, 코멘트 생성, 경향 파악</li>
+        <li>음성 입력의 텍스트 변환</li>
+        <li>앱 안정성 개선, 충돌 분석, 버그 수정, 기능 개선</li>
+        <li>광고 표시, 광고 효과 측정, 리워드 부여</li>
+        <li>구매 상태 확인, 구독 관리, 환불 및 문의 대응</li>
+        <li>부정 이용 방지, 이용약관 위반 대응, 법령상 필요한 대응</li>
+      </ul>
+    </div>
+
+    <div class="content-block">
+      <h3>제3자 서비스 및 국외 전송</h3>
+      <p>본 앱 및 본 사이트는 다음 제3자 서비스를 이용합니다. 제공처는 주로 미국에 소재한 사업자입니다. 일본 또는 이용자의 국가·지역 밖에 있는 제3자에게 개인정보를 제공하는 데 법령상 동의가 필요한 경우, 운영자는 앱 내 확인 화면, OS 권한 화면 또는 기타 합리적인 방법으로 필요한 정보를 제공하고 동의를 받습니다. 각 서비스에서의 처리는 각 사의 개인정보 처리방침 및 약관에 따릅니다.</p>
+      <ul style="line-height:1.9;">
+        <li style="margin-bottom:16px;"><b>Google Gemini API (Google LLC / 주요 소재국: 미국)</b><br>AI 분석 기능 제공을 위해 선택한 꿈 일기 텍스트를 전송합니다. AI 분석 실행 전 전송 대상 정보와 국외 전송 내용을 이용자가 확인할 수 있도록 합니다.<br><a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google 개인정보 처리방침</a></li>
+        <li style="margin-bottom:16px;"><b>Firebase Analytics / Crashlytics (Google LLC / 주요 소재국: 미국)</b><br>이용 현황 분석, 충돌 분석, 버그 수정, 품질 개선을 위해 이용 이벤트, 진단 정보, 기기 정보, 익명 또는 가명 식별자 등이 전송될 수 있습니다.<br><a href="https://firebase.google.com/support/privacy" target="_blank" rel="noopener">Firebase 개인정보 보호 및 보안</a></li>
+        <li style="margin-bottom:16px;"><b>Google AdMob (Google LLC / 주요 소재국: 미국)</b><br>광고 및 리워드 광고 제공을 위해 광고 식별자, 기기 정보, 광고 상호작용 데이터 등이 전송될 수 있습니다. ATT 동의 상태에 따라 수집 및 이용 범위가 달라집니다.<br><a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google 개인정보 처리방침</a></li>
+        <li style="margin-bottom:16px;"><b>Apple Speech Framework / App Store (Apple Inc. / 주요 소재국: 미국)</b><br>음성 텍스트 변환, 앱 배포, 구매 처리, 환불, 구독 관리를 위해 이용합니다.<br><a href="https://www.apple.com/legal/privacy/" target="_blank" rel="noopener">Apple 개인정보 처리방침</a></li>
+        <li><b>Google Analytics (Google LLC / 주요 소재국: 미국)</b><br>본 사이트의 이용 현황을 파악하고 페이지를 개선하기 위해 이용합니다.<br><a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google 개인정보 처리방침</a></li>
+      </ul>
+    </div>
+
+    <div class="content-block">
+      <h3>개인정보의 제3자 제공</h3>
+      <p>운영자는 본 방침에 기재된 제3자 서비스로의 전송, App Store 등의 결제 처리, 이용자의 동의가 있는 경우, 법령에 따른 경우, 또는 생명·신체·재산 보호에 필요한 경우를 제외하고 개인정보를 제3자에게 제공하지 않습니다.</p>
+    </div>
+
+    <div class="content-block">
+      <h3>보관 기간 및 삭제</h3>
+      <ul style="line-height:1.9;">
+        <li>기기 내 꿈 일기 및 설정 데이터는 이용자가 앱 내에서 삭제하거나 앱을 삭제할 때까지 기기 내에 저장됩니다.</li>
+        <li>AI 분석을 위해 전송된 텍스트는 분석 결과 생성에 필요한 범위에서 처리됩니다. 운영자는 AI 분석용 텍스트를 자체 서버에 영구 저장하지 않습니다. 제3자 서비스 측의 보관 기간은 각 사의 정책에 따릅니다.</li>
+        <li>Firebase Crashlytics의 충돌 관련 데이터는 Google의 표준 보관 기간에 따라 일반적으로 90일간 보관된 후 라이브 및 백업 시스템에서 삭제 절차가 시작됩니다.</li>
+        <li>Firebase Analytics, Google Analytics, AdMob의 이용 현황 데이터, 광고 관련 데이터, 웹 분석 데이터는 각 서비스의 보관 설정 및 표준 보관 기간에 따라 저장됩니다.</li>
+        <li>구매 및 구독 관련 정보는 회계, 세무, 환불, 부정 이용 방지, 문의 대응을 위해 법령상 필요한 기간 또는 정당한 운영상 필요한 기간 동안 보관될 수 있습니다.</li>
+      </ul>
+    </div>
+
+    <div class="content-block">
+      <h3>이용자의 선택 및 권리</h3>
+      <ul style="line-height:1.9;">
+        <li>기기 내 데이터는 앱 내 삭제 기능 또는 앱 삭제를 통해 삭제할 수 있습니다.</li>
+        <li>알림, 음성 인식, 추적, 광고 식별자 등의 권한은 iOS 설정에서 변경할 수 있습니다.</li>
+        <li>구독 확인 및 해지는 App Store 계정 설정에서 할 수 있습니다.</li>
+        <li>운영자가 관리하는 개인정보에 대해 공개, 정정, 추가, 삭제, 이용 정지, 소거, 제3자 제공 정지, 동의 철회 등을 원하는 경우 아래 이메일 주소로 연락해 주세요. 요청 처리 전 본인 확인을 요청할 수 있습니다. 법령상 대응 의무가 있는 경우 합리적인 기간 내에 대응합니다.</li>
+      </ul>
+    </div>
+
+    <div class="content-block">
+      <h3>사업자 정보</h3>
+      <p>운영자: Yoshihiko Apps 운영자(개인사업자)</p>
+      <p style="margin-top:10px;">연락처: <a href="mailto:kimuraenator@gmail.com">kimuraenator@gmail.com</a></p>
+      <p style="margin-top:10px;">운영자의 성명 및 주소는 보안 및 개인정보 보호를 위해 본 페이지에 상시 게시하지 않습니다. 개인정보 보호법, 특정상거래법 기타 관련 법령에 따라 공개가 필요한 경우, 요청자를 확인한 후 지체 없이 제공합니다.</p>
+    </div>
+
+    <div class="content-block">
+      <h3>아동의 개인정보</h3>
+      <p>본 앱은 만 13세 미만을 대상으로 하지 않습니다. 만 13세 이상 18세 미만의 이용자는 보호자의 동의를 얻어 이용해야 합니다. 만 13세 미만의 정보가 운영자에게 수집되었을 가능성이 있는 경우 즉시 아래 연락처로 알려 주세요.</p>
+    </div>
+
+    <div class="content-block">
+      <h3>보안</h3>
+      <p>운영자는 정보의 성격에 따라 접근 제한, 암호화 통신, 데이터 최소화 등 합리적인 안전 관리 조치를 취합니다. 다만 인터넷 통신 및 기기 저장 방식의 완전한 안전성을 보장할 수는 없습니다.</p>
+    </div>
+
+    <div class="content-block">
+      <h3>방침의 변경</h3>
+      <p>운영자는 법령, 서비스 내용, 이용하는 제3자 서비스의 변경에 따라 본 방침을 개정할 수 있습니다. 중요한 변경이 있는 경우 앱 내 또는 본 사이트에서 합리적인 방법으로 고지합니다.</p>
     </div>
 
     <div class="content-block">
       <h3>문의하기</h3>
-      <p>개인정보에 관한 문의는 아래 이메일 주소로 연락해 주세요.</p>
+      <p>개인정보 관련 문의, 데이터 삭제, 동의 철회 요청은 아래 이메일 주소로 연락해 주세요.</p>
       <p>Email: <a href="mailto:kimuraenator@gmail.com">kimuraenator@gmail.com</a></p>
     </div>
 
-    <div class="content-foot">최종 업데이트 · 2026년 5월 24일</div>
+    <div class="content-foot">최종 업데이트 · 2026년 5월 31일</div>
 
   </div>
 </main>
@@ -141,8 +183,9 @@
       <a href="index.html#pricing">요금제</a>
       <a href="News.html">소식</a>
       <a href="journal-tips.html">꿈 일기 팁</a>
-      <a href="privacy.html">개인정보 처리방침</a>
-      <a href="terms.html">이용약관</a>
+      <a href="../../legal/privacy.html#dreave">개인정보 처리방침</a>
+      <a href="../../legal/terms.html#dreave">이용약관</a>
+      <a href="../../legal/tokushoho.html#dreave">특정상거래법 표기</a>
       <a href="contact.html">문의하기</a>
     </div>
     <div class="copy">© 2026 DREAVE<br>ALL RIGHTS RESERVED</div>

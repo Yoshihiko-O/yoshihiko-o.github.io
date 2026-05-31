@@ -249,6 +249,17 @@
             color: var(--text-muted);
             letter-spacing: 0.1em;
             margin-top: 16px;
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .footer a {
+            color: var(--text-muted);
+            text-decoration: none;
+        }
+        .footer a:hover {
+            color: var(--text-secondary);
         }
 
         /* サイバーパンク風 座標・ステータス表示 */
@@ -336,7 +347,12 @@
         </a>
     </main>
 
-    <footer class="footer">&copy; 2026 Yoshihiko.inc</footer>
+    <footer class="footer">
+        <span>&copy; 2026 Yoshihiko Apps</span>
+        <a href="legal/terms.html">利用規約</a>
+        <a href="legal/privacy.html">プライバシーポリシー</a>
+        <a href="legal/tokushoho.html">特商法表記</a>
+    </footer>
 </div>
 
 <!-- 右下サイバーパネル -->
