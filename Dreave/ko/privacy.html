@@ -72,28 +72,39 @@
         <li>꿈 일기의 텍스트 데이터 (AI 분석 기능 이용 시 외부 API로 전송됩니다. 자세한 내용은 제3항을 참조하십시오)</li>
         <li>마이크 음성 (꿈 일기 음성 녹음에 사용. 음성 처리는 Apple Speech Framework에 의해 이루어지며, 음성 파일 자체를 당사 서버에 저장·전송하지 않습니다)</li>
         <li>수면 설정 데이터 (취침 시각, 알림 설정 등. 기기 내에만 저장)</li>
-        <li>앱 이용 통계 (기능 개선 목적)</li>
+        <li>앱 조작 로그·충돌 정보 (Firebase Analytics 및 Firebase Crashlytics에 의해 수집. 개인을 특정하지 않는 통계 데이터로 기능 개선에 사용)</li>
+        <li>광고 인터랙션 데이터 (무료 플랜에서 리워드 광고 이용 시 AdMob SDK에 의해 수집. 자세한 내용은 제3항을 참조하십시오)</li>
       </ul>
     </div>
 
     <div class="content-block">
       <h3>데이터 저장 및 처리</h3>
-      <p>꿈 일기의 텍스트 데이터 및 모든 기록 데이터는 원칙적으로 이용자의 기기 내(<b>SwiftData</b>)에 저장됩니다. 당사가 이용자의 음성 파일을 외부 서버에 전송하는 일은 없습니다.</p>
+      <p>꿈 일기의 텍스트 데이터 및 모든 기록 데이터는 원칙적으로 이용자의 기기 내(<b>SwiftData</b>)에 저장됩니다. 당사가 이용자의 음성 파일을 외부 서버에 전송하는 일은 없습니다. 앱 조작 로그·충돌 정보는 Firebase(Google LLC) 서버로 전송되지만, 이용자를 개인으로 특정하는 데이터는 포함되지 않습니다.</p>
     </div>
 
     <div class="content-block">
       <h3>제3자 서비스로의 데이터 전송</h3>
       <p>본 앱은 다음 서드파티 서비스를 이용하고 있습니다.</p>
-      <ul>
-        <li>
+      <ul style="line-height:1.9;">
+        <li style="margin-bottom:16px;">
           <b>Google Gemini API (Google LLC)</b><br>
-          AI 코멘트 생성 기능 이용 시, 입력된 꿈 기록 텍스트를 Google Gemini API에 전송하여 분석 결과 생성에 사용합니다. 전송되는 데이터에 이름·기기 ID 등의 개인 식별 정보는 포함되지 않습니다.<br>
-          Google 개인정보 처리방침: <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">https://policies.google.com/privacy</a>
+          AI 분석 기능 이용 시, 꿈 기록 텍스트를 Google Gemini API에 전송합니다. 전송 데이터에 개인 식별 정보는 포함되지 않습니다.<br>
+          <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google 개인정보 처리방침</a>
+        </li>
+        <li style="margin-bottom:16px;">
+          <b>Firebase Analytics / Crashlytics (Google LLC)</b><br>
+          앱 이용 현황 파악 및 충돌 분석에 사용합니다. 수집 데이터는 개인과 연결되지 않으며, 익명 통계 정보로 처리됩니다.<br>
+          <a href="https://firebase.google.com/support/privacy" target="_blank" rel="noopener">Firebase 개인정보 처리방침</a>
+        </li>
+        <li style="margin-bottom:16px;">
+          <b>Google AdMob (Google LLC)</b><br>
+          무료 플랜의 리워드 광고에 사용합니다. AdMob SDK는 광고 게재를 위해 기기 정보 및 광고 인터랙션 데이터를 수집할 수 있습니다. ATT(앱 추적 투명성) 동의 여부에 따라 수집 범위가 달라집니다.<br>
+          <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google 개인정보 처리방침</a>
         </li>
         <li>
           <b>Apple Speech Framework (Apple Inc.)</b><br>
           음성 텍스트 변환 기능에 사용합니다. 처리는 Apple의 프레임워크에 의해 이루어집니다.<br>
-          Apple 개인정보 처리방침: <a href="https://www.apple.com/legal/privacy/" target="_blank" rel="noopener">https://www.apple.com/legal/privacy/</a>
+          <a href="https://www.apple.com/legal/privacy/" target="_blank" rel="noopener">Apple 개인정보 처리방침</a>
         </li>
       </ul>
     </div>

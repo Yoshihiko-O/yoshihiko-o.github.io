@@ -72,28 +72,39 @@
         <li>夢日記のテキストデータ（AI分析機能のご利用時に外部APIへ送信されます。詳細は第3項をご参照ください）</li>
         <li>マイク音声（夢日記の音声録音に使用。音声処理はApple Speech Frameworkにより行われ、音声ファイル自体を当社サーバーに保存・送信することはありません）</li>
         <li>睡眠設定データ（就寝時刻、通知設定など。端末内にのみ保存）</li>
-        <li>アプリの使用状況統計（機能の改善目的）</li>
+        <li>アプリ操作ログ・クラッシュ情報（Firebase Analytics および Firebase Crashlytics により収集。個人を特定しない統計データとして機能改善に使用します）</li>
+        <li>広告インタラクションデータ（AI分析のリワード広告利用時にAdMob SDKにより収集。詳細は第3項をご参照ください）</li>
       </ul>
     </div>
 
     <div class="content-block">
       <h3>データの保存と処理</h3>
-      <p>夢日記のテキストデータおよびすべての記録データは、原則としてお客様の端末内（<b>SwiftData</b>）に保存されます。当社がお客様の音声ファイルを外部サーバーに送信することはありません。</p>
+      <p>夢日記のテキストデータおよびすべての記録データは、原則としてお客様の端末内（<b>SwiftData</b>）に保存されます。当社がお客様の音声ファイルを外部サーバーに送信することはありません。アプリの操作ログ・クラッシュ情報はFirebase（Google LLC）のサーバーに送信されますが、お客様を個人として特定するデータは含まれません。</p>
     </div>
 
     <div class="content-block">
       <h3>第三者サービスへのデータ送信</h3>
       <p>本アプリは、以下のサードパーティサービスを利用しています。</p>
-      <ul>
-        <li>
+      <ul style="line-height:1.9;">
+        <li style="margin-bottom:16px;">
           <b>Google Gemini API（Google LLC）</b><br>
-          AIコメント生成機能をご利用の際、入力された夢の記録テキストをGoogle Gemini APIに送信し、分析結果の生成に使用します。送信されるデータにはお客様の氏名・端末ID等の個人識別情報は含まれません。<br>
-          Googleのプライバシーポリシー：<a href="https://policies.google.com/privacy" target="_blank" rel="noopener">https://policies.google.com/privacy</a>
+          AI分析機能をご利用の際、夢の記録テキストをGoogle Gemini APIに送信し、分析結果の生成に使用します。送信データに氏名・端末ID等の個人識別情報は含まれません。<br>
+          <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Googleプライバシーポリシー</a>
+        </li>
+        <li style="margin-bottom:16px;">
+          <b>Firebase Analytics / Crashlytics（Google LLC）</b><br>
+          アプリの利用状況把握・クラッシュ解析に使用します。収集データはユーザーに紐付けられず、個人を特定しない統計情報として処理されます。<br>
+          <a href="https://firebase.google.com/support/privacy" target="_blank" rel="noopener">Firebaseプライバシーポリシー</a>
+        </li>
+        <li style="margin-bottom:16px;">
+          <b>Google AdMob（Google LLC）</b><br>
+          AI分析機能のリワード広告（無料プラン）に使用します。広告配信のため、AdMob SDKがデバイス情報・広告インタラクションデータを収集する場合があります。ATT（App Tracking Transparency）の同意状況により、収集範囲が異なります。<br>
+          <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Googleプライバシーポリシー</a>
         </li>
         <li>
           <b>Apple Speech Framework（Apple Inc.）</b><br>
           音声文字起こし機能に使用します。処理はAppleのフレームワークにより行われます。<br>
-          Appleのプライバシーポリシー：<a href="https://www.apple.com/jp/legal/privacy/" target="_blank" rel="noopener">https://www.apple.com/jp/legal/privacy/</a>
+          <a href="https://www.apple.com/jp/legal/privacy/" target="_blank" rel="noopener">Appleプライバシーポリシー</a>
         </li>
       </ul>
     </div>

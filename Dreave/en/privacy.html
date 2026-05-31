@@ -72,28 +72,39 @@
         <li>Dream journal text data (sent to an external API when you use the AI analysis feature — see Section 3 for details)</li>
         <li>Microphone audio (used for voice recording in the Dream Journal; audio processing is handled by Apple Speech Framework, and we never store or transmit the audio file itself to our servers)</li>
         <li>Sleep settings data (bedtime, notification settings, etc.; stored on-device only)</li>
-        <li>App usage statistics (for feature improvement purposes)</li>
+        <li>App usage logs and crash reports (collected via Firebase Analytics and Firebase Crashlytics; processed as non-personally-identifiable statistics for feature improvement)</li>
+        <li>Ad interaction data (collected by AdMob SDK when viewing rewarded ads in the free plan — see Section 3 for details)</li>
       </ul>
     </div>
 
     <div class="content-block">
       <h3>Data Storage and Processing</h3>
-      <p>Dream journal text data and all recorded data are stored locally on your device (<b>SwiftData</b>) as a general rule. We never transmit your audio files to external servers.</p>
+      <p>Dream journal text data and all recorded data are stored locally on your device (<b>SwiftData</b>) as a general rule. We never transmit your audio files to external servers. App usage logs and crash reports are sent to Firebase (Google LLC) servers but do not include data that personally identifies you.</p>
     </div>
 
     <div class="content-block">
       <h3>Data Sent to Third-Party Services</h3>
       <p>This app uses the following third-party services.</p>
-      <ul>
-        <li>
+      <ul style="line-height:1.9;">
+        <li style="margin-bottom:16px;">
           <b>Google Gemini API (Google LLC)</b><br>
-          When you use the AI comment generation feature, your dream record text is sent to the Google Gemini API to generate analysis results. Data transmitted does not include personally identifiable information such as your name or device ID.<br>
-          Google Privacy Policy: <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">https://policies.google.com/privacy</a>
+          When you use the AI analysis feature, your dream record text is sent to the Google Gemini API. Data transmitted does not include personally identifiable information such as your name or device ID.<br>
+          <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google Privacy Policy</a>
+        </li>
+        <li style="margin-bottom:16px;">
+          <b>Firebase Analytics / Crashlytics (Google LLC)</b><br>
+          Used for app usage analysis and crash diagnostics. Collected data is not linked to individual users and is processed as anonymous statistical information.<br>
+          <a href="https://firebase.google.com/support/privacy" target="_blank" rel="noopener">Firebase Privacy Policy</a>
+        </li>
+        <li style="margin-bottom:16px;">
+          <b>Google AdMob (Google LLC)</b><br>
+          Used for rewarded ads in the free plan. The AdMob SDK may collect device information and ad interaction data for ad delivery. The scope of collection varies based on your ATT (App Tracking Transparency) consent status.<br>
+          <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google Privacy Policy</a>
         </li>
         <li>
           <b>Apple Speech Framework (Apple Inc.)</b><br>
           Used for voice-to-text transcription. Processing is handled by Apple's framework.<br>
-          Apple Privacy Policy: <a href="https://www.apple.com/legal/privacy/" target="_blank" rel="noopener">https://www.apple.com/legal/privacy/</a>
+          <a href="https://www.apple.com/legal/privacy/" target="_blank" rel="noopener">Apple Privacy Policy</a>
         </li>
       </ul>
     </div>
