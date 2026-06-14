@@ -132,13 +132,13 @@ nav.top .shell {
   transition: opacity 600ms ease, transform 600ms ease;
 }
 .content-block.in { opacity: 1; transform: none; }
-.content-block h3 {
+.content-block h2, .content-block h3 {
   font-family: var(--serif-jp); font-weight: 500; font-size: 24px;
   line-height: 1.4; margin-bottom: 20px;
   padding-left: 40px; position: relative;
   letter-spacing: -0.005em;
 }
-.content-block h3::before {
+.content-block h2::before, .content-block h3::before {
   content: counter(content-counter);
   counter-increment: content-counter;
   position: absolute; left: 0; top: 4px;
@@ -146,8 +146,8 @@ nav.top .shell {
   color: var(--accent); line-height: 1;
   width: 28px;
 }
-.content-block.no-num h3 { padding-left: 0; }
-.content-block.no-num h3::before { content: none; }
+.content-block.no-num h2, .content-block.no-num h3 { padding-left: 0; }
+.content-block.no-num h2::before, .content-block.no-num h3::before { content: none; }
 .content { counter-reset: content-counter; }
 .content-block p {
   font-family: var(--serif-jp); font-size: 16px; line-height: 1.95;
