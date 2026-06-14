@@ -82,28 +82,28 @@ LPの `style.css` にすでに定義されており、変更不要です。新�
 | ✅ 完了 | terms.html | 同上 |
 | ✅ 完了 | contact.html | 同上 |
 
-### 3-2. 視覚アセット（新規作成が必要）
+### 3-2. 視覚アセット（新規作成が必要）— ✅ 完了済み
 
 | ステータス | アセット | 仕様 |
 |----------|--------|------|
-| 🔴 未対応 | og-image.png（OGP画像） | 1200×630px / PNG / SNSシェア時のサムネイル |
-| 🔴 未対応 | favicon.ico / favicon.png | 32×32px・180×180px（Apple Touch Icon） |
-| 🔴 未対応 | App Store アイコン | 1024×1024px / PNG（透過なし） |
-| 🔴 未対応 | App Store スクリーンショット | 6.5inch・5.5inch・iPad 各サイズ |
+| ✅ 完了 | og-image.png（OGP画像） | 1200×630px / PNG / `Dreave/og-image.png` に配置済み |
+| ✅ 完了 | favicon.png / apple-touch-icon.png | 32×32px・180×180px（PNG運用。.ico は不使用） |
+| ✅ 完了 | App Store アイコン | 1024×1024px / `Dreave/app-store-icon.png`（元データ：AppIcon_Source.png） |
+| ✅ 完了 | App Store スクリーンショット | `Dreave/assets/AppStoreAssets/` に日英韓 各6枚 + プレビュー仕様書 |
 
-### 3-3. ドキュメント・ファイル名変更
+### 3-3. ドキュメント・ファイル名変更 — ✅ 完了済み
 
 | ステータス | 変更前 | 変更後 |
 |----------|------|------|
-| 🔴 未対応 | LucidEngine_LP_デザイン仕様書.docx | Dreave_LP_デザイン仕様書.docx |
-| 🔴 未対応 | LucidEngine_コンテンツ仕様書.docx | Dreave_コンテンツ仕様書.docx |
-| 🟡 任意 | フォルダ名：lucid-engine | dreave（GitHub Pagesに影響するため慎重に） |
+| ✅ 完了 | LucidEngine_LP_デザイン仕様書.docx | Dreave_LP_デザイン仕様書.docx |
+| ✅ 完了 | LucidEngine_コンテンツ仕様書.docx | Dreave_コンテンツ仕様書.docx |
+| ✅ 完了 | フォルダ名：lucid-engine | Dreave（リネーム済み） |
 
-### 3-4. GitHub Pages 親ページ更新
+### 3-4. GitHub Pages 親ページ更新 — ✅ 完了済み
 
 | ステータス | ファイル | 対応内容 |
 |----------|--------|--------|
-| 🔴 未対応 | yoshihiko-o.github.io/index.html | 「LucidEngin」→「Dreave」に変更。リンク先URLも更新。 |
+| ✅ 完了 | yoshihiko-o.github.io/index.html | Dreave 表記・リンク先（`Dreave/`）更新済み |
 
 ---
 
@@ -147,16 +147,18 @@ SNSでシェアされた際に表示される画像です。Dreaveブランド�
 
 ---
 
-## 6. 対応優先順位
+## 6. 対応優先順位 — ✅ 全タスク完了
 
-| 優先度 | タスク | 理由 |
+> 2026-06-12 確認時点で、以下のすべてのタスクが完了しています。
+
+| 優先度 | タスク | ステータス |
 |------|------|------|
-| 🔴 最優先 | og-image.png 作成 | LP公開時にSNSシェアで即使用 |
-| 🔴 最優先 | GitHub Pages 親ページ更新（LucidEngin→Dreave） | ユーザーに見える旧名が残っている |
-| 🔴 最優先 | favicon 作成 | ブラウザタブに表示される |
-| 🟡 高 | ファイル名変更（.docx 2件） | 内部管理のみ、外部には影響なし |
-| 🟡 高 | App Storeアイコン作成 | マネタイズ実装後の審査提出時に必要 |
-| 🟢 中 | App Storeスクリーンショット作成 | 審査提出まで不要 |
+| 🔴 最優先 | og-image.png 作成 | ✅ 完了 |
+| 🔴 最優先 | GitHub Pages 親ページ更新（LucidEngin→Dreave） | ✅ 完了 |
+| 🔴 最優先 | favicon 作成 | ✅ 完了 |
+| 🟡 高 | ファイル名変更（.docx 2件） | ✅ 完了 |
+| 🟡 高 | App Storeアイコン作成 | ✅ 完了 |
+| 🟢 中 | App Storeスクリーンショット作成 | ✅ 完了（日英韓 各6枚） |
 
 ---
 
@@ -176,3 +178,9 @@ SNSでシェアされた際に表示される画像です。Dreaveブランド�
 ---
 
 *— 以上 —*
+
+---
+
+**更新履歴**
+
+- 2026-06-12：全引き継ぎ項目の完了をファイル実体・親ページHTMLで確認し、チェックリスト（3-2／3-3／3-4／6章）のステータスを ✅完了 に更新。なお、仕様書内に残る「LucidEngine」表記（`LucidEngineAudio` 等）はアプリ内製パッケージのコード識別子であり、リブランド対象外。
