@@ -117,6 +117,16 @@
     line-height: 1.02; letter-spacing: -0.01em;
     margin: 28px 0 12px;
   }
+  h1.display .sub-h1 {
+    display: block;
+    font-family: var(--sans);
+    font-weight: 400;
+    font-size: clamp(14px, 1.4vw, 16px);
+    line-height: 1.6;
+    letter-spacing: 0.05em;
+    color: var(--ink-dim);
+    margin-top: 20px;
+  }
   h1.display .glyph { font-family: var(--serif-en); font-style: italic; font-weight: 400; color: var(--accent); padding: 0 0.05em; }
   h1.display .em { font-style: italic; font-family: var(--serif-en); font-weight: 400; }
   .lede {
@@ -673,6 +683,7 @@
         <h1 class="display">
           Wake up<br/>
           <span class="em">inside</span> your dreams.
+          <span class="sub-h1">Dreave: The scientific trainer to control your dreams</span>
         </h1>
         <p class="lede">
           An iOS app that guides your mind to the dream door with REM cycle estimation × 40Hz acoustic stimulation.
