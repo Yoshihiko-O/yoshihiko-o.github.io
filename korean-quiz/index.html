@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>韓国語テスト練習アプリ</title>
+  <style>
+    :root { --bg:#f7f7fb; --card:#fff; --text:#202124; --muted:#666b78; --line:#e5e7ef; --main:#4f46e5; --ok:#15803d; --ng:#b91c1c; }
+    * { box-sizing: border-box; }
+    body { margin:0; font-family: system-ui, -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Yu Gothic", sans-serif; background: var(--bg); color: var(--text); line-height:1.65; }
+    header { padding: 24px 18px 12px; text-align:center; }
+    h1 { margin:0; font-size: clamp(22px, 5vw, 34px); }
+    .sub { color:var(--muted); margin-top:6px; }
+    main { max-width: 980px; margin: 0 auto; padding: 12px 16px 44px; }
+    .tabs { display:flex; gap:8px; justify-content:center; flex-wrap:wrap; margin: 12px 0 18px; }
+    button { border:0; border-radius:999px; padding: 10px 16px; font-weight:700; cursor:pointer; background:#eceeff; color:var(--main); }
+    button.primary { background:var(--main); color:white; }
+    button.good { background:#dcfce7; color:var(--ok); }
+    button.bad { background:#fee2e2; color:var(--ng); }
+    button.gray { background:#eef0f5; color:#333; }
+    .card { background:var(--card); border:1px solid var(--line); border-radius:18px; box-shadow:0 8px 24px rgba(20,20,60,.06); padding:18px; margin-bottom:14px; }
+    .phrase { display:grid; gap:10px; padding:16px 0; border-bottom:1px solid var(--line); }
+    .phrase:last-child { border-bottom:0; }
+    .label { font-size:12px; color:var(--muted); font-weight:800; letter-spacing:.08em; }
+    .jp { font-size:17px; }
+    .kr { font-size:24px; font-weight:800; }
+    .kana { font-size:16px; color:#374151; }
+    .quizBox { text-align:center; padding:22px 12px; }
+    .question { font-size:20px; margin:10px 0 18px; font-weight:800; }
+    .answer { display:none; text-align:left; max-width:720px; margin:18px auto 0; }
+    .answer.show { display:block; }
+    .bigKr { font-size:30px; font-weight:900; }
+    .stats { display:flex; gap:10px; justify-content:center; flex-wrap:wrap; color:var(--muted); }
+    .pill { background:white; border:1px solid var(--line); padding:6px 10px; border-radius:999px; }
+    .hidden { display:none; }
+    input { width:100%; max-width:720px; padding:14px 16px; border:1px solid var(--line); border-radius:14px; font-size:18px; margin-top:10px; }
+    .result { margin-top:10px; font-weight:800; }
+    .footerNote { color:var(--muted); font-size:13px; text-align:center; margin-top:18px; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>韓国語テスト練習アプリ</h1>
+    <div class="sub">日本語 → ハングル → カタカナ発音。間違えた問題だけを繰り返せます。</div>
+  </header>
+
+  <main>
+    <div class="tabs">
+      <button class="primary" onclick="showMode('list')">3行セットで覚える</button>
+      <button onclick="showMode('quiz')">ランダムクイズ</button>
+      <button onclick="showMode('write')">ハングル入力練習</button>
+      <button class="gray" onclick="resetMistakes()">間違いリストをリセット</button>
+    </div>
+
+    <section id="listMode" class="card"></section>
+
+    <section id="quizMode" class="card hidden">
+      <div class="stats">
+        <span class="pill">出題数: <b id="count">0</b></span>
+        <span class="pill">正解: <b id="ok">0</b></span>
+        <span class="pill">間違い残り: <b id="mistakeCount">0</b></span>
+      </div>
+      <div class="quizBox">
+        <div class="label">日本語を見て、韓国語で言ってみよう</div>
+        <div id="qText" class="question"></div>
+        <button class="primary" onclick="showAnswer()">答えを見る</button>
+        <button class="gray" onclick="speakCurrent()">発音を聞く</button>
+        <div id="answer" class="answer">
+          <div class="label">ハングル</div>
+          <div id="aKr" class="bigKr"></div>
+          <div class="label">カタカナ発音</div>
+          <div id="aKana" class="kana"></div>
+          <div style="margin-top:18px">
+            <button class="good" onclick="mark(true)">できた</button>
+            <button class="bad" onclick="mark(false)">間違えた</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="writeMode" class="card hidden">
+      <div class="quizBox">
+        <div class="label">日本語を見て、ハングルを入力</div>
+        <div id="wText" class="question"></div>
+        <input id="writeInput" placeholder="ここにハングルを入力" autocomplete="off" />
+        <div style="margin-top:12px">
+          <button class="primary" onclick="checkWrite()">チェック</button>
+          <button class="gray" onclick="nextWrite()">次の問題</button>
+          <button class="gray" onclick="speakCurrent()">発音を聞く</button>
+        </div>
+        <div id="writeResult" class="result"></div>
+        <div id="writeAnswer" class="answer"></div>
+      </div>
+    </section>
+
+    <div class="footerNote">コツ：最初は書くより音読。読めるようになってから、隠して書くと速く覚えられます。</div>
+  </main>
+
+<script>
+const ITEMS = [
+  {
+    "jp": "あの、すみませんが、駅へ行く道を知りたいんですが。",
+    "kr": "저기요, 전철역으로 가는 길을 알고 싶은데요.",
+    "kana": "チョギヨ、チョンチョルヨグロ カヌン キルル アルゴ シプンデヨ。"
+  },
+  {
+    "jp": "すみません。よく知らないんですが。",
+    "kr": "죄송합니다. 잘 모르는데요.",
+    "kana": "チェソンハムニダ。チャル モルヌンデヨ。"
+  },
+  {
+    "jp": "マキさん、昨日、例の韓国ドラマ見ました？",
+    "kr": "마키 씨, 어제 그 한국 드라마 봤어요?",
+    "kana": "マキッシ、オジェ ク ハングク ドゥラマ ボァッソヨ？"
+  },
+  {
+    "jp": "毎週見ているあのドラマ。",
+    "kr": "매주 보고 있는 그 드라마요.",
+    "kana": "メジュ ポゴ インヌン ク ドゥラマヨ。"
+  },
+  {
+    "jp": "ええ、見ましたよ。",
+    "kr": "네, 봤어요.",
+    "kana": "ネ、ボァッソヨ。"
+  },
+  {
+    "jp": "でも、知らない単語が多くて、やはり全部は聞き取れませんでした。",
+    "kr": "근데 모르는 단어가 많아서, 역시 다는 알아듣지 못했어요.",
+    "kana": "クンデ モルヌン タノガ マナソ、ヨクシ タヌン アラドゥッチ モテッソヨ。"
+  },
+  {
+    "jp": "ソグさんの話、お聞きになりました？",
+    "kr": "석우 씨 이야기를 들으셨어요?",
+    "kana": "ソグッシ イヤギルル トゥルセッソヨ？"
+  },
+  {
+    "jp": "いいえ、聞いていません。教えてください。",
+    "kr": "아뇨, 못 들었어요. 가르쳐 주세요.",
+    "kana": "アニョ、モッ トゥロッソヨ。カルチョ ジュセヨ。"
+  },
+  {
+    "jp": "日本語はどのくらい勉強されたのですか。",
+    "kr": "일본어는 얼마나 공부하셨어요?",
+    "kana": "イルボノヌン オルマナ コンブハショッソヨ？"
+  },
+  {
+    "jp": "えーと、1年半ほど勉強しました。",
+    "kr": "어, 일 년 반 정도 공부했어요.",
+    "kana": "オ、イルリョン バン チョンド コンブヘッソヨ。"
+  }
+];
+let mode = 'list';
+let current = null;
+let writeCurrent = null;
+let asked = 0;
+let correct = 0;
+let mistakes = JSON.parse(localStorage.getItem('krMistakes') || '[]');
+
+function normalize(s) {
+  return (s || '').replace(/[\s。、,.?？!！]/g, '').trim();
+}
+
+function saveMistakes() {
+  localStorage.setItem('krMistakes', JSON.stringify([...new Set(mistakes)]));
+  document.getElementById('mistakeCount').textContent = mistakes.length;
+}
+
+function showMode(next) {
+  mode = next;
+  document.querySelectorAll('.tabs button').forEach(b => b.classList.remove('primary'));
+  if (next === 'list') document.querySelectorAll('.tabs button')[0].classList.add('primary');
+  if (next === 'quiz') document.querySelectorAll('.tabs button')[1].classList.add('primary');
+  if (next === 'write') document.querySelectorAll('.tabs button')[2].classList.add('primary');
+
+  document.getElementById('listMode').classList.toggle('hidden', next !== 'list');
+  document.getElementById('quizMode').classList.toggle('hidden', next !== 'quiz');
+  document.getElementById('writeMode').classList.toggle('hidden', next !== 'write');
+
+  if (next === 'quiz') nextQuiz();
+  if (next === 'write') nextWrite();
+}
+
+function renderList() {
+  const el = document.getElementById('listMode');
+  el.innerHTML = ITEMS.map((it, i) => `
+    <div class="phrase">
+      <div><div class="label">日本語 ${i+1}</div><div class="jp">${it.jp}</div></div>
+      <div><div class="label">ハングル</div><div class="kr">${it.kr}</div></div>
+      <div><div class="label">カタカナ発音</div><div class="kana">${it.kana}</div></div>
+    </div>
+  `).join('');
+}
+
+function pickItem() {
+  const pool = mistakes.length ? mistakes.map(i => ITEMS[i]).filter(Boolean) : ITEMS;
+  return pool[Math.floor(Math.random() * pool.length)];
+}
+
+function indexOfItem(item) {
+  return ITEMS.findIndex(x => x.jp === item.jp);
+}
+
+function nextQuiz() {
+  current = pickItem();
+  asked++;
+  document.getElementById('count').textContent = asked;
+  document.getElementById('ok').textContent = correct;
+  document.getElementById('mistakeCount').textContent = mistakes.length;
+  document.getElementById('qText').textContent = current.jp;
+  document.getElementById('aKr').textContent = current.kr;
+  document.getElementById('aKana').textContent = current.kana;
+  document.getElementById('answer').classList.remove('show');
+}
+
+function showAnswer() {
+  document.getElementById('answer').classList.add('show');
+}
+
+function mark(isGood) {
+  const idx = indexOfItem(current);
+  if (isGood) {
+    correct++;
+    mistakes = mistakes.filter(x => x !== idx);
+  } else {
+    if (!mistakes.includes(idx)) mistakes.push(idx);
+  }
+  saveMistakes();
+  document.getElementById('ok').textContent = correct;
+  nextQuiz();
+}
+
+function resetMistakes() {
+  mistakes = [];
+  saveMistakes();
+  alert('間違いリストをリセットしました');
+}
+
+function speakCurrent() {
+  const target = current || writeCurrent;
+  if (!target || !window.speechSynthesis) return;
+  const u = new SpeechSynthesisUtterance(target.kr);
+  u.lang = 'ko-KR';
+  u.rate = 0.82;
+  speechSynthesis.cancel();
+  speechSynthesis.speak(u);
+}
+
+function nextWrite() {
+  writeCurrent = pickItem();
+  current = writeCurrent;
+  document.getElementById('wText').textContent = writeCurrent.jp;
+  document.getElementById('writeInput').value = '';
+  document.getElementById('writeResult').textContent = '';
+  document.getElementById('writeAnswer').classList.remove('show');
+  document.getElementById('writeAnswer').innerHTML = '';
+}
+
+function checkWrite() {
+  const input = document.getElementById('writeInput').value;
+  const isOk = normalize(input) === normalize(writeCurrent.kr);
+  const idx = indexOfItem(writeCurrent);
+  const result = document.getElementById('writeResult');
+  const ans = document.getElementById('writeAnswer');
+
+  if (isOk) {
+    result.textContent = '正解！';
+    result.style.color = 'var(--ok)';
+    mistakes = mistakes.filter(x => x !== idx);
+  } else {
+    result.textContent = '惜しい。答えを確認して、もう一度。';
+    result.style.color = 'var(--ng)';
+    if (!mistakes.includes(idx)) mistakes.push(idx);
+  }
+  saveMistakes();
+  ans.innerHTML = `<div class="label">正解</div><div class="bigKr">${writeCurrent.kr}</div><div class="kana">${writeCurrent.kana}</div>`;
+  ans.classList.add('show');
+}
+
+renderList();
+saveMistakes();
+</script>
+</body>
+</html>
