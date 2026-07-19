@@ -120,3 +120,42 @@
   }
 }
 
+/* Campaign Banner Styles */
+.campaign-banner {
+  padding: 32px 0 0;
+}
+.banner-box {
+  background: var(--paper);
+  border: 1px solid var(--sage);
+  border-radius: 16px;
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  box-shadow: 0 4px 12px rgba(113,128,106,0.06);
+}
+.banner-tag {
+  background: var(--sage);
+  color: white;
+  font-size: 0.72rem;
+  font-weight: 800;
+  padding: 4px 10px;
+  border-radius: 999px;
+  letter-spacing: 0.08em;
+}
+.banner-text {
+  font-size: 0.92rem;
+  color: var(--ink);
+  font-weight: 500;
+  margin: 0;
+  line-height: 1.5;
+}
+@media(max-width:768px) {
+  .banner-box {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 16px;
+  }
+}
+
