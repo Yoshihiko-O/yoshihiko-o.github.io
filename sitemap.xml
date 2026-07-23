@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <!-- Root site -->
+  <url>
+    <loc>https://yoshihiko-o.github.io/</loc>
+    <priority>1.00</priority>
+  </url>
+
+  <!-- Nagica Landing Page (Japanese - Default) -->
+  <url>
+    <loc>https://yoshihiko-o.github.io/manner-camera/</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://yoshihiko-o.github.io/manner-camera/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://yoshihiko-o.github.io/manner-camera/ko/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://yoshihiko-o.github.io/manner-camera/"/>
+    <priority>0.90</priority>
+  </url>
+  <url>
+    <loc>https://yoshihiko-o.github.io/manner-camera/privacy.html</loc>
+    <priority>0.50</priority>
+  </url>
+  <url>
+    <loc>https://yoshihiko-o.github.io/manner-camera/terms.html</loc>
+    <priority>0.50</priority>
+  </url>
+
+  <!-- Nagica Landing Page (Korean) -->
+  <url>
+    <loc>https://yoshihiko-o.github.io/manner-camera/ko/</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://yoshihiko-o.github.io/manner-camera/"/>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://yoshihiko-o.github.io/manner-camera/ko/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://yoshihiko-o.github.io/manner-camera/"/>
+    <priority>0.90</priority>
+  </url>
+  <url>
+    <loc>https://yoshihiko-o.github.io/manner-camera/ko/privacy.html</loc>
+    <priority>0.50</priority>
+  </url>
+  <url>
+    <loc>https://yoshihiko-o.github.io/manner-camera/ko/terms.html</loc>
+    <priority>0.50</priority>
+  </url>
+</urlset>
