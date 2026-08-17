@@ -271,20 +271,6 @@ a:focus-visible {
   display: block;
 }
 
-.hero-visual figcaption {
-  position: absolute;
-  left: 22px;
-  bottom: 22px;
-  padding: 8px 14px;
-  border-radius: 999px;
-  border: 2px solid var(--ink);
-  background: rgba(255, 253, 249, 0.9);
-  backdrop-filter: blur(12px);
-  font-size: .76rem;
-  font-weight: 700;
-  color: var(--ink);
-}
-
 /* Campaign Banner */
 .campaign-banner {
   padding: 24px 0 0;
@@ -492,8 +478,8 @@ a:focus-visible {
 
 .privacy-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 80px;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 60px;
   align-items: center;
 }
 
@@ -502,9 +488,35 @@ a:focus-visible {
 }
 
 .privacy-grid p {
-  color: rgba(243, 238, 219, 0.82);
-  margin-bottom: 28px;
-  font-size: 1.08rem;
+  color: rgba(243, 238, 219, 0.88);
+  margin-bottom: 24px;
+  font-size: 1.05rem;
+  line-height: 1.7;
+}
+
+.privacy-pricing-note {
+  color: var(--paper) !important;
+  font-weight: 700;
+  background: rgba(255, 255, 255, 0.08);
+  padding: 12px 18px;
+  border-radius: 12px;
+  border-left: 3px solid var(--accent);
+  margin-bottom: 24px !important;
+}
+
+.privacy-visual {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+}
+
+.privacy-visual img {
+  width: 100%;
+  max-width: 320px;
+  height: auto;
+  border-radius: 36px;
+  border: 4px solid var(--paper);
+  box-shadow: 0 16px 0 rgba(0, 0, 0, 0.4);
 }
 
 .text-link {
@@ -513,6 +525,7 @@ a:focus-visible {
   border-bottom: 2px solid var(--accent);
   padding-bottom: 3px;
   transition: color 0.2s, border-color 0.2s;
+  display: inline-block;
 }
 
 .text-link:hover {
@@ -766,9 +779,6 @@ a:focus-visible {
   }
   .hero-visual img {
     aspect-ratio: auto;
-  }
-  .hero-visual figcaption {
-    display: none;
   }
   .moments, .features, .secondary-feature, .privacy-callout {
     padding: 76px 0;
