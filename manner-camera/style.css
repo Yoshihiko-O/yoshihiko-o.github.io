@@ -178,9 +178,10 @@ a:focus-visible {
 
 .hero h1 {
   font-family: var(--font);
-  font-size: clamp(2.4rem, 4.5vw, 4.2rem);
-  line-height: 1.18;
-  letter-spacing: -.03em;
+  font-size: clamp(1.6rem, 2.9vw, 2.45rem);
+  line-height: 1.32;
+  letter-spacing: -.02em;
+  font-weight: 800;
   margin: 18px 0 24px;
 }
 
