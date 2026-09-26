@@ -432,6 +432,12 @@ a:focus-visible {
   margin: 18px 0 10px;
 }
 
+.feature-card .line-icon span {
+  font-size: .76rem;
+  font-weight: 800;
+  letter-spacing: -.04em;
+}
+
 /* Secondary Feature (Memo Scan) */
 .secondary-feature {
   padding: 110px 0;
@@ -454,6 +460,29 @@ a:focus-visible {
   border-radius: 40px;
   border: 5px solid var(--ink);
   box-shadow: 0 16px 0 var(--line);
+}
+
+.audience-callout {
+  padding: 72px 0;
+  background: var(--paper);
+  border-bottom: 2px solid var(--ink);
+}
+
+.audience-grid {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+}
+
+.audience-grid h2 {
+  margin: 8px 0 10px;
+  font-size: clamp(1.55rem, 3vw, 2.3rem);
+}
+
+.audience-grid p:not(.section-kicker) {
+  color: var(--muted);
+  max-width: 680px;
 }
 
 .secondary-copy > p:not(.section-kicker) {
@@ -730,6 +759,10 @@ a:focus-visible {
   }
   .secondary-grid {
     gap: 42px;
+  }
+  .audience-grid {
+    align-items: flex-start;
+    flex-direction: column;
   }
   .secondary-grid img {
     order: -1;
