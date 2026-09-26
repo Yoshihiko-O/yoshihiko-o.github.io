@@ -7,6 +7,12 @@
     <priority>1.00</priority>
   </url>
 
+  <!-- Nagica育児カメラ導線 -->
+  <url>
+    <loc>https://yoshihiko-o.github.io/manner-camera/nagica/</loc>
+    <priority>0.95</priority>
+  </url>
+
   <!-- Nagica Landing Page (Japanese - Default) -->
   <url>
     <loc>https://yoshihiko-o.github.io/manner-camera/</loc>
